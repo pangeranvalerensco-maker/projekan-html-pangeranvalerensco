@@ -22,8 +22,10 @@
             <div class="container">
                 <div class="social-media">
                     <span data-translate-key="follow-us-title">Ikuti Kami di</span>
-                    <a href="https://www.instagram.com/varelrivaldi_hutabarat/" target="_blank"><img src="assets/logo-instagram.webp" alt="Instagram" class="logo-ig"></a>
-                    <a href="https://www.facebook.com/varel.rival.9" target="_blank"><img src="assets/logo-facebook.webp" alt="Facebook" class="logo-fb"></a>
+                    <a href="https://www.instagram.com/varelrivaldi_hutabarat/" target="_blank"><img
+                            src="assets/logo-instagram.webp" alt="Instagram" class="logo-ig"></a>
+                    <a href="https://www.facebook.com/varel.rival.9" target="_blank"><img
+                            src="assets/logo-facebook.webp" alt="Facebook" class="logo-fb"></a>
                 </div>
                 <nav class="header-top-nav">
                     <ul>
@@ -52,11 +54,18 @@
 
         <div class="header-main">
             <div class="container">
-                <a href="index.html" class="logo">
-                    <img src="assets/logo-MineCart.png" alt="MineCart Logo">
-                    <span>MineCart</span>
-                </a>
-
+                <div class="header-main-left">
+                    <a href="index.html" class="logo">
+                        <img src="assets/logo-MineCart.png" alt="MineCart Logo">
+                        <span>MineCart</span>
+                    </a>
+                    <!-- <div class="header-main-right"> -->
+                    <button class="hamburger-btn" aria-label="Buka Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
                 <form class="search-bar" action="html/search.html" method="GET">
                     <input type="search" name="q" placeholder="Cari di MineCart..." data-translate-key="search-title"
                         required>
@@ -68,7 +77,8 @@
                     <ul>
                         <li><a href="#recommended" data-translate-key="recommended-title">Rekomendasi</a></li>
                         <li><a href="index.html" class="active" data-translate-key="home-title">Beranda</a></li>
-                        <li><a href="html/products.html" data-translate-key="all-products-title">Semua Produk</a></li>
+                        <li><a href="html/products.html" data-translate-key="all-products-title">Semua Produk</a>
+                        </li>
                         <li class="mobile-only"><a href="html/about.html" data-translate-key="about-us-title">Tentang
                                 Kami</a></li>
                         <li class="mobile-only"><a href="html/help.html" data-translate-key="help-title">Bantuan</a>
@@ -90,11 +100,11 @@
                     </ul>
                 </nav>
 
-                <button class="hamburger-btn" aria-label="Buka Menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <button class="search-toggle-btn" aria-label="Buka Pencarian">
+                    <img src="assets/logo-search.png" alt="Ikon Cari">
                 </button>
+
+                <!-- </div> -->
             </div>
         </div>
     </header>

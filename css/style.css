@@ -62,12 +62,22 @@ body {
     font-family: var(--font-body);
     line-height: 1.6;
     transition: background-color 0.3s, color 0.3s;
+
+    display: flex;
+    flex-direction: column;
+    /* Membuat elemen di dalamnya (header, main, footer) menumpuk ke bawah */
+    min-height: 100vh;
+    /* Mengatur tinggi minimal body adalah 100% tinggi layar */
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+main{
+    flex-grow: 1;
 }
 
 /* ============================================= */
@@ -308,6 +318,21 @@ header {
     padding: 0 20px;
     cursor: pointer;
     font-weight: 500;
+}
+
+/* Tombol untuk toggle search di mobile */
+.search-toggle-btn {
+    display: none;
+    /* Sembunyikan di desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.search-toggle-btn img {
+    height: 28px;
+    /* Samakan dengan ikon lain */
 }
 
 .header-main-nav ul {
@@ -1170,6 +1195,20 @@ footer {
 
 @media (max-width: 768px) {
 
+    .logo {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+
+    .logo img {
+        height: 40px;
+    }
+
+    .logo span {
+        font-size: 1.2rem;
+    }
+
     .header-top {
         display: none;
     }
@@ -1182,27 +1221,40 @@ footer {
         /* Pastikan mengambil lebar penuh */
     }
 
-    /* Sembunyikan navigasi utama di mobile */
+    /* Sembunyikan navigasi utama seperti biasa */
     .header-main-nav {
         display: none;
+        order: 3;
+        /* Pastikan menu muncul di bawah */
+        width: 100%;
     }
 
     /* Tampilkan tombol hamburger di mobile */
     .hamburger-btn {
         display: flex;
-        order: 3;
+        order: 4;
         /* Posisikan di paling kanan */
     }
 
-    /* Tata ulang header utama */
     .header-main .container {
+        display: flex;
         justify-content: space-between;
+        /* Mendorong logo ke kiri & hamburger ke kanan */
+        align-items: center;
+        /* MEMAKSA item sejajar di tengah secara vertikal */
+        flex-wrap: wrap;
+    }
+
+    .header-main-left {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 15px;
     }
 
     .search-bar {
-        /* Sembunyikan search bar di header agar tidak penuh, 
-           bisa dipindahkan ke dalam menu mobile jika mau */
-        display: none;
+        width: 100%;
     }
 
     /* --- Gaya untuk menu mobile saat aktif --- */
@@ -1215,6 +1267,7 @@ footer {
         width: 100%;
         background: var(--header-main-bg);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        order: 3;
     }
 
     .header-main-nav.is-active ul {
@@ -1253,6 +1306,59 @@ footer {
         /* Posisikan semua item di tengah */
         gap: 20px;
         /* Atur jarak vertikal antar item */
+    }
+
+    .header-main-nav.is-active .cart-icon-wrapper a {
+        display: inline-block;
+        /* Membuat area link pas dengan ikon */
+        position: relative;
+    }
+
+    .header-main-nav.is-active .cart-counter {
+        top: -5px;
+        right: -8px;
+        /* Posisi ini akan kembali benar */
+    }
+
+    /* Sembunyikan bilah pencarian utama secara default di mobile */
+    /* Pastikan search bar selalu terlihat dan lebarnya penuh */
+    /* Pastikan search bar mengambil ruang yang tersedia */
+    .search-bar {
+        flex-grow: 1;
+    }
+
+    /* Hapus tombol ikon search, karena search bar sudah terlihat */
+    .search-toggle-btn {
+        display: none;
+    }
+
+    .search-bar,
+    .hamburger-btn {
+        order: 0;
+        /* Kembalikan urutan default */
+    }
+
+    /* === Gaya untuk bilah pencarian saat aktif === */
+    .search-bar.is-active {
+        display: flex;
+        position: absolute;
+        top: 100%;
+        /* Muncul tepat di bawah header */
+        left: 0;
+        width: 100%;
+        background: var(--header-main-bg);
+        padding: 10px 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 99;
+        margin: 0;
+        /* Hapus margin agar pas */
+    }
+
+    body.light-theme .search-bar.is-active {
+        background-color: #f9f9f9;
+        /* Warna abu-abu sangat terang sebagai alternatif */
+        border-top: 1px solid #ddd;
+        /* Tambahkan garis pemisah tipis */
     }
 
     .featured-products h2 {

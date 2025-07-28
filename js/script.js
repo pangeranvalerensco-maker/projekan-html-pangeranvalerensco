@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'error-load-products': 'Gagal memuat produk. Silakan coba lagi nanti.',
             'page-title-search': 'Hasil untuk',
             'search-results-for': 'Hasil Pencarian untuk',
+            'no-search-results': 'Tidak ada produk yang cocok dengan pencarian',
             'my-account': 'Akun Saya',
             'logout': 'Keluar',
             'select-lang': 'Ganti Bahasa',
@@ -101,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
             'help-a8': 'Jika pertanyaan Anda tidak terjawab di sini, jangan ragu untuk mengunjungi halaman "Tentang Kami" untuk mempelajari lebih lanjut tentang proyek ini atau hubungi kami melalui media sosial yang tertera di bagian atas halaman.',
             'help-q9': 'Mengapa ada fitur tema gelap/terang?',
             'help-a9': 'Kami menyediakan fitur tema gelap dan terang untuk memberikan kenyamanan visual maksimal bagi Anda. Fitur ini dibuat menggunakan CSS Variables dan JavaScript untuk menunjukkan salah satu komponen wajib dalam proyek ini.',
-
             'footer-title': '© 2025 MineCart. Dibuat oleh Pangeran Valerensco Rivaldi Hutabarat. Semua hak cipta dilindungi.'
         },
         en: {
@@ -138,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'error-load-products': 'Failed to load products. Please try again later.',
             'page-title-search': 'Results for',
             'search-results-for': 'Search Results for',
+            'no-search-results': 'No products found matching the search',
             'my-account': 'My Account',
             'logout': 'Logout',
             'select-lang': 'Change Language',
@@ -357,7 +358,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.title = translations[lang][titleKey];
         }
 
-
         // Translate Product Detail Page Title & Description
         if (document.getElementById('product-images')) {
             const urlParams = new URLSearchParams(window.location.search);
@@ -374,8 +374,24 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.getElementById('product-title').textContent = product.titleId;
                         document.getElementById('product-description').textContent = product.descriptionId;
                     }
+
+                    const categoryElement = document.getElementById('product-category');
+                    if (categoryElement) {
+                        categoryElement.textContent = translations[lang]?.categories?.[product.category] || product.category;
+                    }
                 }
             }
+        }
+
+        // Cari elemen pesan "tidak ada hasil"
+        const noResultsMessage = document.getElementById('no-results-message');
+        if (noResultsMessage) {
+            // Ambil kembali query yang tersimpan
+            const query = noResultsMessage.dataset.query;
+            // Ambil teks terjemahan yang baru
+            const noResultText = translations[lang]['no-search-results'] || 'Tidak ada hasil';
+            // Gabungkan lagi dan perbarui teksnya
+            noResultsMessage.textContent = `${noResultText} "${query}".`;
         }
 
         // Translate Category Filter Buttons
@@ -484,7 +500,9 @@ document.addEventListener('DOMContentLoaded', () => {
     async function displayFeaturedProducts() {
         if (!productGrid) return;
 
-        productGrid.innerHTML = '';
+        while (productGrid.firstChild) {
+            productGrid.removeChild(productGrid.firstChild);
+        }
         const loadingElement = document.createElement('p');
         loadingElement.dataset.translateKey = 'loading-text';
         productGrid.appendChild(loadingElement);
@@ -499,7 +517,9 @@ document.addEventListener('DOMContentLoaded', () => {
             allProductsData = await response.json();
             const recommendedProducts = allProductsData.filter(p => p.isRecommended === true);
 
-            productGrid.innerHTML = '';
+            while (productGrid.firstChild) {
+                productGrid.removeChild(productGrid.firstChild);
+            }
             recommendedProducts.forEach(product => {
                 const cardElement = createProductCard(product);
                 productGrid.appendChild(cardElement);
@@ -508,7 +528,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Failed to load products:', error);
-            productGrid.innerHTML = '';
+            while (productGrid.firstChild) {
+                productGrid.removeChild(productGrid.firstChild);
+            }
             const errorElement = document.createElement('p');
             errorElement.dataset.translateKey = 'error-load-products';
             productGrid.appendChild(errorElement);
@@ -524,7 +546,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const categoryFiltersContainer = document.getElementById('category-filters');
         if (!allProductsGrid || !categoryFiltersContainer) return;
 
-        allProductsGrid.innerHTML = '';
+        while (allProductsGrid.firstChild) {
+            allProductsGrid.removeChild(allProductsGrid.firstChild);
+        }
         const loadingEl = document.createElement('p');
         loadingEl.dataset.translateKey = 'loading-text';
         allProductsGrid.appendChild(loadingEl);
@@ -538,7 +562,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const categories = ['Semua', ...new Set(allProductsData.map(p => p.category))];
-            categoryFiltersContainer.innerHTML = '';
+            while (categoryFiltersContainer.firstChild) {
+                categoryFiltersContainer.removeChild(categoryFiltersContainer.firstChild);
+            }
             categories.forEach(category => {
                 const button = document.createElement('button');
                 button.textContent = category;
@@ -550,7 +576,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             const renderProducts = (products) => {
-                allProductsGrid.innerHTML = '';
+                while (allProductsGrid.firstChild) {
+                    allProductsGrid.removeChild(allProductsGrid.firstChild);
+                }
                 if (products.length === 0) {
                     const noProductEl = document.createElement('p');
                     noProductEl.textContent = 'Tidak ada produk dalam kategori ini.';
@@ -582,7 +610,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Failed to load products:', error);
-            allProductsGrid.innerHTML = '';
+            while (allProductsGrid.firstChild) {
+                allProductsGrid.removeChild(allProductsGrid.firstChild);
+            }
             const errorEl = document.createElement('p');
             errorEl.textContent = 'Gagal memuat produk.';
             allProductsGrid.appendChild(errorEl);
@@ -612,7 +642,9 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('add-to-cart-btn').dataset.productId = product.id;
 
             // Populate product details
-            document.getElementById('product-category').textContent = product.category;
+            // document.getElementById('product-category').textContent = product.category;
+            const categoryText = translations[currentLang]?.categories?.[product.category] || product.category;
+            document.getElementById('product-category').textContent = categoryText;
             document.getElementById('product-price').textContent = `Rp ${parseInt(product.price).toLocaleString('id-ID')}`;
             document.getElementById('product-stock').textContent = `Stok: ${product.stock}`;
 
@@ -628,7 +660,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Populate image gallery
-            productImagesContainer.innerHTML = '';
+            while (productImagesContainer.firstChild) {
+                productImagesContainer.removeChild(productImagesContainer.firstChild);
+            }
             const mainImage = document.createElement('img');
             mainImage.src = product.images[0];
             mainImage.alt = product.titleId;
@@ -657,7 +691,9 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("Failed to display product detail:", error);
             const layout = document.querySelector('.product-detail-layout');
             if (layout) {
-                layout.innerHTML = '';
+                while (layout.firstChild) {
+                    layout.removeChild(layout.firstChild);
+                }
                 const errorEl = document.createElement('p');
                 errorEl.textContent = `Gagal memuat produk. ${error.message}`;
                 layout.appendChild(errorEl);
@@ -682,7 +718,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Jika tidak ada query di URL, tampilkan pesan
             if (!query) {
-                searchResultsGrid.innerHTML = '<p>Silakan masukkan kata kunci pencarian.</p>';
+                const p = document.createElement('p');
+                p.textContent = 'Silakan masukkan kata kunci pencarian.';
+                searchResultsGrid.appendChild(p);
                 queryDisplay.textContent = '...';
                 return;
             }
@@ -695,7 +733,10 @@ document.addEventListener('DOMContentLoaded', () => {
             document.title = `${titlePrefix} "${query}" - MineCart`;
 
             // Tampilkan pesan loading
-            searchResultsGrid.innerHTML = '<p data-translate-key="loading-text">Memuat produk...</p>';
+            const loadingEl = document.createElement('p');
+            loadingEl.dataset.translateKey = 'loading-text';
+            searchResultsGrid.appendChild(loadingEl);
+
             translateUI(currentLang);
 
             // Ambil data produk jika belum ada
@@ -716,7 +757,9 @@ document.addEventListener('DOMContentLoaded', () => {
             );
 
             // Kosongkan grid sebelum menampilkan hasil
-            searchResultsGrid.innerHTML = '';
+            while (searchResultsGrid.firstChild) {
+                searchResultsGrid.removeChild(searchResultsGrid.firstChild);
+            }
 
             if (results.length > 0) {
                 results.forEach(product => {
@@ -725,7 +768,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             } else {
                 // Jika tidak ada hasil
-                searchResultsGrid.innerHTML = `<p>Tidak ada produk yang cocok dengan pencarian "${query}".</p>`;
+                const noResultEl = document.createElement('p');
+                noResultEl.id = 'no-results-message'; // <-- Beri ID unik
+                noResultEl.dataset.query = query;     // <-- Simpan query pencarian
+                const noResultText = translations[currentLang]['no-search-results'] || 'Tidak ada hasil';
+                noResultEl.textContent = `${noResultText} "${query}".`;
+                searchResultsGrid.appendChild(noResultEl);
             }
 
             // Terjemahkan kartu produk yang baru dibuat
@@ -733,7 +781,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Failed to display search results:', error);
-            searchResultsGrid.innerHTML = '<p>Terjadi kesalahan saat memuat hasil pencarian.</p>';
+            const p = document.createElement('p');
+            p.textContent = 'Terjadi kesalahan saat memuat hasil pencarian.';
+            searchResultsGrid.appendChild(p);
         }
     }
 
@@ -885,10 +935,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!cartItemsContainer || !cartSummaryContainer) return;
 
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        while (cartItemsContainer.firstChild) {
+            cartItemsContainer.removeChild(cartItemsContainer.firstChild);
+        }
 
         if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<p>Keranjang Anda kosong.</p>';
             cartSummaryContainer.style.display = 'none';
+            const emptyCartEl = document.createElement('p');
+            emptyCartEl.textContent = 'Keranjang Anda kosong.';
+            cartItemsContainer.appendChild(emptyCartEl);
             return;
         }
 
@@ -898,7 +953,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 allProductsData = await response.json();
             }
 
-            cartItemsContainer.innerHTML = '';
+            while (cartItemsContainer.firstChild) {
+                cartItemsContainer.removeChild(cartItemsContainer.firstChild);
+            }
             let subtotal = 0;
 
             cart.forEach(cartItem => {
@@ -969,24 +1026,44 @@ document.addEventListener('DOMContentLoaded', () => {
             // Tampilkan ringkasan belanja
             // Tampilkan ringkasan belanja
             cartSummaryContainer.style.display = 'block';
-            cartSummaryContainer.innerHTML = `
-    <h2 data-translate-key="summary-title">${translations[currentLang]['summary-title']}</h2>
-    <p><span data-translate-key="summary-subtotal">${translations[currentLang]['summary-subtotal']}</span> <span>Rp ${subtotal.toLocaleString('id-ID')}</span></p>
-    <p><span data-translate-key="summary-tax">${translations[currentLang]['summary-tax']}</span> <span>Rp ${Math.round(subtotal * 0.11).toLocaleString('id-ID')}</span></p>
-    <hr>
-    <p class="total"><span data-translate-key="summary-total">${translations[currentLang]['summary-total']}</span> <span>Rp ${Math.round(subtotal * 1.11).toLocaleString('id-ID')}</span></p>
-`;
+            while (cartSummaryContainer.firstChild) {
+                cartSummaryContainer.removeChild(cartSummaryContainer.firstChild);
+            }
 
-            // Dan juga bagian tombol hapus di dalam loop
-            const removeBtn = document.createElement('button');
-            removeBtn.className = 'remove-btn';
-            removeBtn.textContent = translations[currentLang]['remove-item']; // <-- Diubah menjadi ini
-            removeBtn.dataset.translateKey = 'remove-item';
-            removeBtn.onclick = () => removeFromCart(cartItem.id);
+            const summaryTitle = document.createElement('h2');
+            summaryTitle.dataset.translateKey = 'summary-title';
 
+            const subtotalP = document.createElement('p');
+            const subtotalTextSpan = document.createElement('span');
+            subtotalTextSpan.dataset.translateKey = 'summary-subtotal';
+            const subtotalValueSpan = document.createElement('span');
+            subtotalValueSpan.textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+            subtotalP.append(subtotalTextSpan, subtotalValueSpan);
+
+            const taxP = document.createElement('p');
+            const taxTextSpan = document.createElement('span');
+            taxTextSpan.dataset.translateKey = 'summary-tax';
+            const taxValueSpan = document.createElement('span');
+            taxValueSpan.textContent = `Rp ${Math.round(subtotal * 0.11).toLocaleString('id-ID')}`;
+            taxP.append(taxTextSpan, taxValueSpan);
+
+            const hr = document.createElement('hr');
+
+            const totalP = document.createElement('p');
+            totalP.className = 'total';
+            const totalTextSpan = document.createElement('span');
+            totalTextSpan.dataset.translateKey = 'summary-total';
+            const totalValueSpan = document.createElement('span');
+            totalValueSpan.textContent = `Rp ${Math.round(subtotal * 1.11).toLocaleString('id-ID')}`;
+            totalP.append(totalTextSpan, totalValueSpan);
+
+            cartSummaryContainer.append(summaryTitle, subtotalP, taxP, hr, totalP);
+            translateUI(currentLang); // Menerjemahkan teks setelah elemen dibuat
         } catch (error) {
             console.error("Gagal memuat data keranjang:", error);
-            cartItemsContainer.innerHTML = '<p>Gagal memuat keranjang. Coba lagi.</p>';
+            const errorEl = document.createElement('p');
+            errorEl.textContent = 'Gagal memuat keranjang. Coba lagi.';
+            cartItemsContainer.appendChild(errorEl);
         }
     }
 
@@ -1060,6 +1137,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     answer.style.maxHeight = '0px';
                 }
             }
+        });
+    }
+
+    // --- LOGIKA UNTUK TOGGLE SEARCH BAR ---
+    const searchToggleBtn = document.querySelector('.search-toggle-btn');
+    const searchBar = document.querySelector('.search-bar');
+
+    if (searchToggleBtn && searchBar) {
+        searchToggleBtn.addEventListener('click', () => {
+            // Toggle kelas 'is-active' untuk menampilkan/menyembunyikan search bar
+            searchBar.classList.toggle('is-active');
         });
     }
 
