@@ -1,153 +1,150 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tes API Vercel</title>
-    <style>
-        body { font-family: system-ui, sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        #category-filters { margin-bottom: 20px; }
-        #category-filters button, .lang-switcher button { padding: 8px 16px; border: 1px solid #ccc; background-color: #fff; cursor: pointer; margin-right: 5px; border-radius: 16px; }
-        #category-filters button:hover, .lang-switcher button:hover { background-color: #e9e9e9; }
-        #category-filters button.active { background-color: #007bff; color: white; border-color: #007bff; }
-        #product-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .product-card { background-color: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
-        .product-card img { width: 100%; height: 220px; object-fit: cover; background-color: #eee; }
-        .product-card-body { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
-        .product-card-body h3 { font-size: 16px; margin: 0 0 10px 0; }
-        .product-card-body .description { font-size: 14px; color: #666; margin: 0 0 15px 0; flex-grow: 1; line-height: 1.5; }
-        .product-card-footer { display: flex; justify-content: space-between; align-items: center; padding: 0 15px 15px 15px; }
-        .product-card-footer .price { font-size: 18px; font-weight: bold; color: #28a745; }
-        .product-card-footer .buy-btn { padding: 8px 16px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
-    </style>
+    <title>MineCart - Beranda</title>
+    <link rel="icon" href="assets/logo-MineCart.png">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
-    <div class="container">
-        <header>
-            <h1 data-translate-key="page-title">Toko Keren</h1>
-            <div class="lang-switcher">
-                <button id="btn-id">ID</button>
-                <button id="btn-en">EN</button>
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="social-media">
+                    <span data-translate-key="follow-us-title">Ikuti Kami di</span>
+                    <a href="#"><img src="assets/logo-instagram.webp" alt="Instagram" class="logo-ig"></a>
+                    <a href="#"><img src="assets/logo-facebook.webp" alt="Facebook" class="logo-fb"></a>
+                </div>
+                <nav class="header-top-nav">
+                    <ul>
+                        <li><a href="html/about.html" data-translate-key="about-us-title" class="a-header-top">Tentang
+                                Kami</a></li>
+                        <li><a href="html/help.html" data-translate-key="help-title" class="a-header-top">Bantuan</a>
+                        </li>
+                        <li class="language-selector-wrapper">
+                            <div class="custom-select">
+                                <button class="select-button" aria-haspopup="listbox" aria-expanded="false"
+                                    title="Ganti Bahasa" data-translate-key="select-lang">
+                                    <span id="selected-lang-text">Bahasa Indonesia</span>
+                                    <span class="arrow-down"></span>
+                                </button>
+                                <ul class="select-dropdown" role="listbox">
+                                    <li data-value="id" role="option">Bahasa Indonesia</li>
+                                    <li data-value="en" role="option">English</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li id="account-menu"></li>
+                    </ul>
+                </nav>
             </div>
-        </header>
-
-        <div id="category-filters">
-            </div>
-    
-        <div id="product-container">
-            <p data-translate-key="loading-text">Memuat produk...</p>
         </div>
-    </div>
 
-    <script>
-        // --- KONFIGURASI & VARIABEL GLOBAL ---
-        const API_URL = 'https://my-api-theta-three.vercel.app/pangeran/api'; // URL API BARU
-        const productContainer = document.getElementById('product-container');
-        const categoryFiltersContainer = document.getElementById('category-filters');
-        
-        let allProducts = [];
-        let currentLang = 'id';
+        <div class="header-main">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="assets/logo-MineCart.png" alt="MineCart Logo">
+                    <span>MineCart</span>
+                </a>
 
-        const translations = {
-            id: { 'page-title': 'Toko Keren', 'loading-text': 'Memuat produk...', 'all-categories': 'Semua', 'buy-button': 'Beli' },
-            en: { 'page-title': 'Cool Store', 'loading-text': 'Loading products...', 'all-categories': 'All', 'buy-button': 'Buy' }
-        };
+                <form class="search-bar" action="html/search.html" method="GET">
+                    <input type="search" name="q" placeholder="Cari di MineCart..." data-translate-key="search-title"
+                        required>
+                    <button type="submit" title="Cari" data-translate-key="search-btn"><img src="assets/logo-search.png"
+                            alt="Cari"></button>
+                </form>
 
-        // --- FUNGSI-FUNGSI ---
+                <nav class="header-main-nav">
+                    <ul>
+                        <li><a href="#recommended" data-translate-key="recommended-title">Rekomendasi</a></li>
+                        <li><a href="index.html" class="active" data-translate-key="home-title">Beranda</a></li>
+                        <li><a href="html/products.html" data-translate-key="all-products-title">Semua Produk</a></li>
+                        <li class="mobile-only"><a href="html/about.html" data-translate-key="about-us-title">Tentang
+                                Kami</a></li>
+                        <li class="mobile-only"><a href="html/help.html" data-translate-key="help-title">Bantuan</a>
+                        </li>
+                        <li class="cart-icon-wrapper">
+                            <a href="html/cart.html" title="Keranjang Belanja" data-translate-key="cart-link-title">
+                                <img src="assets/logo-keranjang-gelap.png" alt="Keranjang" class="icon-nav"
+                                    id="cart-icon-img">
+                                <span id="cart-counter" class="cart-counter">0</span>
+                            </a>
+                        </li>
+                        <li>
+                            <button id="theme-toggle-btn" class="theme-button" title="Ubah Tema"
+                                data-translate-key="theme-toggle-title">
+                                <img id="theme-icon" src="assets/logo-gelap.png" alt="Tema"
+                                    data-translate-key="theme-link-title">
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
 
-        function renderProducts(productsToRender) {
-            productContainer.innerHTML = '';
-            productsToRender.forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                
-                // Menggunakan field dari API baru: name, description, images
-                card.innerHTML = `
-                    <img src="${product.images[0]}" alt="${product.name}">
-                    <div class="product-card-body">
-                        <h3>${product.name}</h3>
-                        <p class="description">${product.description}</p>
-                    </div>
-                    <div class="product-card-footer">
-                        <span class="price">Rp ${parseInt(product.price).toLocaleString('id-ID')}</span>
-                        <button class="buy-btn" data-product-id="${product.id}">
-                            <span data-translate-key="buy-button">Beli</span>
-                        </button>
-                    </div>
-                `;
-                productContainer.appendChild(card);
-            });
-            changeLanguage(currentLang);
-        }
+                <button class="hamburger-btn" aria-label="Buka Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
 
-        function changeLanguage(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-translate-key]').forEach(el => {
-                const key = el.dataset.translateKey;
-                if(translations[lang][key]) {
-                    el.textContent = translations[lang][key];
-                }
-            });
-        }
+    <main>
+        <section class="hero">
+            <div class="carousel-container">
+                <div class="carousel-slide">
+                    <img src="https://picsum.photos/id/1015/1920/1080" alt="Koleksi Pakaian">
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://picsum.photos/id/1025/1920/1080" alt="Aksesoris anjing lucu">
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://picsum.photos/id/106/1920/1080" alt="Sepatu Gunung">
+                </div>
+            </div>
 
-        function handleBuy(productId) {
-            const product = allProducts.find(p => p.id == productId);
-            alert(`Anda menambahkan "${product.name}" ke keranjang!`);
-            // Karena tidak ada data stok, kita hanya menampilkan notifikasi
-        }
+            <div class="hero-overlay"></div>
 
-        async function init() {
-            try {
-                const response = await fetch(API_URL);
-                allProducts = await response.json();
+            <div class="hero-content">
+                <h1 data-translate-key="hero-title">Koleksi Terbaru Musim Ini</h1>
+                <p data-translate-key="hero-subtitle">Temukan gaya terbaik Anda dengan produk pilihan berkualitas
+                    tinggi.</p>
+                <a href="html/products.html" class="cta-button" data-translate-key="hero-cta">Lihat Semua Produk</a>
+            </div>
+            <button id="prevBtn" class="carousel-btn prev">&#10094;</button>
+            <button id="nextBtn" class="carousel-btn next">&#10095;</button>
+        </section>
 
-                // Membuat daftar kategori unik dari data produk
-                const categories = [...new Set(allProducts.map(p => p.category))];
-                
-                categoryFiltersContainer.innerHTML = `<button class="active" data-category="Semua">${translations[currentLang]['all-categories']}</button>`;
-                categories.forEach(cat => {
-                    categoryFiltersContainer.innerHTML += `<button data-category="${cat}">${cat}</button>`;
-                });
-                
-                renderProducts(allProducts);
+        <section class="featured-products" id="recommended">
+            <div class="container">
+                <h2 data-translate-key="featured-title">Produk Rekomendasi</h2>
+                <div class="product-grid">
+                </div>
+                <div class="see-more-container">
+                    <a href="html/products.html" class="cta-button" data-translate-key="see-more-btn">Lihat Lainnya</a>
+                </div>
+            </div>
+        </section>
+    </main>
 
-            } catch(error) { 
-                console.error('Gagal fetch produk:', error);
-                productContainer.innerHTML = '<p>Gagal memuat produk. Coba periksa koneksi atau URL API.</p>';
-            }
+    <footer>
+        <div class="container">
+            <p data-translate-key="footer-title">&copy; 2025 MineCart. Dibuat oleh Pangeran Valerensco Rivaldi
+                Hutabarat. Semua hak cipta dilindungi.</p>
+        </div>
+    </footer>
 
-            // --- EVENT LISTENERS ---
-            document.getElementById('btn-id').addEventListener('click', () => changeLanguage('id'));
-            document.getElementById('btn-en').addEventListener('click', () => changeLanguage('en'));
-
-            categoryFiltersContainer.addEventListener('click', e => {
-                if (e.target.tagName === 'BUTTON') {
-                    document.querySelectorAll('#category-filters button').forEach(btn => btn.classList.remove('active'));
-                    e.target.classList.add('active');
-
-                    const categoryName = e.target.dataset.category;
-                    if (categoryName === 'Semua') {
-                        renderProducts(allProducts);
-                    } else {
-                        const filteredProducts = allProducts.filter(p => p.category === categoryName);
-                        renderProducts(filteredProducts);
-                    }
-                }
-            });
-
-            productContainer.addEventListener('click', e => {
-                if (e.target.closest('.buy-btn')) {
-                    const productId = e.target.closest('.buy-btn').dataset.productId;
-                    handleBuy(productId);
-                }
-            });
-        }
-
-        // --- MULAI APLIKASI ---
-        init();
-    </script>
+    <script src="js/script.js"></script>
 </body>
+
 </html>

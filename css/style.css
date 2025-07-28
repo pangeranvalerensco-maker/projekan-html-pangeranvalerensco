@@ -1,0 +1,1273 @@
+/* ============================================= */
+/* --- Variabel Global & Reset Dasar --- */
+/* ============================================= */
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    /* TEMA TERANG BARU ("Overworld") */
+    --body-bg: #F5F5F5;
+    --header-top-bg: #2D3748;
+    --header-main-bg: #FFFFFF;
+    --card-bg: #FFFFFF;
+    --section-bg: #e0dede;
+    --hero-bg: #1A202C;
+
+    --heading-color: #222222;
+    --text-color: #404040;
+    --hero-text-color: #FFFFFF;
+    --light-text-color: #F5F5F5;
+
+    --accent-color: #3DCEC4;
+    /* Aksen Diamond */
+    --accent-text-color: #181A1B;
+    /* Teks di atas aksen */
+    --subtle-border-color: #EAEAEA;
+
+    /* Tipografi */
+    --font-heading: 'Press Start 2P', cursive;
+    --font-body: 'Inter', sans-serif;
+}
+
+body.dark-mode {
+    /* TEMA GELAP BARU ("Cave/Mining") */
+    --body-bg: #181A1B;
+    --header-top-bg: #101112;
+    --header-main-bg: #242628;
+    --card-bg: #3A3D41;
+    --section-bg: #242628;
+    --hero-bg: #101112;
+
+    --heading-color: #FFFFFF;
+    --text-color: #D1D5DB;
+    --hero-text-color: #FFFFFF;
+    --light-text-color: #ffffff;
+
+    --accent-color: #45E8DA;
+    /* Aksen Diamond lebih cerah */
+    --accent-text-color: #181A1B;
+    --subtle-border-color: #4B5563;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--body-bg);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ============================================= */
+/* --- Header --- */
+/* ============================================= */
+header {
+    background: var(--header-main-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background-color 0.3s;
+}
+
+/* -- Header Atas -- */
+.header-top {
+    background-color: var(--header-top-bg);
+    color: var(--light-text-color);
+    padding: 0.5rem 0;
+    font-size: 0.85rem;
+    transition: background-color 0.3s;
+}
+
+.header-top .container,
+.header-main .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social-media {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-ig {
+    height: 20px;
+    border-radius: 4px;
+}
+
+.logo-fb {
+    height: 30px;
+}
+
+.logo-ig,
+.logo-fb {
+    /* Ini akan membuat semua perubahan properti 'transform' berjalan mulus selama 0.3 detik */
+    transition: transform 0.3s ease-out;
+}
+
+.social-media a:hover .logo-ig,
+.social-media a:hover .logo-fb {
+    /* Ikon akan sedikit terangkat ke atas dan membesar */
+    transform: translateY(-1px) scale(1.1);
+}
+
+.header-top-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-top-nav a {
+    color: var(--light-text-color);
+    text-decoration: none;
+}
+
+.a-header-top:hover {
+    color: var(--accent-color)
+}
+
+.theme-button {
+    transform: translateY(-2px);
+    /* Naik 2 piksel */
+    transition: transform 0.3s ease-in-out;
+    /* Tambahkan transisi untuk animasi halus */
+}
+
+.theme-button:hover {
+    transform: translateY(-2px) rotate(30deg);
+    /* Putar 360 derajat saat di-hover */
+}
+
+/* ============================================= */
+/* --- Dropdown Bahasa Kustom (RAPIH) --- */
+/* ============================================= */
+
+/* Wrapper untuk menjaga posisi dropdown */
+.language-selector-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tombol utama yang terlihat */
+.select-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Membuat teks dan panah terpisah */
+    background: transparent;
+    border: 1px solid var(--light-text-color);
+    border-radius: 6px;
+    padding: 6px 14px;
+    cursor: pointer;
+    width: 150px;
+    /* Beri lebar tetap agar rapi */
+    text-align: left;
+}
+
+#selected-lang-text {
+    color: var(--light-text-color);
+    font-size: 0.85rem;
+    /* margin-right: 10px; */
+}
+
+/* Ikon panah dropdown kustom */
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--light-text-color);
+}
+
+/* Menu dropdown yang tersembunyi */
+.select-dropdown {
+    display: block;
+    position: absolute;
+    top: calc(100% + 5px);
+    /* Jarak 5px dari tombol */
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+
+    list-style: none;
+    background: var(--card-bg);
+    border: 1px solid var(--subtle-border-color);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    padding: 5px 0;
+
+    display: flex;
+    /* Aktifkan flexbox */
+    flex-direction: column;
+    /* Paksa item untuk berbaris ke bawah (atas-bawah) */
+    min-width: 100%;
+    /* Pastikan lebar minimal sama dengan tombolnya */
+    width: max-content;
+    /* Lebar akan menyesuaikan dengan teks terpanjang */
+
+    /* Sembunyikan dengan transisi halus */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease-out;
+}
+
+/* Tampilkan dropdown saat ada kelas .show */
+.select-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Setiap item di dalam dropdown */
+.select-dropdown li {
+    padding: 4px 14px;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+/* EFEK HOVER YANG DIINGINKAN (mengganti warna biru) */
+.select-dropdown li:hover {
+    background: var(--accent-color);
+    color: var(--accent-text-color);
+    border-radius: 6px;
+}
+
+#theme-toggle-btn {
+    background-color: transparent;
+    border: none;
+    color: var(--light-text-color);
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* -- Header Utama -- */
+.header-main {
+    padding: 1rem 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.logo span {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--heading-color);
+}
+
+.search-bar {
+    flex-grow: 1;
+    display: flex;
+    border: 2px solid var(--subtle-border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 30px;
+}
+
+.search-bar input {
+    border: none;
+    padding: 12px 15px;
+    font-size: 1rem;
+    flex-grow: 1;
+    outline: none;
+    background-color: var(--body-bg);
+    color: var(--text-color);
+}
+
+.search-bar button {
+    background-color: var(--accent-color);
+    color: var(--accent-text-color);
+    border: none;
+    padding: 0 20px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.header-main-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.header-main-nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.header-main-nav a.active,
+.header-main-nav a:hover {
+    color: var(--accent-color);
+}
+
+.icon-nav {
+    height: 28px;
+}
+
+/* Style dasar untuk semua tombol di menu akun */
+.btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+    /* Border transparan untuk menjaga ukuran tetap sama */
+}
+
+/* Style untuk tombol Primary (contoh: Daftar) */
+.btn-primary {
+    background-color: var(--accent-color);
+    color: var(--accent-text-color);
+}
+
+.btn-primary:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+/* Style untuk tombol Secondary/Outline (contoh: Masuk) */
+.btn-secondary {
+    background-color: transparent;
+    color: var(--light-text-color);
+    border: 2px solid var(--light-text-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--light-text-color);
+    color: var(--header-top-bg);
+    /* Warna teks menjadi warna latar header atas */
+}
+
+/* Ganti .user-profile yang lama dengan yang ini */
+.user-profile {
+    display: flex;
+    align-items: center;
+    /* Membuat ikon dan teks sejajar vertikal */
+    gap: 8px;
+    /* Jarak antara ikon dan teks */
+    cursor: pointer;
+
+    /* PENTING: Menghilangkan gaya seperti input/tombol */
+    background: none;
+    border: none;
+    padding: 0;
+
+    /* PENTING: Mengatur warna dan font agar terlihat jelas */
+    color: var(--light-text-color);
+    /* Mengambil warna teks terang dari variabel root */
+    font-family: var(--font-body);
+    /* Menyamakan font */
+    font-size: 0.85rem;
+    /* Menyamakan ukuran font di header atas */
+    font-weight: 500;
+}
+
+/* Efek hover sederhana untuk feedback visual */
+.user-profile:hover {
+    opacity: 0.8;
+}
+
+.profile-icon {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    /* Membuat bingkai ikon bulat */
+    object-fit: cover;
+}
+
+/* ============================================= */
+/* --- Menu Dropdown Akun --- */
+/* ============================================= */
+
+/* Atur posisi relatif untuk menu akun agar dropdown bisa diposisikan */
+#account-menu {
+    position: relative;
+    display: inline-block;
+    /* Pastikan elemen ini punya dimensi */
+}
+
+/* Styling untuk konten dropdown, awalnya disembunyikan */
+.dropdown-content {
+    display: none;
+    /* Sembunyikan secara default */
+    position: absolute;
+    right: 0;
+    /* Posisikan di kanan */
+    background-color: var(--header-main-bg);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 8px;
+    border: 1px solid var(--subtle-border-color);
+    padding: 8px 0;
+    /* Beri sedikit padding atas & bawah */
+    margin-top: 10px;
+    /* Jarak dari ikon profil */
+}
+
+/* Tampilkan dropdown saat kelas 'show' ditambahkan via JS */
+.dropdown-content.show {
+    display: block;
+}
+
+/* Styling untuk link di dalam dropdown */
+.dropdown-content a,
+.dropdown-content button {
+    color: var(--text-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    background: none;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* Efek hover pada item dropdown */
+.dropdown-content a:hover,
+.dropdown-content button:hover {
+    background-color: var(--body-bg);
+}
+
+/* ============================================= */
+/* --- Hero & Sections --- */
+/* ============================================= */
+/* ============================================= */
+/* --- Hero Carousel --- */
+/* ============================================= */
+
+.page-title {
+    padding: 20px;
+}
+
+/* 1. Atur Ulang .hero untuk menjadi Kontainer Carousel */
+.hero {
+    /* Menjadikan .hero sebagai acuan posisi untuk lapisan di dalamnya */
+    position: relative;
+    min-height: 70vh;
+    /* Sesuaikan tinggi sesuai selera */
+    color: var(--hero-text-color);
+
+    /* PENTING: Sembunyikan bagian gambar yang bergeser keluar dari area hero */
+    overflow: hidden;
+
+    /* Ganti background solid dengan warna fallback jika gambar gagal dimuat */
+    background: #1A202C;
+}
+
+/* 2. Kontainer yang membungkus semua slide */
+.carousel-container {
+    display: flex;
+    /* Membuat semua slide berjajar ke samping */
+    height: 100%;
+
+    /* Lebar total = 100% * jumlah gambar. 
+       Ganti nilai ini jika Anda menggunakan jumlah gambar yang berbeda. */
+    width: 300%;
+    /* (Contoh untuk 3 gambar) */
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /* Ini akan membuat efek pergeseran menjadi halus */
+    transition: transform 0.7s ease-in-out;
+}
+
+/* 3. Masing-masing Slide di dalam Carousel */
+.carousel-slide {
+    /* Setiap slide mengambil porsi yang sama dari kontainer.
+       Untuk 3 gambar, masing-masing mendapat 1/3 dari 300% */
+    width: 33.333%;
+    height: 100%;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Membuat gambar mengisi area tanpa menjadi gepeng */
+}
+
+/* 4. Lapisan Overlay Gelap (Agar Teks Terbaca) */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gunakan warna --hero-bg dengan transparansi */
+    background-color: rgba(26, 32, 44, 0.6);
+    z-index: 1;
+    /* Posisikan di atas gambar, tapi di bawah teks */
+}
+
+/* 5. Atur Ulang Konten Teks Hero */
+.hero-content {
+    /* Posisikan di atas lapisan overlay */
+    position: relative;
+    /* Gunakan relative agar bisa diberi z-index */
+    z-index: 2;
+
+    /* Kode untuk membuat konten tetap di tengah */
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* 6. Tombol Navigasi Carousel (Panah Kiri & Kanan) */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    /* Trik untuk membuat tombol pas di tengah vertikal */
+    z-index: 3;
+    /* Posisikan di lapisan paling depan */
+
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.carousel-btn:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.carousel-btn.prev {
+    left: 20px;
+}
+
+.carousel-btn.next {
+    right: 20px;
+}
+
+.hero-content h1 {
+    font-family: var(--font-heading);
+    color: var(--hero-text-color);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.cta-button {
+    display: inline-block;
+    background: var(--accent-color);
+    color: var(--accent-text-color);
+    padding: 12px 24px;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.cta-button,
+.product-card-footer .buy-btn {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+/* 2. Definisikan efek yang terjadi saat di-hover */
+.cta-button:hover,
+.product-card-footer .buy-btn:hover {
+    /* Gabungkan efek angkat dengan zoom (1.05 = 5% lebih besar) */
+    transform: translateY(-2px) scale(1.05);
+
+    /* Gelapkan warna tombol sebesar 5% */
+    filter: brightness(95%);
+
+    /* Bayangan bisa dipertahankan untuk efek kedalaman */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+#recommended {
+    scroll-margin-top: 120px;
+}
+
+.featured-products {
+    padding: 4rem 0;
+    background: var(--section-bg);
+}
+
+.featured-products h2 {
+    font-family: var(--font-heading);
+    color: var(--heading-color);
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+/* 1. Aturan untuk Wadah Grid Utama */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+/* 2. Aturan untuk Setiap Kartu Produk */
+/* GANTI SEMUA STYLE KARTU PRODUK LAMA ANDA DENGAN INI */
+
+/* Mengatur link pembungkus agar fleksibel */
+a.product-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    /* Membuat link ini menjadi flex container */
+}
+
+/* Aturan untuk Setiap Kartu Produk */
+.product-card {
+    background: var(--card-bg);
+    border: 1px solid var(--subtle-border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    /* Menjadikan kartu sebagai flex container */
+    flex-direction: column;
+    /* Mengatur item dari atas ke bawah */
+    width: 100%;
+    /* Memastikan kartu mengisi seluruh ruang link */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.07);
+}
+
+/* Aturan untuk GAMBAR di dalam Kartu */
+.product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+/* Aturan untuk KONTEN di Dalam Kartu */
+.product-card-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    flex-grow: 1;
+    /* INI KUNCINYA: Paksa bagian ini untuk mengisi semua ruang kosong */
+}
+
+.product-card-body h3 {
+    font-size: 1rem;
+    color: var(--heading-color);
+    margin: 0 0 10px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-card-body .description {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin: 0 0 15px 0;
+    /* Batasi deskripsi menjadi 2 baris untuk konsistensi tinggi */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+/* Aturan untuk FOOTER Kartu */
+.product-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-top: 1px solid var(--subtle-border-color);
+    margin-top: auto;
+    /* Mendorong footer ke bawah, sebagai pengaman tambahan */
+}
+
+.product-card-footer .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.product-card-footer .buy-btn {
+    padding: 8px 16px;
+    background-color: var(--accent-color);
+    color: var(--accent-text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* Tambahkan ini di bawah styling .product-grid */
+.see-more-container {
+    text-align: center;
+    margin-top: 3rem;
+    /* Jarak dari grid produk di atasnya */
+}
+
+.cart-icon-wrapper {
+    position: relative;
+    /* Diperlukan agar counter bisa diposisikan */
+}
+
+.cart-counter {
+    position: absolute;
+    top: -5px;
+    /* Sedikit ke atas dari ikon */
+    right: -8px;
+    /* Sedikit ke kanan dari ikon */
+
+    background-color: #e63946;
+    /* Warna merah yang kontras */
+    color: white;
+    border-radius: 50%;
+    /* Membuatnya bulat */
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+
+    /* Sembunyikan jika angkanya 0 */
+    display: none;
+}
+
+/* Kelas untuk menampilkan counter jika isinya lebih dari 0 */
+.cart-counter.visible {
+    display: block;
+}
+
+/* ============================================= */
+/* --- Filter Kategori --- */
+/* ============================================= */
+.category-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 3rem;
+    /* Jarak ke grid produk */
+}
+
+.category-filters button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: var(--font-body);
+    color: var(--text-color);
+    background-color: var(--card-bg);
+    border: 2px solid var(--subtle-border-color);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.category-filters button:hover {
+    background-color: var(--accent-color);
+    color: var(--accent-text-color);
+    border-color: var(--accent-color);
+}
+
+.category-filters button.active {
+    background-color: var(--accent-color);
+    color: var(--accent-text-color);
+    border-color: var(--accent-color);
+}
+
+/* ============================================= */
+/* --- Halaman Keranjang --- */
+/* ============================================= */
+/* Tambahkan ini di style.css */
+
+.cart-section .container {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+#cart-items-container {
+    flex-grow: 1;
+    /* Mengambil ruang lebih banyak */
+}
+
+.cart-item {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background-color: var(--card-bg);
+    border: 1px solid var(--subtle-border-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.cart-item-info {
+    flex-grow: 1;
+}
+
+.cart-item-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 1rem;
+    color: var(--heading-color);
+}
+
+.cart-item-info .price {
+    font-weight: 500;
+}
+
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-controls button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--subtle-border-color);
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.remove-btn {
+    background: #e63946;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cart-summary {
+    width: 300px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--subtle-border-color);
+    border-radius: 8px;
+    padding: 20px;
+    position: sticky;
+    top: 150px;
+    /* Sesuaikan dengan tinggi header Anda */
+}
+
+.cart-summary h2 {
+    margin: 0 0 15px 0;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+}
+
+.cart-summary p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.cart-summary .total {
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-top: 2px solid var(--subtle-border-color);
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+/* ============================================= */
+/* --- Halaman Detail Produk --- */
+/* ============================================= */
+
+/* 1. Layout Utama (Gambar di kiri, Info di kanan) */
+.product-detail-layout {
+    display: flex;
+    gap: 40px;
+    /* Jarak antara kolom gambar dan kolom info */
+    padding: 3rem 0;
+}
+
+.product-detail-info {
+    flex: 1;
+    /* Kolom info mengambil 50% ruang */
+}
+
+/* ============================================= */
+/* --- PERBAIKAN FINAL GALERI PRODUK --- */
+/* ============================================= */
+
+/* Kolom utama untuk semua gambar */
+.product-detail-images {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Selector spesifik untuk gambar utama */
+#product-images>img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--subtle-border-color);
+}
+
+/* Selector spesifik untuk wadah thumbnail */
+.thumbnails {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Selector spesifik dan tegas untuk SEMUA thumbnail */
+.thumbnails>img {
+    width: 100px !important;
+    /* Paksa lebar dengan !important */
+    height: 100px !important;
+    /* Paksa tinggi dengan !important */
+    object-fit: cover;
+    border-radius: 6px;
+    border: 2px solid var(--subtle-border-color);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+}
+
+/* Gaya untuk hover dan active (tidak berubah) */
+.thumbnails>img:hover,
+.thumbnails>img.active {
+    opacity: 1;
+    border-color: var(--accent-color);
+    transform: scale(1.05);
+}
+
+/* 3. Penataan Info Produk */
+.product-detail-info h1 {
+    font-family: var(--font-heading);
+    color: var(--heading-color);
+    margin-bottom: 10px;
+}
+
+.category-tag {
+    display: inline-block;
+    background-color: var(--subtle-border-color);
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.price-detail {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+#product-description {
+    margin-bottom: 1.5rem;
+}
+
+#product-stock {
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+/* 4. Responsivitas untuk Mobile */
+@media (max-width: 768px) {
+    .product-detail-layout {
+        flex-direction: column;
+        /* Tumpuk gambar dan info ke bawah */
+    }
+}
+
+/* ============================================= */
+/* --- About --- */
+/* ============================================= */
+
+/* Tambahkan ini di style.css */
+
+.page-content {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+}
+
+.about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Dua kolom sama besar */
+    gap: 40px;
+    align-items: center;
+}
+
+.about-text h2,
+.about-text h3 {
+    font-family: var(--font-heading);
+    color: var(--heading-color);
+    margin-bottom: 1rem;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* Responsivitas untuk halaman About */
+@media (max-width: 768px) {
+    .about-layout {
+        grid-template-columns: 1fr;
+        /* Satu kolom di mobile */
+    }
+}
+
+/* ============================================= */
+/* --- Help --- */
+
+/* Tambahkan ini di style.css */
+
+.faq-container {
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--subtle-border-color);
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px 0;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-family: var(--font-body);
+    color: var(--heading-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question::after {
+    content: '+';
+    /* Ikon plus */
+    font-size: 1.5rem;
+    transition: transform 0.2s;
+}
+
+.faq-question.active::after {
+    content: '−';
+    /* Ikon minus saat aktif */
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    /* Sembunyikan jawaban */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.faq-answer p {
+    padding: 0 0 20px 0;
+    line-height: 1.7;
+}
+
+/* ============================================= */
+/* ============================================= */
+/* --- Footer --- */
+/* ============================================= */
+footer {
+    background: var(--header-top-bg);
+    color: var(--light-text-color);
+    text-align: center;
+    padding: 2rem 0;
+}
+
+/* ============================================= */
+/* --- Media Queries untuk Tampilan Responsif --- */
+/* ============================================= */
+
+.hamburger-btn {
+    display: none;
+    /* Sembunyikan di desktop */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 110;
+    /* Pastikan di atas elemen lain */
+}
+
+/* Sembunyikan link khusus mobile di tampilan desktop */
+.mobile-only {
+    display: none;
+}
+
+.hamburger-btn span {
+    width: 2rem;
+    height: 0.25rem;
+    background: var(--heading-color);
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
+}
+
+@media (max-width: 768px) {
+
+    .header-top {
+        display: none;
+    }
+
+    /* Tampilkan link khusus mobile di dalam menu hamburger */
+    .mobile-only {
+        display: list-item;
+        /* atau 'block', tergantung struktur Anda */
+        width: 100%;
+        /* Pastikan mengambil lebar penuh */
+    }
+
+    /* Sembunyikan navigasi utama di mobile */
+    .header-main-nav {
+        display: none;
+    }
+
+    /* Tampilkan tombol hamburger di mobile */
+    .hamburger-btn {
+        display: flex;
+        order: 3;
+        /* Posisikan di paling kanan */
+    }
+
+    /* Tata ulang header utama */
+    .header-main .container {
+        justify-content: space-between;
+    }
+
+    .search-bar {
+        /* Sembunyikan search bar di header agar tidak penuh, 
+           bisa dipindahkan ke dalam menu mobile jika mau */
+        display: none;
+    }
+
+    /* --- Gaya untuk menu mobile saat aktif --- */
+    .header-main-nav.is-active {
+        display: flex;
+        position: absolute;
+        top: 100%;
+        /* Muncul tepat di bawah header */
+        left: 0;
+        width: 100%;
+        background: var(--header-main-bg);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-main-nav.is-active ul {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    .header-main-nav.is-active li {
+        padding: 0.5rem 0;
+        width: 100%;
+        border-top: 1px solid var(--subtle-border-color);
+
+        transition: background-color 0.2s ease-in-out;
+    }
+
+    /* TAMBAHKAN BLOK BARU INI UNTUK EFEK HOVER */
+    .header-main-nav.is-active li:hover {
+        background: var(--accent-color);
+    }
+
+    /* Ganti juga warna teks link di dalamnya agar kontras */
+    .header-main-nav.is-active li:hover a {
+        color: var(--accent-text-color);
+    }
+
+    .header-main-nav.is-active li:first-child {
+        border-top: none;
+    }
+
+    .header-top-nav ul {
+        flex-direction: column;
+        /* PAKSA item untuk menumpuk ke bawah */
+        align-items: center;
+        /* Posisikan semua item di tengah */
+        gap: 20px;
+        /* Atur jarak vertikal antar item */
+    }
+
+    .featured-products h2 {
+        font-size: 1.6rem;
+        /* Kecilkan lagi dari 1.8rem */
+    }
+
+    .hero-content {
+        h1 {
+            font-size: 1.6rem;
+        }
+
+        p {
+            font-size: 0.8rem;
+            text-align: center;
+        }
+    }
+}

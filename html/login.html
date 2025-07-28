@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MineCart - Tentang Kami</title>
+    <link rel="icon" href="../assets/logo-MineCart.png">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Styling khusus untuk halaman login/register */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            /* Set tinggi agar di tengah halaman */
+            padding: 20px;
+            background-color: var(--bg-color);
+        }
+
+        .auth-box {
+            background-color: var(--light-color);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .auth-box h2 {
+            font-family: var(--font-heading);
+            margin-bottom: 30px;
+            color: var(--dark-color);
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            /* Penting agar padding tidak menambah lebar */
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="password"]:focus,
+        .form-group input[type="email"]:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .auth-button {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            width: 100%;
+        }
+
+        .auth-button:hover {
+            background-color: #2574A9;
+        }
+
+        .switch-auth {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--dark-color);
+        }
+
+        .switch-auth a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .switch-auth a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="social-media">
+                    <span data-translate-key="follow-us-title">Ikuti Kami di</span>
+                    <a href="#"><img src="../assets/logo-instagram.webp" alt="Instagram" class="logo-ig"></a>
+                    <a href="#"><img src="../assets/logo-facebook.webp" alt="Facebook" class="logo-fb"></a>
+                </div>
+                <nav class="header-top-nav">
+                    <ul>
+                        <li><a href="about.html" data-translate-key="about-us-title" class="a-header-top">Tentang
+                                Kami</a></li>
+                        <li><a href="help.html" data-translate-key="help-title" class="a-header-top">Bantuan</a></li>
+                        <li class="language-selector-wrapper">
+                            <div class="custom-select">
+                                <button class="select-button" aria-haspopup="listbox" aria-expanded="false"
+                                    title="Ganti Bahasa" data-translate-key="select-lang">
+                                    <span id="selected-lang-text">Bahasa Indonesia</span>
+                                    <span class="arrow-down"></span>
+                                </button>
+                                <ul class="select-dropdown" role="listbox">
+                                    <li data-value="id" role="option">Bahasa Indonesia</li>
+                                    <li data-value="en" role="option">English</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li id="account-menu"></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/logo-MineCart.png" alt="MineCart Logo">
+                    <span>MineCart</span>
+                </a>
+
+                <form class="search-bar" action="search.html" method="GET">
+                    <input type="search" name="q" placeholder="Cari di MineCart..." data-translate-key="search-title"
+                        required>
+                    <button type="submit" title="Cari" data-translate-key="search-btn"><img
+                            src="../assets/logo-search.png" alt="Cari"></button>
+                </form>
+
+                <nav class="header-main-nav">
+                    <ul>
+                        <li><a href="../index.html" data-translate-key="home-title">Beranda</a></li>
+                        <li><a href="products.html" data-translate-key="all-products-title">Semua Produk</a></li>
+                        <li class="mobile-only"><a href="about.html" data-translate-key="about-us-title">Tentang
+                                Kami</a></li>
+                        <li class="mobile-only"><a href="help.html" data-translate-key="help-title">Bantuan</a></li>
+                        <li class="cart-icon-wrapper">
+                            <a href="cart.html" title="Keranjang Belanja" data-translate-key="cart-link-title">
+                                <img src="../assets/logo-keranjang-gelap.png" alt="Keranjang" class="icon-nav"
+                                    id="cart-icon-img">
+                                <span id="cart-counter" class="cart-counter">0</span>
+                            </a>
+                        </li>
+                        <li>
+                            <button id="theme-toggle-btn" class="theme-button" title="Ubah Tema"
+                                data-translate-key="theme-toggle-title">
+                                <img id="theme-icon" src="../assets/logo-gelap.png" alt="Tema">
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+
+                <button class="hamburger-btn" aria-label="Buka Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="auth-container">
+            <div class="auth-box">
+                <h2 data-translate-key="login-header">Masuk ke Akun Anda</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email atau Username</label>
+                        <input type="text" id="login-email" name="emailOrUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" required>
+                    </div>
+                    <button type="submit" class="auth-button">Masuk</button>
+                </form>
+                <div class="switch-auth">
+                    Belum punya akun? <a href="register.html">Daftar sekarang</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Toko Anda. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        // JavaScript sementara untuk menangani login (hanya simulasi)
+        document.getElementById('login-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // Mencegah form submit dan refresh halaman
+            const emailOrUsername = document.getElementById('login-email').value;
+            // Di sini Anda akan mengirim data ke server untuk verifikasi login
+            // Untuk simulasi, kita langsung anggap berhasil dan simpan status
+            if (emailOrUsername) {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', emailOrUsername); // Simpan email/username sebagai nama pengguna
+                alert('Login Berhasil! Selamat datang, ' + emailOrUsername);
+                window.location.href = '../index.html'; // Kembali ke halaman utama
+            } else {
+                alert('Silakan masukkan email atau username.');
+            }
+        });
+    </script>
+</body>
+
+</html>

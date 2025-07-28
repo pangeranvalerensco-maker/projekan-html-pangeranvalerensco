@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MineCart - Bantuan</title>
+    <link rel="icon" href="../assets/logo-MineCart.png">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="social-media">
+                    <span data-translate-key="follow-us-title">Ikuti Kami di</span>
+                    <a href="#"><img src="../assets/logo-instagram.webp" alt="Instagram" class="logo-ig"></a>
+                    <a href="#"><img src="../assets/logo-facebook.webp" alt="Facebook" class="logo-fb"></a>
+                </div>
+                <nav class="header-top-nav">
+                    <ul>
+                        <li><a href="about.html" data-translate-key="about-us-title" class="a-header-top">Tentang
+                                Kami</a></li>
+                        <li><a href="help.html" data-translate-key="help-title" class="a-header-top">Bantuan</a></li>
+                        <li class="language-selector-wrapper">
+                            <div class="custom-select">
+                                <button class="select-button" aria-haspopup="listbox" aria-expanded="false"
+                                    title="Ganti Bahasa" data-translate-key="select-lang">
+                                    <span id="selected-lang-text">Bahasa Indonesia</span>
+                                    <span class="arrow-down"></span>
+                                </button>
+                                <ul class="select-dropdown" role="listbox">
+                                    <li data-value="id" role="option">Bahasa Indonesia</li>
+                                    <li data-value="en" role="option">English</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li id="account-menu"></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/logo-MineCart.png" alt="MineCart Logo">
+                    <span>MineCart</span>
+                </a>
+
+                <form class="search-bar" action="search.html" method="GET">
+                    <input type="search" name="q" placeholder="Cari di MineCart..." data-translate-key="search-title"
+                        required>
+                    <button type="submit" title="Cari" data-translate-key="search-btn"><img
+                            src="../assets/logo-search.png" alt="Cari"></button>
+                </form>
+
+                <nav class="header-main-nav">
+                    <ul>
+                        <li><a href="../index.html" data-translate-key="home-title">Beranda</a></li>
+                        <li><a href="products.html" data-translate-key="all-products-title">Semua Produk</a></li>
+                        <li class="mobile-only"><a href="about.html" data-translate-key="about-us-title">Tentang
+                                Kami</a></li>
+                        <li class="mobile-only"><a href="help.html" data-translate-key="help-title">Bantuan</a></li>
+                        <li class="cart-icon-wrapper">
+                            <a href="cart.html" title="Keranjang Belanja" data-translate-key="cart-link-title">
+                                <img src="../assets/logo-keranjang-gelap.png" alt="Keranjang" class="icon-nav" id="cart-icon-img">
+                                <span id="cart-counter" class="cart-counter">0</span>
+                            </a>
+                        </li>
+                        <li>
+                            <button id="theme-toggle-btn" class="theme-button" title="Ubah Tema"
+                                data-translate-key="theme-toggle-title">
+                                <img id="theme-icon" src="../assets/logo-gelap.png" alt="Tema">
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+
+                <button class="hamburger-btn" aria-label="Buka Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container page-content">
+            <h1 class="page-title" data-translate-key="help-title">Pusat Bantuan</h1>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question" data-translate-key="help-q1">Bagaimana cara memesan produk?</button>
+                    <div class="faq-answer">
+                        <p data-translate-key="help-a1">Anda dapat memesan produk dengan menekan tombol "Tambah ke
+                            Keranjang", lalu melanjutkan ke halaman keranjang untuk menyelesaikan proses checkout.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" data-translate-key="help-q2">Apa saja metode pembayaran yang
+                        diterima?</button>
+                    <div class="faq-answer">
+                        <p data-translate-key="help-a2">Saat ini, proyek ini adalah simulasi front-end dan tidak
+                            memproses pembayaran sungguhan. Semua fitur checkout hanya untuk tujuan demonstrasi.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" data-translate-key="help-q3">Berapa lama waktu pengiriman?</button>
+                    <div class="faq-answer">
+                        <p data-translate-key="help-a3">Karena ini adalah website simulasi, tidak ada pengiriman fisik
+                            yang terjadi. Namun, kami memastikan pengalaman berbelanja virtual Anda secepat mungkin!</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" data-translate-key="help-q4">Bagaimana cara mengembalikan
+                        produk?</button>
+                    <div class="faq-answer">
+                        <p data-translate-key="help-a4">Proses pengembalian produk saat ini tidak dapat dilakukan karena
+                            website ini merupakan simulasi untuk proyek. Namun, kami selalu memastikan data produk yang
+                            ditampilkan akurat.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" data-translate-key="help-q5">Apakah semua produk ready stock?</button>
+                    <div class="faq-answer">
+                        <p data-translate-key="help-a5">Ya, semua produk yang ditampilkan di website ini dianggap ready
+                            stock. Jumlah stok yang tertera pada setiap halaman produk adalah angka simulasi dan akan
+                            berkurang setiap kali ada transaksi pembelian.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" data-translate-key="help-q6">Bagaimana cara mengubah data akun
+                        saya?</button>
+                    <div class="faq-answer">
+                        <p data-translate-key="help-a6">Fitur untuk mengubah data akun seperti password atau alamat akan
+                            tersedia di halaman "Akun Saya" yang saat ini sedang dalam pengembangan untuk proyek ini.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" data-translate-key="help-q7">Ke mana saja jangkauan pengiriman
+                        MineCart?</button>
+                    <div class="faq-answer">
+                        <p data-translate-key="help-a7">Jangkauan pengiriman kami seluas imajinasi Anda! Sebagai
+                            platform simulasi, kami dapat "mengirim" ke lokasi mana pun di dunia virtual. Tidak ada
+                            biaya ongkos kirim yang akan dikenakan.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" data-translate-key="help-q8">Bagaimana jika saya butuh bantuan lebih
+                        lanjut?</button>
+                    <div class="faq-answer">
+                        <p data-translate-key="help-a8">Jika pertanyaan Anda tidak terjawab di sini, jangan ragu untuk
+                            mengunjungi halaman "Tentang Kami" untuk mempelajari lebih lanjut tentang proyek ini atau
+                            hubungi kami melalui media sosial yang tertera di bagian atas halaman.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" data-translate-key="help-q9">Mengapa ada fitur tema
+                        gelap/terang?</button>
+                    <div class="faq-answer">
+                        <p data-translate-key="help-a9">Kami menyediakan fitur tema gelap dan terang untuk memberikan
+                            kenyamanan visual maksimal bagi Anda. Fitur ini dibuat menggunakan CSS Variables dan
+                            JavaScript untuk menunjukkan salah satu komponen wajib dalam proyek ini.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p data-translate-key="footer-title">&copy; 2025 MineCart. Dibuat oleh Pangeran Valerensco Rivaldi
+                Hutabarat. Semua hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

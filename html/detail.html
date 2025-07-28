@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MineCart - Detail Produk</title>
+    <link rel="icon" href="../assets/logo-MineCart.png">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="social-media">
+                    <span data-translate-key="follow-us-title">Ikuti Kami di</span>
+                    <a href="#"><img src="../assets/logo-instagram.webp" alt="Instagram" class="logo-ig"></a>
+                    <a href="#"><img src="../assets/logo-facebook.webp" alt="Facebook" class="logo-fb"></a>
+                </div>
+                <nav class="header-top-nav">
+                    <ul>
+                        <li><a href="about.html" data-translate-key="about-us-title" class="a-header-top">Tentang
+                                Kami</a></li>
+                        <li><a href="help.html" data-translate-key="help-title" class="a-header-top">Bantuan</a></li>
+                        <li class="language-selector-wrapper">
+                            <div class="custom-select">
+                                <button class="select-button" aria-haspopup="listbox" aria-expanded="false"
+                                    title="Ganti Bahasa" data-translate-key="select-lang">
+                                    <span id="selected-lang-text">Bahasa Indonesia</span>
+                                    <span class="arrow-down"></span>
+                                </button>
+                                <ul class="select-dropdown" role="listbox">
+                                    <li data-value="id" role="option">Bahasa Indonesia</li>
+                                    <li data-value="en" role="option">English</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li id="account-menu"></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/logo-MineCart.png" alt="MineCart Logo">
+                    <span>MineCart</span>
+                </a>
+
+                <form class="search-bar" action="search.html" method="GET">
+                    <input type="search" name="q" placeholder="Cari di MineCart..." data-translate-key="search-title"
+                        required>
+                    <button type="submit" title="Cari" data-translate-key="search-btn"><img
+                            src="../assets/logo-search.png" alt="Cari"></button>
+                </form>
+
+                <nav class="header-main-nav">
+                    <ul>
+                        <li><a href="../index.html#recommended" data-translate-key="recommended-title">Rekomendasi</a>
+                        </li>
+                        <li><a href="../index.html" data-translate-key="home-title">Beranda</a></li>
+                        <li><a href="products.html" data-translate-key="all-products-title">Semua Produk</a></li>
+                        <li class="mobile-only"><a href="about.html" data-translate-key="about-us-title">Tentang
+                                Kami</a></li>
+                        <li class="mobile-only"><a href="help.html" data-translate-key="help-title">Bantuan</a></li>
+                        <li class="cart-icon-wrapper">
+                            <a href="cart.html" title="Keranjang Belanja" data-translate-key="cart-link-title">
+                                <img src="../assets/logo-keranjang-gelap.png" alt="Keranjang" class="icon-nav" id="cart-icon-img">
+                                <span id="cart-counter" class="cart-counter">0</span>
+                            </a>
+                        </li>
+                        <li>
+                            <button id="theme-toggle-btn" class="theme-button" title="Ubah Tema"
+                                data-translate-key="theme-toggle-title">
+                                <img id="theme-icon" src="../assets/logo-gelap.png" alt="Tema">
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+
+                <button class="hamburger-btn" aria-label="Buka Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="product-detail-layout">
+                <div id="product-images" class="product-detail-images">
+                </div>
+                <div class="product-detail-info">
+                    <h1 id="product-title">Memuat...</h1>
+                    <p id="product-category" class="category-tag">Kategori</p>
+                    <p id="product-price" class="price-detail">Rp 0</p>
+                    <p id="product-description">Deskripsi produk sedang dimuat...</p>
+                    <p id="product-stock">Stok: -</p>
+                    <button id="add-to-cart-btn" class="cta-button" data-translate-key="buy-button">Tambah ke
+                        Keranjang</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p data-translate-key="footer-title">&copy; 2025 MineCart. Dibuat oleh Pangeran Valerensco Rivaldi
+                Hutabarat. Semua hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
