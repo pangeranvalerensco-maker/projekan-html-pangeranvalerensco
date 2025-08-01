@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+body {
+    background: #fcefef;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    color: #333;
+}
+
+header {
+    background-color: rgb(168, 5, 5);
+    color: white;
+    padding: 1rem 1rem 1.2rem 1rem;
+}
+
+.headgambar {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+#logo {
+    max-width: 100px;
+    height: auto;
+}
+
+.judul {
+    text-align: center;
+    flex: 1;
+    min-width: 200px;
+}
+
+.judul h1,
+.judul h3 {
+    margin: 0;
+    color: white;
+}
+
+.judul h2 {
+    color: antiquewhite;
+    margin: 0.2rem 0;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+}
+
+form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 1000px;
+    border-top: 5px solid maroon;
+    border-bottom: 5px solid maroon;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+fieldset {
+    margin-bottom: 24px;
+    padding: 20px;
+    border: 1px solid rgb(128, 0, 0);
+    border-radius: 8px;
+}
+
+legend {
+    color: rgb(128, 0, 0);
+    padding: 0 12px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 20px 14px;
+    table-layout: fixed;
+}
+
+td {
+    vertical-align: top;
+}
+
+td label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 14px;
+    font-family: inherit;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* Progress Bar */
+.progress-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    counter-reset: step;
+}
+
+.progress-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+    color: #666;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.progress-step.active {
+    color: rgb(168, 5, 5);
+}
+
+.progress-step::before {
+    counter-increment: step;
+    content: counter(step);
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: #ddd;
+    color: #666;
+    border-radius: 50%;
+    margin: 0 auto 8px;
+    line-height: 30px;
+}
+
+.progress-step.active::before {
+    background: rgb(168, 5, 5);
+    color: white;
+}
+
+.progress-step::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: #ddd;
+    top: 15px;
+    left: -50%;
+    z-index: -1;
+}
+
+.progress-step:first-child::after {
+    content: none;
+}
+
+.progress-step.active::after {
+    background: rgb(168, 5, 5);
+}
+
+.progress-step.completed {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.progress-step.completed::before {
+    content: '✓';
+    background: #28a745;
+    color: white;
+    font-size: 1.2rem;
+    line-height: 30px;
+}
+
+.progress-step.completed::after {
+    background: #28a745;
+}
+
+/* Tombol Navigasi (Desktop) */
+.form-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.next-btn,
+.prev-btn {
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+    color: white;
+}
+
+.next-btn {
+    background-color: rgb(168, 5, 5);
+}
+
+.prev-btn {
+    background-color: #6c757d;
+}
+
+.next-btn:hover {
+    background-color: rgb(128, 0, 0);
+}
+
+.prev-btn:hover {
+    background-color: #5a6268;
+}
+
+/* --- CSS RESPONSIF --- */
+@media (max-width: 768px) {
+
+    .headgambar,
+    .judul {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .judul h1 {
+        font-size: 1.5rem;
+    }
+
+    .judul h2 {
+        font-size: 1.1rem;
+    }
+
+    .judul h3 {
+        font-size: 1rem;
+    }
+
+    main {
+        padding: 1.5rem;
+    }
+
+    form {
+        padding: 1.5rem 1rem;
+    }
+
+    fieldset {
+        border: none;
+        padding: 0;
+    }
+
+    legend {
+        padding-left: 0;
+    }
+
+    table,
+    tbody,
+    tr,
+    td {
+        display: block;
+        width: 100%;
+    }
+
+    table {
+        border-spacing: 0;
+    }
+
+    tr,
+    td {
+        margin-bottom: 1rem;
+        padding: 0 !important;
+    }
+
+    .form-navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .prev-btn,
+    .next-btn {
+        width: 100%;
+        text-align: center;
+    }
+}

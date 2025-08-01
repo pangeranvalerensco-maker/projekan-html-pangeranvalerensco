@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MineCart - Detail Produk</title>
+    <title data-translate-key="page-title-checkout">MineCart - Checkout</title>
     <link rel="icon" href="../assets/logo-MineCart.png">
     <link rel="stylesheet" href="../css/style.css">
 
@@ -77,10 +77,10 @@
                         <li class="mobile-only mobile-only-logged-out"><a href="register.html"
                                 data-translate-key="register">Daftar</a></li>
 
-                        <li class="mobile-only mobile-only-logged-in"><a href="account.html"
-                                data-translate-key="my-account">Akun Saya</a></li>
-                        <li class="mobile-only mobile-only-logged-in"><a href="#" id="logout-btn-mobile"
-                                data-translate-key="logout">Keluar</a></li>
+                        <!-- Hanya muncul saat mobile -->
+                        <li class="mobile-only mobile-only-logged-in"><a href="account.html">My Account</a></li>
+                        <li class="mobile-only mobile-only-logged-in"><a href="#" id="logout-btn-mobile">Logout</a></li>
+
 
                         <li><a href="../index.html" data-translate-key="home-title">Beranda</a></li>
                         <li><a href="products.html" data-translate-key="all-products-title">Semua Produk</a></li>
@@ -117,27 +117,78 @@
     </header>
 
     <main>
-        <div class="container">
-            <div class="product-detail-layout">
-                <div id="product-images" class="product-detail-images">
-                </div>
-                <div class="product-detail-info">
-                    <h1 id="product-title">Memuat...</h1>
-                    <p id="product-category" class="category-tag">Kategori</p>
-                    <p id="product-price" class="price-detail">Rp 0</p>
-                    <p id="product-description">Deskripsi produk sedang dimuat...</p>
-                    <p id="product-stock">Stok: -</p>
+        <div class="container page-content">
+            <h1 class="page-title" data-translate-key="checkout-title">Checkout Pesanan</h1>
 
-                    <div class="product-location-info">
-                        <h3 data-translate-key="product-seller-title">Penjual:</h3>
-                        <p><strong data-translate-key="seller-name-label">Nama Toko:</strong> <span
-                                id="product-seller-name">Memuat...</span></p>
-                        <p><strong data-translate-key="label-address">Alamat Toko:</strong> <span
-                                id="product-full-address">Memuat Alamat...</span></p>
+            <div class="checkout-layout">
+                <div class="checkout-section order-summary">
+                    <h2 data-translate-key="order-summary-title">Ringkasan Belanja Anda</h2>
+                    <div id="checkout-items-summary">
                     </div>
-                    <button id="add-to-cart-btn" class="cta-button" data-translate-key="buy-button">Tambah ke
-                        Keranjang</button>
+                    <div id="checkout-total-summary">
+                        <p>
+                            <span id="summary-subtotal-label"></span>
+                            <span id="summary-subtotal-price"></span>
+                        </p>
+                        <p><span data-translate-key="summary-shipping">Ongkir</span> <span
+                                id="summary-shipping-price">Rp 0</span></p>
+                        <hr>
+                        <p><span data-translate-key="shipping-time-label">Estimasi Waktu Sampai:</span> <span
+                                id="checkout-shipping-time">Waktu tidak dapat dihitung.</span></p>
+                        <p class="total-price"><span data-translate-key="summary-total">Total</span> <span
+                                id="summary-total-price">Rp 0</span></p>
+                    </div>
                 </div>
+
+                <div class="checkout-section shipping-info">
+                    <h2 data-translate-key="shipping-info-title">Informasi Pengiriman</h2>
+                    <div id="shipping-address-display">
+                        <p><strong data-translate-key="label-fullname">Nama Lengkap:</strong> <span
+                                id="checkout-fullname"></span></p>
+                        <p><strong data-translate-key="label-phone">Nomor Telepon:</strong> <span
+                                id="checkout-phone"></span></p>
+                        <p><strong data-translate-key="label-address">Alamat Lengkap:</strong> <span
+                                id="checkout-address"></span></p>
+                        <p><strong data-translate-key="label-city">Kota:</strong> <span id="checkout-city"></span></p>
+                        <p><strong data-translate-key="label-postalcode">Kode Pos:</strong> <span
+                                id="checkout-postalcode"></span></p>
+                    </div>
+                    <button id="change-address-btn" class="cta-button" data-translate-key="change-address-btn">Ubah
+                        Alamat</button>
+                </div>
+
+                <form id="checkout-form" class="checkout-section payment-courier-note">
+                    <h2 data-translate-key="payment-method-title">Metode Pembayaran</h2>
+                    <div class="form-group payment-methods">
+                        <div class="radio-option">
+                            <input type="radio" id="payment-bca" name="paymentMethod" value="BCA Virtual Account"
+                                required checked>
+                            <label for="payment-bca">BCA Virtual Account</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="payment-mandiri" name="paymentMethod"
+                                value="Mandiri Virtual Account" required>
+                            <label for="payment-mandiri">Mandiri Virtual Account</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="payment-gopay" name="paymentMethod" value="GoPay" required>
+                            <label for="payment-gopay">GoPay</label>
+                        </div>
+                    </div>
+
+                    <h2 id="courier-note-title" data-translate-key="courier-note-title">Catatan untuk Kurir (Opsional)
+                    </h2>
+                    <div class="form-group">
+                        <label for="courier-note" class="sr-only" data-translate-key="courier-note-label">Catatan untuk
+                            Kurir</label>
+                        <textarea id="courier-note" rows="4"
+                            placeholder="Contoh: Titip ke satpam jika tidak ada orang di rumah."
+                            data-translate-key="courier-note-placeholder"></textarea>
+                    </div>
+
+                    <button type="submit" id="place-order-btn" class="cta-button"
+                        data-translate-key="place-order-btn">Selesaikan Pembayaran</button>
+                </form>
             </div>
         </div>
     </main>

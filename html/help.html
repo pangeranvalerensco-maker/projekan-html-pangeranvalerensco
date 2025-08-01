@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="../css/style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Press+Start+2P&display=swap"
         rel="stylesheet">
 </head>
 
 <body>
+
     <header>
         <div class="header-top">
             <div class="container">
@@ -72,11 +72,23 @@
 
                 <nav class="header-main-nav">
                     <ul>
+                        <li class="mobile-only mobile-only-logged-out"><a href="login.html"
+                                data-translate-key="login">Masuk</a></li>
+                        <li class="mobile-only mobile-only-logged-out"><a href="register.html"
+                                data-translate-key="register">Daftar</a></li>
+
+                        <li class="mobile-only mobile-only-logged-in"><a href="account.html"
+                                data-translate-key="my-account">Akun Saya</a></li>
+                        <li class="mobile-only mobile-only-logged-in"><a href="#" id="logout-btn-mobile"
+                                data-translate-key="logout">Keluar</a></li>
+
                         <li><a href="../index.html" data-translate-key="home-title">Beranda</a></li>
                         <li><a href="products.html" data-translate-key="all-products-title">Semua Produk</a></li>
+
                         <li class="mobile-only"><a href="about.html" data-translate-key="about-us-title">Tentang
                                 Kami</a></li>
                         <li class="mobile-only"><a href="help.html" data-translate-key="help-title">Bantuan</a></li>
+
                         <li class="cart-icon-wrapper">
                             <a href="cart.html" title="Keranjang Belanja" data-translate-key="cart-link-title">
                                 <img src="../assets/logo-keranjang-gelap.png" alt="Keranjang" class="icon-nav"
@@ -87,9 +99,12 @@
                         <li>
                             <button id="theme-toggle-btn" class="theme-button" title="Ubah Tema"
                                 data-translate-key="theme-toggle-title">
-                                <img id="theme-icon" src="../assets/logo-gelap.png" alt="Tema">
+                                <img id="theme-icon" src="../assets/logo-gelap.png" alt="Tema"
+                                    data-translate-key="theme-link-title">
                             </button>
                         </li>
+
+                        <li id="mobile-lang-switcher" class="mobile-only"><a href="#"></a></li>
                     </ul>
                 </nav>
 
@@ -109,76 +124,106 @@
                 <div class="faq-item">
                     <button class="faq-question" data-translate-key="help-q1">Bagaimana cara memesan produk?</button>
                     <div class="faq-answer">
-                        <p data-translate-key="help-a1">Anda dapat memesan produk dengan menekan tombol "Tambah ke
-                            Keranjang", lalu melanjutkan ke halaman keranjang untuk menyelesaikan proses checkout.</p>
+                        <div>
+                            <p data-translate-key="help-a1">Anda dapat memesan produk dengan menekan tombol "Tambah ke
+                                Keranjang", lalu melanjutkan ke halaman keranjang untuk menyelesaikan proses checkout.
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" data-translate-key="help-q2">Apa saja metode pembayaran yang
                         diterima?</button>
                     <div class="faq-answer">
-                        <p data-translate-key="help-a2">Saat ini, proyek ini adalah simulasi front-end dan tidak
-                            memproses pembayaran sungguhan. Semua fitur checkout hanya untuk tujuan demonstrasi.</p>
+                        <div>
+                            <p data-translate-key="help-a2">Saat ini, proyek ini adalah simulasi front-end dan tidak
+                                memproses pembayaran sungguhan. Semua fitur checkout hanya untuk tujuan demonstrasi.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" data-translate-key="help-q3">Berapa lama waktu pengiriman?</button>
                     <div class="faq-answer">
-                        <p data-translate-key="help-a3">Karena ini adalah website simulasi, tidak ada pengiriman fisik
-                            yang terjadi. Namun, kami memastikan pengalaman berbelanja virtual Anda secepat mungkin!</p>
+                        <div>
+                            <p data-translate-key="help-a3">Karena ini adalah website simulasi, tidak ada pengiriman
+                                fisik
+                                yang terjadi. Namun, kami memastikan pengalaman berbelanja virtual Anda secepat mungkin!
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" data-translate-key="help-q4">Bagaimana cara mengembalikan
                         produk?</button>
                     <div class="faq-answer">
-                        <p data-translate-key="help-a4">Proses pengembalian produk saat ini tidak dapat dilakukan karena
-                            website ini merupakan simulasi untuk proyek. Namun, kami selalu memastikan data produk yang
-                            ditampilkan akurat.</p>
+                        <div>
+                            <p data-translate-key="help-a4">Proses pengembalian produk saat ini tidak dapat dilakukan
+                                karena
+                                website ini merupakan simulasi untuk proyek. Namun, kami selalu memastikan data produk
+                                yang
+                                ditampilkan akurat.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" data-translate-key="help-q5">Apakah semua produk ready stock?</button>
                     <div class="faq-answer">
-                        <p data-translate-key="help-a5">Ya, semua produk yang ditampilkan di website ini dianggap ready
-                            stock. Jumlah stok yang tertera pada setiap halaman produk adalah angka simulasi dan akan
-                            berkurang setiap kali ada transaksi pembelian.</p>
+                        <div>
+                            <p data-translate-key="help-a5">Ya, semua produk yang ditampilkan di website ini dianggap
+                                ready
+                                stock. Jumlah stok yang tertera pada setiap halaman produk adalah angka simulasi dan
+                                akan
+                                berkurang setiap kali ada transaksi pembelian.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" data-translate-key="help-q6">Bagaimana cara mengubah data akun
                         saya?</button>
                     <div class="faq-answer">
-                        <p data-translate-key="help-a6">Fitur untuk mengubah data akun seperti password atau alamat akan
-                            tersedia di halaman "Akun Saya" yang saat ini sedang dalam pengembangan untuk proyek ini.
-                        </p>
+                        <div>
+                            <p data-translate-key="help-a6">Fitur untuk mengubah data akun seperti password atau alamat
+                                akan
+                                tersedia di halaman "Akun Saya" yang saat ini sedang dalam pengembangan untuk proyek
+                                ini.
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" data-translate-key="help-q7">Ke mana saja jangkauan pengiriman
                         MineCart?</button>
                     <div class="faq-answer">
-                        <p data-translate-key="help-a7">Jangkauan pengiriman kami seluas imajinasi Anda! Sebagai
-                            platform simulasi, kami dapat "mengirim" ke lokasi mana pun di dunia virtual. Tidak ada
-                            biaya ongkos kirim yang akan dikenakan.</p>
+                        <div>
+                            <p data-translate-key="help-a7">Jangkauan pengiriman kami seluas imajinasi Anda! Sebagai
+                                platform simulasi, kami dapat "mengirim" ke lokasi mana pun di dunia virtual. Tidak ada
+                                biaya ongkos kirim yang akan dikenakan.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" data-translate-key="help-q8">Bagaimana jika saya butuh bantuan lebih
                         lanjut?</button>
                     <div class="faq-answer">
-                        <p data-translate-key="help-a8">Jika pertanyaan Anda tidak terjawab di sini, jangan ragu untuk
-                            mengunjungi halaman "Tentang Kami" untuk mempelajari lebih lanjut tentang proyek ini atau
-                            hubungi kami melalui media sosial yang tertera di bagian atas halaman.</p>
+                        <div>
+                            <p data-translate-key="help-a8">Jika pertanyaan Anda tidak terjawab di sini, jangan ragu
+                                untuk
+                                mengunjungi halaman "Tentang Kami" untuk mempelajari lebih lanjut tentang proyek ini
+                                atau
+                                hubungi kami melalui media sosial yang tertera di bagian atas halaman.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" data-translate-key="help-q9">Mengapa ada fitur tema
                         gelap/terang?</button>
                     <div class="faq-answer">
-                        <p data-translate-key="help-a9">Kami menyediakan fitur tema gelap dan terang untuk memberikan
-                            kenyamanan visual maksimal bagi Anda. Fitur ini dibuat menggunakan CSS Variables dan
-                            JavaScript untuk menunjukkan salah satu komponen wajib dalam proyek ini.</p>
+                        <div>
+                            <p data-translate-key="help-a9">Kami menyediakan fitur tema gelap dan terang untuk
+                                memberikan
+                                kenyamanan visual maksimal bagi Anda. Fitur ini dibuat menggunakan CSS Variables dan
+                                JavaScript untuk menunjukkan salah satu komponen wajib dalam proyek ini.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -192,6 +237,7 @@
         </div>
     </footer>
 
+    <div id="toast-container"></div>
     <script src="../js/script.js"></script>
 </body>
 

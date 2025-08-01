@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="../css/style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Press+Start+2P&display=swap"
         rel="stylesheet">
 </head>
 
 <body>
+
 
     <header>
         <div class="header-top">
@@ -49,6 +49,7 @@
                 </nav>
             </div>
         </div>
+
         <div class="header-main">
             <div class="container">
                 <div class="header-main-left">
@@ -69,17 +70,29 @@
                     <button type="submit" title="Cari" data-translate-key="search-btn"><img
                             src="../assets/logo-search.png" alt="Cari"></button>
                 </form>
+
                 <nav class="header-main-nav">
                     <ul>
+                        <li class="mobile-only mobile-only-logged-out"><a href="login.html"
+                                data-translate-key="login">Masuk</a></li>
+                        <li class="mobile-only mobile-only-logged-out"><a href="register.html"
+                                data-translate-key="register">Daftar</a></li>
+
+                        <li class="mobile-only mobile-only-logged-in"><a href="account.html"
+                                data-translate-key="my-account">Akun Saya</a></li>
+                        <li class="mobile-only mobile-only-logged-in"><a href="#" id="logout-btn-mobile"
+                                data-translate-key="logout">Keluar</a></li>
+
                         <li><a href="../index.html" data-translate-key="home-title">Beranda</a></li>
-                        <li><a href="products.html" class="active" data-translate-key="all-products-title">Semua
-                                Produk</a></li>
+                        <li><a href="products.html" data-translate-key="all-products-title">Semua Produk</a></li>
+
                         <li class="mobile-only"><a href="about.html" data-translate-key="about-us-title">Tentang
                                 Kami</a></li>
                         <li class="mobile-only"><a href="help.html" data-translate-key="help-title">Bantuan</a></li>
+
                         <li class="cart-icon-wrapper">
                             <a href="cart.html" title="Keranjang Belanja" data-translate-key="cart-link-title">
-                                <img src="assets/logo-keranjang-gelap.png" alt="Keranjang" class="icon-nav"
+                                <img src="../assets/logo-keranjang-gelap.png" alt="Keranjang" class="icon-nav"
                                     id="cart-icon-img">
                                 <span id="cart-counter" class="cart-counter">0</span>
                             </a>
@@ -87,9 +100,12 @@
                         <li>
                             <button id="theme-toggle-btn" class="theme-button" title="Ubah Tema"
                                 data-translate-key="theme-toggle-title">
-                                <img id="theme-icon" src="../assets/logo-keranjang-gelap.png" alt="Tema">
+                                <img id="theme-icon" src="../assets/logo-gelap.png" alt="Tema"
+                                    data-translate-key="theme-link-title">
                             </button>
                         </li>
+
+                        <li id="mobile-lang-switcher" class="mobile-only"><a href="#"></a></li>
                     </ul>
                 </nav>
 
@@ -118,7 +134,7 @@
                 Hutabarat. Semua hak cipta dilindungi.</p>
         </div>
     </footer>
-
+    <div id="toast-container"></div>
     <script src="../js/script.js"></script>
 </body>
 

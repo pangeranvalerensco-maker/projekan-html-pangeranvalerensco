@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="../css/style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Press+Start+2P&display=swap"
         rel="stylesheet">
 </head>
 
 <body>
+    
     <header>
         <div class="header-top">
             <div class="container">
@@ -72,13 +72,23 @@
 
                 <nav class="header-main-nav">
                     <ul>
-                        <li><a href="../index.html#recommended" data-translate-key="recommended-title">Rekomendasi</a>
-                        </li>
+                        <li class="mobile-only mobile-only-logged-out"><a href="login.html"
+                                data-translate-key="login">Masuk</a></li>
+                        <li class="mobile-only mobile-only-logged-out"><a href="register.html"
+                                data-translate-key="register">Daftar</a></li>
+
+                        <li class="mobile-only mobile-only-logged-in"><a href="account.html"
+                                data-translate-key="my-account">Akun Saya</a></li>
+                        <li class="mobile-only mobile-only-logged-in"><a href="#" id="logout-btn-mobile"
+                                data-translate-key="logout">Keluar</a></li>
+                        
                         <li><a href="../index.html" data-translate-key="home-title">Beranda</a></li>
                         <li><a href="products.html" data-translate-key="all-products-title">Semua Produk</a></li>
+                        
                         <li class="mobile-only"><a href="about.html" data-translate-key="about-us-title">Tentang
                                 Kami</a></li>
                         <li class="mobile-only"><a href="help.html" data-translate-key="help-title">Bantuan</a></li>
+                        
                         <li class="cart-icon-wrapper">
                             <a href="cart.html" title="Keranjang Belanja" data-translate-key="cart-link-title">
                                 <img src="../assets/logo-keranjang-gelap.png" alt="Keranjang" class="icon-nav"
@@ -89,9 +99,12 @@
                         <li>
                             <button id="theme-toggle-btn" class="theme-button" title="Ubah Tema"
                                 data-translate-key="theme-toggle-title">
-                                <img id="theme-icon" src="../assets/logo-gelap.png" alt="Tema">
+                                <img id="theme-icon" src="../assets/logo-gelap.png" alt="Tema"
+                                    data-translate-key="theme-link-title">
                             </button>
                         </li>
+
+                        <li id="mobile-lang-switcher" class="mobile-only"><a href="#"></a></li>
                     </ul>
                 </nav>
 
@@ -110,9 +123,11 @@
 
         <section class="cart-section">
             <div class="container">
+                <div class="cart-header"> <input type="checkbox" id="select-all-checkbox">
+                    <label for="select-all-checkbox" data-translate-key="select-all">Pilih Semua</label>
+                </div>
                 <div id="cart-items-container">
                 </div>
-
                 <div id="cart-summary" class="cart-summary">
                 </div>
             </div>
@@ -126,6 +141,7 @@
         </div>
     </footer>
 
+    <div id="toast-container"></div>
     <script src="../js/script.js"></script>
 </body>
 

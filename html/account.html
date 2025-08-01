@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MineCart - Detail Produk</title>
+    <title data-translate-key="page-title-account">MineCart - Akun Saya</title>
     <link rel="icon" href="../assets/logo-MineCart.png">
     <link rel="stylesheet" href="../css/style.css">
 
@@ -117,27 +117,84 @@
     </header>
 
     <main>
-        <div class="container">
-            <div class="product-detail-layout">
-                <div id="product-images" class="product-detail-images">
-                </div>
-                <div class="product-detail-info">
-                    <h1 id="product-title">Memuat...</h1>
-                    <p id="product-category" class="category-tag">Kategori</p>
-                    <p id="product-price" class="price-detail">Rp 0</p>
-                    <p id="product-description">Deskripsi produk sedang dimuat...</p>
-                    <p id="product-stock">Stok: -</p>
+        <div class="container page-content">
+            <h1 class="page-title" data-translate-key="my-account">Akun Saya</h1>
 
-                    <div class="product-location-info">
-                        <h3 data-translate-key="product-seller-title">Penjual:</h3>
-                        <p><strong data-translate-key="seller-name-label">Nama Toko:</strong> <span
-                                id="product-seller-name">Memuat...</span></p>
-                        <p><strong data-translate-key="label-address">Alamat Toko:</strong> <span
-                                id="product-full-address">Memuat Alamat...</span></p>
+            <div class="account-details">
+                <h2><span data-translate-key="account-info">Informasi Akun</span></h2>
+                <div id="user-info-display">
+                    <div class="user-info-item">
+                        <strong data-translate-key="label-username">Nama Pengguna:</strong>
+                        <span id="display-username"></span>
                     </div>
-                    <button id="add-to-cart-btn" class="cta-button" data-translate-key="buy-button">Tambah ke
-                        Keranjang</button>
+                    <div class="user-info-item">
+                        <strong data-translate-key="label-email">Email:</strong>
+                        <span id="display-email"></span>
+                    </div>
                 </div>
+
+                <h2><span data-translate-key="address-info">Informasi Alamat</span></h2>
+                <div id="address-info-display">
+                    <div class="user-info-item">
+                        <strong data-translate-key="label-fullname">Nama Lengkap:</strong>
+                        <span id="display-fullname">Belum diisi</span>
+                    </div>
+                    <div class="user-info-item">
+                        <strong data-translate-key="label-address">Alamat Lengkap:</strong>
+                        <span id="display-address">Belum diisi</span>
+                    </div>
+                    <div class="user-info-item">
+                        <strong data-translate-key="label-city">Kota:</strong>
+                        <span id="display-city">Belum diisi</span>
+                    </div>
+                    <div class="user-info-item">
+                        <strong data-translate-key="label-postalcode">Kode Pos:</strong>
+                        <span id="display-postalcode">Belum diisi</span>
+                    </div>
+                    <div class="user-info-item">
+                        <strong data-translate-key="label-phone">Nomor Telepon:</strong>
+                        <span id="display-phone">Belum diisi</span>
+                    </div>
+                </div>
+                <button id="edit-address-btn" class="cta-button" data-translate-key="edit-address-btn">Edit
+                    Alamat</button>
+
+                <form id="address-form" class="auth-form">
+                    <h2><span data-translate-key="edit-address-title">Edit Alamat</span></h2>
+                    <div class="form-group">
+                        <label for="edit-fullname" data-translate-key="label-fullname">Nama Lengkap:</label>
+                        <input type="text" id="edit-fullname" required>
+                        <p class="error-message" data-translate-key="validation-required"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-address" data-translate-key="label-address">Alamat Lengkap:</label>
+                        <input type="text" id="edit-address" required>
+                        <p class="error-message" data-translate-key="validation-required"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-city" data-translate-key="label-city">Kota:</label>
+                        <input type="text" id="edit-city" required>
+                        <p class="error-message" data-translate-key="validation-required"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-postalcode" data-translate-key="label-postalcode">Kode Pos:</label>
+                        <input type="text" id="edit-postalcode" pattern="[0-9]{5}" title="Kode pos harus 5 digit angka"
+                            required>
+                        <p class="error-message" data-translate-key="validation-required"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-phone" data-translate-key="label-phone">Nomor Telepon:</label>
+                        <input type="tel" id="edit-phone" pattern="[0-9]{10,13}"
+                            title="Nomor telepon minimal 10 digit, maksimal 13 digit angka" required>
+                        <p class="error-message" data-translate-key="validation-required"></p>
+                    </div>
+                    <button type="submit" class="cta-button" data-translate-key="save-address-btn">Simpan
+                        Alamat</button>
+                    <button type="button" id="cancel-edit-btn" class="cta-button"
+                        data-translate-key="cancel-btn">Batal</button>
+                </form>
+
+                <button id="logout-btn" class="cta-button" data-translate-key="logout">Keluar</button>
             </div>
         </div>
     </main>
