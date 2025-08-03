@@ -1013,30 +1013,6 @@ body.dark-mode .skeleton::after {
 .cart-counter.visible { /* Kelas untuk menampilkan counter jika isinya lebih dari 0 */
     display: block;
 }
-
-/* Styling untuk gambar duplikat yang akan terbang */
-.flying-image {
-    position: fixed;
-    z-index: 2000;
-    border-radius: 50%;
-    object-fit: cover;
-    
-    /* Atur posisi & ukuran awal dari Variabel CSS */
-    left: var(--start-left, 0px);
-    top: var(--start-top, 0px);
-    width: var(--start-width, 100px);
-    height: var(--start-height, 100px);
-    
-    /* Transisi sekarang menggunakan transform agar lebih mulus */
-    transition: transform 0.7s cubic-bezier(0.5, 0, 1, 0.5), opacity 0.7s ease-in;
-}
-
-/* Class baru untuk state akhir animasi */
-.flying-image.fly-to-end {
-    /* Pindah & kecilkan menggunakan transform, bukan mengubah left/top/width/height */
-    transform: translate(var(--end-translate-x), var(--end-translate-y)) scale(0.1) rotate(180deg);
-    opacity: 0;
-}
 /* Animasi untuk ikon keranjang bergoyang */
 @keyframes cart-shake {
     0% { transform: rotate(0deg); }

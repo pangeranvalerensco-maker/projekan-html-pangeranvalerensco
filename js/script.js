@@ -2567,85 +2567,53 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.body.addEventListener('click', (e) => {
-    // --- LOGIKA TOMBOL BELI (DENGAN CEK LOGIN) ---
-    const buyButton = e.target.closest('.buy-btn') || e.target.closest('#add-to-cart-btn');
-    if (buyButton) {
-        e.preventDefault();
-        const { isLoggedIn } = checkLoginStatus();
+        // --- LOGIKA TOMBOL BELI (HANYA DENGAN ANIMASI GOYANG) ---
+        const buyButton = e.target.closest('.buy-btn') || e.target.closest('#add-to-cart-btn');
+        if (buyButton) {
+            e.preventDefault();
+            const { isLoggedIn } = checkLoginStatus();
 
-        if (isLoggedIn) {
-            const productId = buyButton.dataset.productId;
-            if (productId) {
-                // ▼▼▼ LOGIKA ANIMASI BARU DENGAN VARIABEL CSS ▼▼▼
-                const cartIconEl = document.getElementById('cart-icon-img');
-                const productCard = buyButton.closest('.product-card') || buyButton.closest('.product-detail-layout');
-                const productImage = productCard.querySelector('img');
+            if (isLoggedIn) {
+                const productId = buyButton.dataset.productId;
+                if (productId) {
+                    // 1. Langsung panggil fungsi utama untuk menambah item ke keranjang
+                    addToCart(productId);
 
-                if (cartIconEl && productImage) {
-                    const startRect = productImage.getBoundingClientRect();
-                    const endRect = cartIconEl.getBoundingClientRect();
-
-                    const flyingImage = productImage.cloneNode(true);
-                    
-                    // Set Variabel CSS untuk posisi & ukuran AWAL
-                    flyingImage.style.setProperty('--start-left', `${startRect.left}px`);
-                    flyingImage.style.setProperty('--start-top', `${startRect.top}px`);
-                    flyingImage.style.setProperty('--start-width', `${startRect.width}px`);
-                    flyingImage.style.setProperty('--start-height', `${startRect.height}px`);
-
-                    // Hitung jarak perpindahan untuk transform
-                    const translateX = endRect.left - startRect.left + (endRect.width / 2) - (startRect.width / 2);
-                    const translateY = endRect.top - startRect.top + (endRect.height / 2) - (startRect.height / 2);
-
-                    // Set Variabel CSS untuk posisi AKHIR (untuk properti transform)
-                    flyingImage.style.setProperty('--end-translate-x', `${translateX}px`);
-                    flyingImage.style.setProperty('--end-translate-y', `${translateY}px`);
-
-                    flyingImage.classList.add('flying-image');
-                    document.body.appendChild(flyingImage);
-                    
-                    // Picu animasi dengan menambahkan class .fly-to-end
-                    requestAnimationFrame(() => {
-                        flyingImage.classList.add('fly-to-end');
-                    });
-                    
-                    // Hapus gambar duplikat dan goyangkan ikon
-                    setTimeout(() => {
-                        flyingImage.remove();
+                    // 2. Picu animasi goyang pada ikon keranjang
+                    const cartIconEl = document.getElementById('cart-icon-img');
+                    if (cartIconEl) {
                         cartIconEl.classList.add('shake');
+
+                        // Hapus class setelah animasi selesai agar bisa dipicu lagi
                         setTimeout(() => {
                             cartIconEl.classList.remove('shake');
-                        }, 500);
-                    }, 700);
+                        }, 500); // Durasi harus sama dengan animasi 'cart-shake' di CSS
+                    }
                 }
-                // ▲▲▲ AKHIR DARI LOGIKA ANIMASI ▲▲▲
-
-                addToCart(productId);
+            } else {
+                showToast('toast-must-login', 'error');
+                setTimeout(() => {
+                    const loginPagePath = window.location.pathname.includes('/html/') ? 'login.html' : 'html/login.html';
+                    window.location.href = loginPagePath;
+                }, 3000);
             }
-        } else {
-            showToast('toast-must-login', 'error');
-            setTimeout(() => {
-                const loginPagePath = window.location.pathname.includes('/html/') ? 'login.html' : 'html/login.html';
-                window.location.href = loginPagePath;
-            }, 3000);
         }
-    }
 
-    // --- LOGIKA TOMBOL LOGOUT (DESKTOP & MOBILE) ---
-    if (e.target.id === 'logout-btn' || e.target.id === 'logout-btn-mobile') {
-        e.preventDefault();
-        logoutUser();
-    }
+        // --- LOGIKA TOMBOL LOGOUT (DESKTOP & MOBILE) ---
+        if (e.target.id === 'logout-btn' || e.target.id === 'logout-btn-mobile') {
+            e.preventDefault();
+            logoutUser();
+        }
 
-    // --- LOGIKA PENGALIH BAHASA MOBILE ---
-    if (e.target.closest('#mobile-lang-switcher')) {
-        e.preventDefault();
-        currentLang = (currentLang === 'id') ? 'en' : 'id';
-        localStorage.setItem('userLanguage', currentLang);
-        translateUI(currentLang);
-        updateMobileNavState();
-    }
-});
+        // --- LOGIKA PENGALIH BAHASA MOBILE ---
+        if (e.target.closest('#mobile-lang-switcher')) {
+            e.preventDefault();
+            currentLang = (currentLang === 'id') ? 'en' : 'id';
+            localStorage.setItem('userLanguage', currentLang);
+            translateUI(currentLang);
+            updateMobileNavState();
+        }
+    });
 
     window.addEventListener('click', (event) => {
         // Close account dropdown if clicking outside
