@@ -1013,6 +1013,93 @@ body.dark-mode .skeleton::after {
 .cart-counter.visible { /* Kelas untuk menampilkan counter jika isinya lebih dari 0 */
     display: block;
 }
+
+/* --- Cart Preview Dropdown --- */
+.cart-preview {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 350px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--subtle-border-color);
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    padding: 15px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-out;
+}
+.cart-icon-wrapper:hover .cart-preview {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.cart-preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--subtle-border-color);
+}
+#cart-preview-title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--heading-color);
+    font-size: 1rem;
+    margin: 0;
+}
+#cart-preview-view-link {
+    text-decoration: none;
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+#cart-preview-view-link:hover {
+    text-decoration: underline;
+}
+#cart-preview-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.cart-preview-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+.cart-preview-item:hover {
+    background-color: var(--section-bg);
+}
+.cart-preview-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.cart-preview-item-info {
+    flex-grow: 1;
+    font-size: 0.9rem;
+    overflow: hidden; /* Mencegah teks panjang merusak layout */
+}
+.cart-preview-item-info h5 {
+    margin: 0 0 5px 0;
+    font-size: 0.9rem;
+    color: var(--heading-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cart-preview-item-info .price {
+    font-weight: 500;
+}
 /* Animasi untuk ikon keranjang bergoyang */
 @keyframes cart-shake {
     0% { transform: rotate(0deg); }
@@ -1024,7 +1111,6 @@ body.dark-mode .skeleton::after {
 .shake {
     animation: cart-shake 0.5s ease-in-out;
 }
-
 @media (max-width: 768px) {
     .product-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1056,7 +1142,7 @@ body.dark-mode .skeleton::after {
     justify-content: center;
     flex-wrap: wrap;
     gap: 15px;
-    margin-bottom: 3rem; /* Jarak ke grid produk */
+    margin-bottom: 1rem; /* Jarak ke grid produk */
 }
 .category-filters button {
     padding: 10px 20px;
@@ -1100,6 +1186,17 @@ body.dark-mode .skeleton::after {
     font-family: var(--font-body);
     font-size: 0.9rem;
     cursor: pointer;
+}
+@media (max-width: 768px) {
+    .sorting-controls {
+        flex-direction: column; /* Ubah menjadi kolom di mobile */
+        align-items: flex-start; /* Pusatkan item */
+        gap: 8px; /* Jarak antar tombol */
+    }
+    .sorting-controls select{
+        width: 100%; /* Lebar penuh di mobile */
+        margin-top: 10px; /* Jarak atas untuk pemisahan */
+    }
 }
 
 /* ============================================= */

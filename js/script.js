@@ -105,6 +105,7 @@ const translations = {
         'no-search-results': 'Tidak ada produk yang cocok dengan pencarian',
         'my-account': 'Akun Saya',
         'logout': 'Keluar',
+        'btn-saving': 'Menyimpan...',
         'select-lang': 'Ganti Bahasa',
         'search-btn': 'Cari',
         'theme-toggle-btn': 'Ubah Tema',
@@ -205,6 +206,7 @@ const translations = {
         'cart-must-login': 'Anda harus masuk untuk melihat keranjang.',
         'toast-remove-item': 'Produk berhasil dihapus dari keranjang.',
         'empty-cart-message': 'Keranjang Anda kosong.',
+        'view-cart-btn': 'Lihat Keranjang',
         'page-title-account': 'MineCart - Akun Saya',
         'account-info': 'Informasi Akun',
         'address-info': 'Informasi Alamat',
@@ -303,6 +305,7 @@ const translations = {
         'no-search-results': 'No products found matching the search',
         'my-account': 'My Account',
         'logout': 'Logout',
+        'btn-saving': 'Saving...',
         'select-lang': 'Change Language',
         'search-btn': 'Search',
         'theme-toggle-btn': 'Change Theme',
@@ -403,6 +406,7 @@ const translations = {
         'cart-must-login': 'You must be logged in to view the cart.',
         'toast-remove-item': 'Product successfully removed from cart.',
         'empty-cart-message': 'Your cart is empty.',
+        'view-cart-btn': 'View Cart',
         'page-title-account': 'MineCart - My Account',
         'account-info': 'Account Information',
         'address-info': 'Address Information',
@@ -808,35 +812,50 @@ function initAccountPage() {
     if (addressForm) {
         addressForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            // Gunakan validateForm yang sudah ada
+
+            // Dapatkan referensi tombol submit
+            const submitButton = addressForm.querySelector('button[type="submit"]');
+            const originalButtonKey = submitButton.dataset.translateKey;
+
             if (!validateForm(addressForm)) {
-                showToast('toast-address-error', 'error');
-                return;
+                return; // Hentikan jika form tidak valid
             }
 
-            const { username } = checkLoginStatus();
-            let allUsers = getLocalStorage('userAccounts', [])
-            const currentUserIndex = allUsers.findIndex(user => user.username === username);
+            // 1. Nonaktifkan tombol dan ubah teksnya
+            submitButton.disabled = true;
+            submitButton.textContent = translations[currentLang]['btn-saving'];
 
-            if (currentUserIndex !== -1) {
-                allUsers[currentUserIndex].address = {
-                    fullname: addressForm.querySelector('#edit-fullname').value.trim(),
-                    fullAddress: addressForm.querySelector('#edit-address').value.trim(),
-                    city: addressForm.querySelector('#edit-city').value.trim(),
-                    postalCode: addressForm.querySelector('#edit-postalcode').value.trim(),
-                    phone: addressForm.querySelector('#edit-phone').value.trim(),
-                };
-                setLocalStorage('userAccounts', allUsers);
-                showToast('toast-address-saved', 'success');
-                displayAccountInfo(); // Perbarui tampilan setelah disimpan
-                // Sembunyikan form dan tampilkan info lagi
-                addressForm.classList.remove('visible-block');
-                editAddressBtn.classList.remove('hidden-element');
-                document.getElementById('address-info-display').classList.remove('hidden-element');
-            } else {
-                showToast('toast-address-error', 'error'); // Fallback error
-                console.error("Could not find user to update address!");
-            }
+            // Simulasi proses penyimpanan (beri jeda sedikit)
+            setTimeout(() => {
+                const { username } = checkLoginStatus();
+                let allUsers = getLocalStorage('userAccounts', []);
+                const currentUserIndex = allUsers.findIndex(user => user.username === username);
+
+                if (currentUserIndex !== -1) {
+                    allUsers[currentUserIndex].address = {
+                        fullname: addressForm.querySelector('#edit-fullname').value.trim(),
+                        fullAddress: addressForm.querySelector('#edit-address').value.trim(),
+                        city: addressForm.querySelector('#edit-city').value.trim(),
+                        postalCode: addressForm.querySelector('#edit-postalcode').value.trim(),
+                        phone: addressForm.querySelector('#edit-phone').value.trim(),
+                    };
+                    setLocalStorage('userAccounts', allUsers);
+                    showToast('toast-address-saved', 'success');
+                    displayAccountInfo();
+
+                    // Sembunyikan form dan tampilkan info lagi
+                    addressForm.classList.remove('visible-block');
+                    document.getElementById('edit-address-btn').classList.remove('hidden-element');
+                    document.getElementById('address-info-display').classList.remove('hidden-element');
+                } else {
+                    showToast('toast-address-error', 'error');
+                }
+
+                // 2. Aktifkan kembali tombol dan kembalikan teks aslinya
+                submitButton.disabled = false;
+                submitButton.textContent = translations[currentLang][originalButtonKey];
+                // ▲▲▲ AKHIR DARI LOGIKA BARU ▲▲▲
+            }, 500); // Jeda 500ms untuk simulasi
         });
     }
 }
@@ -1472,6 +1491,85 @@ function addToCart(productId) {
     setLocalStorage(userCartKey, cart);
     showToast('toast-add-success', 'success');
     updateCartCounter();
+    updateCartPreview();
+}
+
+/**
+ * Updates the cart preview dropdown in the header.
+ */
+async function updateCartPreview() {
+    // Pastikan data produk dimuat HANYA jika pengguna sudah login
+    const { isLoggedIn, username } = checkLoginStatus();
+    if (isLoggedIn) {
+        await ensureProductsLoaded();
+    }
+
+    const previewItemsContainer = document.getElementById('cart-preview-items');
+    const previewTitle = document.getElementById('cart-preview-title');
+    const viewCartLink = document.getElementById('cart-preview-view-link');
+    if (!previewItemsContainer || !previewTitle || !viewCartLink) return;
+
+    clearContainer(previewItemsContainer);
+
+    // Tentukan path yang benar untuk link
+    const onIndexPage = window.location.pathname.endsWith('/index.html') || window.location.pathname === '/';
+    const cartPagePath = onIndexPage ? 'html/cart.html' : 'cart.html';
+    const loginPagePath = onIndexPage ? 'html/login.html' : 'login.html';
+
+    if (isLoggedIn) {
+        // --- LOGIKA UNTUK PENGGUNA YANG SUDAH LOGIN ---
+        const userCartKey = `cart_${username}`;
+        const cart = getLocalStorage(userCartKey, []);
+
+        const titleText = translations[currentLang]['cart-title'];
+        previewTitle.textContent = `${titleText} (${cart.length})`;
+
+        viewCartLink.href = cartPagePath;
+        viewCartLink.dataset.translateKey = 'view-cart-btn';
+        viewCartLink.textContent = translations[currentLang]['view-cart-btn'];
+
+        if (cart.length === 0) {
+            const emptyText = document.createElement('p');
+            emptyText.className = 'empty-preview';
+            emptyText.dataset.translateKey = 'empty-cart-message';
+            emptyText.textContent = translations[currentLang]['empty-cart-message'];
+            previewItemsContainer.appendChild(emptyText);
+        } else {
+            const recentItems = [...cart].reverse().slice(0, 3);
+            recentItems.forEach(item => {
+                const product = allProductsData.find(p => p.id == item.id);
+                if (product) {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'cart-preview-item';
+                    const img = document.createElement('img');
+                    img.src = product.images[0];
+                    const infoDiv = document.createElement('div');
+                    infoDiv.className = 'cart-preview-item-info';
+                    const title = document.createElement('h5');
+                    title.textContent = currentLang === 'id' ? product.titleId : product.titleEn;
+                    const price = document.createElement('p');
+                    price.className = 'price';
+                    price.textContent = `Rp ${parseInt(product.price).toLocaleString('id-ID')}`;
+                    infoDiv.append(title, price);
+                    itemDiv.append(img, infoDiv);
+                    previewItemsContainer.appendChild(itemDiv);
+                }
+            });
+        }
+    } else {
+        // --- LOGIKA BARU UNTUK PENGGUNA YANG BELUM LOGIN ---
+        previewTitle.textContent = translations[currentLang]['cart-title']; // Tampilkan judul tanpa jumlah
+
+        const loginMessage = document.createElement('p');
+        loginMessage.className = 'empty-preview';
+        loginMessage.dataset.translateKey = 'cart-must-login';
+        loginMessage.textContent = translations[currentLang]['cart-must-login'];
+        previewItemsContainer.appendChild(loginMessage);
+
+        viewCartLink.href = loginPagePath;
+        viewCartLink.dataset.translateKey = 'login';
+        viewCartLink.textContent = translations[currentLang]['login'];
+    }
 }
 
 /**
@@ -1526,6 +1624,30 @@ function updateCart(productId, change) {
     setLocalStorage(userCartKey, cart);
     displayCart();
     updateCartCounter();
+    saveSelectedCartItems();
+}
+
+/**
+ * Menyelaraskan status checkbox "Select All" berdasarkan checkbox item.
+ */
+function syncSelectAllCheckbox() {
+    const selectAllCheckbox = document.getElementById('select-all-checkbox');
+    const itemsContainer = document.getElementById('cart-items-container');
+    if (!selectAllCheckbox || !itemsContainer) return;
+
+    const allItemCheckboxes = itemsContainer.querySelectorAll('.cart-item-select input');
+
+    // Jika tidak ada item di keranjang, pastikan "Select All" tidak terceklis.
+    if (allItemCheckboxes.length === 0) {
+        selectAllCheckbox.checked = false;
+        return;
+    }
+
+    // Cek apakah SEMUA checkbox item sedang dalam keadaan terceklis.
+    const allChecked = Array.from(allItemCheckboxes).every(cb => cb.checked);
+
+    // Atur status "Select All" sesuai hasilnya.
+    selectAllCheckbox.checked = allChecked;
 }
 
 function updateCartSummary() {
@@ -1557,7 +1679,7 @@ function updateCartSummary() {
     if (!userAddress || !userAddress.fullAddress || !userAddress.city || !userAddress.postalCode) {
         const warningMessage = document.createElement('p');
         warningMessage.classList.add('warning-message'); // Beri warna peringatan
-        warningMessage.textContent = translations[currentLang]['shipping-address-missing'] || 'Silakan lengkapi alamat di halaman akun untuk menghitung ongkir.'; // <-- Tambah terjemahan
+        warningMessage.dataset.translateKey = 'shipping-address-missing';
         cartSummaryContainer.appendChild(warningMessage);
         // Kita masih bisa menampilkan subtotal, tapi ongkir akan 0 atau flat default
     }
@@ -1671,6 +1793,18 @@ function updateCartSummary() {
     translateUI(currentLang);
 }
 
+/**
+ * Menyimpan ID produk yang sedang terceklis di keranjang ke localStorage.
+ */
+function saveSelectedCartItems() {
+    const { isLoggedIn, username } = checkLoginStatus();
+    if (!isLoggedIn) return;
+
+    const selectedProductIds = getSelectedProductIds(); // Fungsi ini sudah ada
+    const selectedItemsKey = `selectedItems_${username}`;
+    setLocalStorage(selectedItemsKey, selectedProductIds);
+}
+
 async function displayCart() {
     const cartItemsContainer = document.getElementById('cart-items-container');
     const cartSummaryContainer = document.getElementById('cart-summary');
@@ -1744,7 +1878,11 @@ async function displayCart() {
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
                 checkbox.dataset.productId = productDetail.id;
-                checkbox.checked = true; // Default dicentang
+                const userCartKey = `cart_${username}`;
+                const selectedItemsKey = `selectedItems_${username}`;
+                const selectedItems = getLocalStorage(selectedItemsKey, cart.map(item => item.id)); // Default pilih semua jika belum ada data
+
+                checkbox.checked = selectedItems.includes(productDetail.id);
                 checkbox.addEventListener('change', updateCartSummary); // Listener untuk checkbox item
                 selectDiv.appendChild(checkbox);
 
@@ -1797,6 +1935,7 @@ async function displayCart() {
                 removeBtn.className = 'remove-btn';
                 removeBtn.dataset.translateKey = 'remove-item';
                 removeBtn.dataset.productId = productDetail.id;
+                removeBtn.textContent = translations[currentLang]['remove-item'];
 
                 actionsDiv.appendChild(quantityDiv);
                 actionsDiv.appendChild(removeBtn);
@@ -1811,6 +1950,7 @@ async function displayCart() {
 
         updateCartSummary();
         translateUI(currentLang);
+        syncSelectAllCheckbox();
 
         // Pasang event listener untuk "Pilih Semua"
         if (selectAllCheckbox) {
@@ -2308,6 +2448,12 @@ function initializeLanguageDropdown() {
             localStorage.setItem('userLanguage', currentLang);
             translateUI(currentLang);
 
+            updateCartPreview();
+            // Periksa apakah kita di halaman keranjang, jika ya, perbarui ringkasannya
+            if (document.querySelector('.cart-section')) {
+                updateCartSummary();
+            }
+
             dropdown.classList.remove('show');
             selectButton.setAttribute('aria-expanded', 'false');
         }
@@ -2395,6 +2541,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Set up UI components
     updateAccountMenu();
     updateCartCounter();
+    updateCartPreview();
     initializeCarousel();
     initializeLanguageDropdown();
     initializeHamburgerMenu();
@@ -2513,6 +2660,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     checkbox.checked = selectAllCheckbox.checked;
                 });
                 updateCartSummary(); // Panggil update
+                saveSelectedCartItems();
             });
         }
 
@@ -2523,11 +2671,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Jika checkbox individual diklik
                 if (target.matches('.cart-item-select input')) {
-                    // Periksa apakah semua item tercentang untuk update 'Pilih Semua'
-                    const allItemCheckboxes = itemsContainer.querySelectorAll('.cart-item-select input');
-                    const allChecked = Array.from(allItemCheckboxes).every(cb => cb.checked);
-                    selectAllCheckbox.checked = allChecked;
-                    updateCartSummary(); // Panggil update
+                    syncSelectAllCheckbox(); // Panggil fungsi sinkronisasi
+                    updateCartSummary(); // Panggil update ringkasan
+                    saveSelectedCartItems();
                 }
 
                 // Logika untuk tombol kuantitas
