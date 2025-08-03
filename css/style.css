@@ -140,10 +140,15 @@ header {
 .logo-fb {
     height: 30px;
 }
+.logo-wa {
+    height: 22px;
+}
+.logo-wa,
 .logo-ig,
 .logo-fb {
     transition: transform 0.3s ease-out;
 }
+.social-media a:hover .logo-wa,
 .social-media a:hover .logo-ig,
 .social-media a:hover .logo-fb {
     /* Ikon akan sedikit terangkat ke atas dan membesar */
