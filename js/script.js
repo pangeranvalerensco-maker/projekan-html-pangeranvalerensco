@@ -61,6 +61,7 @@ const translations = {
         'hero-subtitle': 'Temukan gaya terbaik Anda dengan produk pilihan berkualitas tinggi.',
         'hero-cta': 'Lihat Semua Produk',
         'featured-title': 'Produk Rekomendasi',
+        'related-products-title': 'Mungkin Anda Suka',
         'recommended-title': 'Rekomendasi',
         'see-more-btn': 'Lihat Lainnya',
         'buy-button': 'Tambah ke Keranjang',
@@ -95,6 +96,9 @@ const translations = {
         'search-btn-title': 'Cari',
         'cart-link-title': 'Lihat Keranjang Belanja',
         'theme-toggle-title': 'Ubah Tema',
+        'loading-product': 'Memuat...',
+        'loading-description': 'Deskripsi produk sedang dimuat...',
+        'loading-stock': 'Stok: -',
         'error-load-products': 'Gagal memuat produk. Silakan coba lagi nanti.',
         'page-title-search': 'Hasil untuk',
         'search-results-for': 'Hasil Pencarian untuk',
@@ -114,6 +118,15 @@ const translations = {
             'Olahraga': 'Olahraga',
             'Rumah & Dapur': 'Rumah & Dapur'
         },
+        'sort-title': 'Urutkan Berdasarkan: ',
+        'sort-price-asc': 'Harga: Terendah ke Tertinggi',
+        'sort-price-desc': 'Harga: Tertinggi ke Terendah',
+        'sort-name-asc': 'Nama: A-Z',
+        'sort-name-desc': 'Nama: Z-A',
+        'sort-stock-desc': 'Stok: Terbanyak',
+        'sort-stock-asc': 'Stok: Paling Sedikit',
+        'sort-location-asc': 'Lokasi: Terdekat',
+        'sort-location-desc': 'Lokasi: Terjauh',
         'summary-title': 'Ringkasan Belanja',
         'summary-subtotal': 'Subtotal',
         'summary-total': 'Total',
@@ -138,6 +151,24 @@ const translations = {
         'help-a8': 'Jika pertanyaan Anda tidak terjawab di sini, jangan ragu untuk mengunjungi halaman "Tentang Kami" untuk mempelajari lebih lanjut tentang proyek ini atau hubungi kami melalui media sosial yang tertera di bagian atas halaman.',
         'help-q9': 'Mengapa ada fitur tema gelap/terang?',
         'help-a9': 'Kami menyediakan fitur tema gelap dan terang untuk memberikan kenyamanan visual maksimal bagi Anda. Fitur ini dibuat menggunakan CSS Variables dan JavaScript untuk menunjukkan salah satu komponen wajib dalam proyek ini.',
+        'help-q-order-flow': 'Bagaimana alur pemesanan di MineCart?',
+        'help-a-order-flow-step1': 'Pilih produk yang Anda inginkan dan klik tombol "Tambah ke Keranjang".',
+        'help-a-order-flow-step2': 'Setelah selesai, masuk ke halaman Keranjang Belanja melalui ikon di kanan atas.',
+        'help-a-order-flow-step3': 'Periksa kembali item Anda, lalu klik tombol "Checkout".',
+        'help-a-order-flow-step4': 'Isi informasi pengiriman dan selesaikan pembayaran.',
+        'help-q-video': 'Apakah ada video perkenalan MineCart?',
+        'help-q-audio': 'Apakah MineCart memiliki jingle?',
+        'help-q-features': 'Apa saja fitur utama di website ini?',
+        'help-a-features-1': 'Pencarian Produk: Pengguna dapat mencari produk berdasarkan nama, kategori, atau deskripsi.',
+        'help-a-features-2': 'Keranjang Belanja Dinamis: Keranjang belanja yang terpisah untuk setiap pengguna, disimpan di Local Storage.',
+        'help-a-features-3': 'Checkout & Simulasi Stok: Alur checkout lengkap dengan simulasi pengurangan stok produk.',
+        'help-a-features-4': 'Tema Gelap & Terang: Pengguna dapat mengganti tema website untuk kenyamanan visual.',
+        'help-a-features-5': 'Multi-Bahasa: Website mendukung dua bahasa (Indonesia & Inggris) yang dapat diganti.',
+        'help-q-tags': 'Elemen HTML5 apa saja yang digunakan di proyek ini?',
+        'help-a-tags-1': 'Struktur Semantik: Penggunaan <header>, <main>, <footer>, <nav>, <section>, dan <article> untuk membangun layout yang bermakna.',
+        'help-a-tags-2': 'Multimedia: Implementasi <video> dan <audio> di halaman Bantuan, serta <figure> dan <figcaption> untuk gambar dengan keterangan.',
+        'help-a-tags-3': 'Daftar: Penggunaan <ul> untuk daftar tidak berurutan dan <ol> untuk daftar langkah-langkah yang berurutan.',
+        'help-a-tags-4': 'Formulir Interaktif: Penggunaan <form>, <input> dengan berbagai tipe, dan <details> & <summary> untuk FAQ accordion.',
         'login-title': 'Masuk ke Akun Anda',
         'register-title': 'Daftar Akun Baru',
         'label-username': 'Nama Pengguna',
@@ -207,6 +238,7 @@ const translations = {
         'toast-no-payment-method': 'Silakan pilih metode pembayaran.',
         'toast-order-success': 'Pesanan berhasil diproses! Terima kasih.',
         'toast-stock-issue': 'Gagal memproses pesanan: Stok produk tidak mencukupi.',
+        'toast-sort-location-error': 'Untuk mengurutkan berdasarkan lokasi, Anda harus masuk & melengkapi alamat.',
         'summary-subtotal': 'Subtotal',
         'summary-shipping': 'Ongkir',
         'summary-items': 'barang',
@@ -226,6 +258,7 @@ const translations = {
         'hero-subtitle': 'Find your best style with high-quality selected products.',
         'hero-cta': 'Shop All Products',
         'featured-title': 'Recommended Products',
+        'related-products-title': 'You Might Also Like',
         'recommended-title': 'Recommended',
         'see-more-btn': 'See More',
         'buy-button': 'Add to Cart',
@@ -261,6 +294,9 @@ const translations = {
         'search-btn-title': 'Search',
         'cart-link-title': 'View Shopping Cart',
         'theme-toggle-title': 'Change Theme',
+        'loading-product': 'Loading...',
+        'loading-description': 'Product description is loading...',
+        'loading-stock': 'Stock: -',
         'error-load-products': 'Failed to load products. Please try again later.',
         'page-title-search': 'Results for',
         'search-results-for': 'Search Results for',
@@ -280,6 +316,15 @@ const translations = {
             'Olahraga': 'Sports',
             'Rumah & Dapur': 'Home & Kitchen'
         },
+        'sort-title': 'Sort By: ',
+        'sort-price-asc': 'Price: Low to High',
+        'sort-price-desc': 'Price: High to Low',
+        'sort-name-asc': 'Name: A-Z',
+        'sort-name-desc': 'Name: Z-A',
+        'sort-stock-desc': 'Stock: Highest',
+        'sort-stock-asc': 'Stock: Lowest',
+        'sort-location-asc': 'Location: Nearest',
+        'sort-location-desc': 'Location: Farthest',
         'summary-title': 'Order Summary',
         'summary-subtotal': 'Subtotal',
         'summary-total': 'Total',
@@ -304,6 +349,24 @@ const translations = {
         'help-a8': 'If your question is not answered here, feel free to visit the "About Us" page to learn more about this project or contact us via the social media listed at the top of the page.',
         'help-q9': 'Why is there a dark/light theme feature?',
         'help-a9': 'We provide a dark and light theme feature to offer maximum visual comfort for you. This feature is built using CSS Variables and JavaScript to demonstrate one of the mandatory components of this project.',
+        'help-q-order-flow': 'What is the order flow on MineCart?',
+        'help-a-order-flow-step1': 'Select the product you want and click the "Add to Cart" button.',
+        'help-a-order-flow-step2': 'When finished, go to the Shopping Cart page via the icon in the top right.',
+        'help-a-order-flow-step3': 'Review your items, then click the "Checkout" button.',
+        'help-a-order-flow-step4': 'Fill in the shipping information and complete the payment.',
+        'help-q-video': 'Is there a MineCart introduction video?',
+        'help-q-audio': 'Does MineCart have a jingle?',
+        'help-q-features': 'What are the main features of this website?',
+        'help-a-features-1': 'Product Search: Users can search for products by name, category, or description.',
+        'help-a-features-2': 'Dynamic Shopping Cart: A separate shopping cart for each user, stored in Local Storage.',
+        'help-a-features-3': 'Checkout & Stock Simulation: A complete checkout flow with product stock reduction simulation.',
+        'help-a-features-4': 'Dark & Light Theme: Users can switch the website theme for visual comfort.',
+        'help-a-features-5': 'Multi-Language: The website supports two languages (Indonesian & English) that can be switched.',
+        'help-q-tags': 'What HTML5 elements are used in this project?',
+        'help-a-tags-1': 'Semantic Structure: Use of <header>, <main>, <footer>, <nav>, <section>, and <article> to build a meaningful layout.',
+        'help-a-tags-2': 'Multimedia: Implementation of <video> and <audio> on the Help page, as well as <figure> and <figcaption> for images with captions.',
+        'help-a-tags-3': 'Lists: Use of <ul> for unordered lists and <ol> for ordered step-by-step lists.',
+        'help-a-tags-4': 'Interactive Forms: Use of <form>, <input> with various types, and <details> & <summary> for the FAQ accordion.',
         'login-title': 'Login to Your Account',
         'register-title': 'Create a New Account',
         'label-username': 'Username',
@@ -373,6 +436,7 @@ const translations = {
         'toast-no-payment-method': 'Please select a payment method.',
         'toast-order-success': 'Order processed successfully! Thank you.',
         'toast-stock-issue': 'Failed to process order: Insufficient product stock.',
+        'toast-sort-location-error': 'To sort by location, you must be logged in & have a complete address.',
         'summary-subtotal': 'Subtotal',
         'summary-shipping': 'Shipping',
         'summary-items': 'items',
@@ -394,6 +458,16 @@ async function ensureProductsLoaded() {
     if (allProductsData.length === 0) {
         const response = await fetch(API_URL);
         allProductsData = await response.json();
+
+        const savedStock = getLocalStorage('productStockData', {});
+        if (Object.keys(savedStock).length > 0) {
+            allProductsData.forEach(product => {
+                // Jika ID produk ada di dalam data stok tersimpan, perbarui stoknya
+                if (savedStock[product.id] !== undefined) {
+                    product.stock = savedStock[product.id];
+                }
+            });
+        }
     }
 }
 
@@ -511,6 +585,37 @@ function showValidationError(inputElement, messageKey) {
 
     // Taruh pesan error setelah input
     inputElement.parentNode.appendChild(errorMessage);
+}
+
+function createSkeletonCard() {
+    const cardLink = document.createElement('div');
+    cardLink.className = 'product-card-link'; // Gunakan div agar tidak bisa diklik
+
+    const card = document.createElement('article');
+    card.className = 'product-card skeleton-card';
+
+    const image = document.createElement('div');
+    image.className = 'skeleton skeleton-img';
+
+    const cardBody = document.createElement('div');
+    cardBody.className = 'product-card-body';
+
+    const title = document.createElement('div');
+    title.className = 'skeleton skeleton-title';
+
+    const text1 = document.createElement('div');
+    text1.className = 'skeleton skeleton-text';
+    const text2 = document.createElement('div');
+    text2.className = 'skeleton skeleton-text';
+
+    cardBody.appendChild(title);
+    cardBody.appendChild(text1);
+    cardBody.appendChild(text2);
+    card.appendChild(image);
+    card.appendChild(cardBody);
+    cardLink.appendChild(card);
+
+    return cardLink;
 }
 
 // =================================================================================
@@ -912,16 +1017,17 @@ function translateUI(lang) {
 /**
  * Creates and returns a single product card HTML element.
  * @param {object} product - A single product object from the API data.
+ * @param {string} lang - The current language ('id' or 'en').
  * @returns {HTMLElement} The product card link element.
  */
-function createProductCard(product) {
+function createProductCard(product, lang) {
     const cardLink = document.createElement('a');
     cardLink.className = 'product-card-link';
 
     const isIndexPage = window.location.pathname.endsWith('/index.html') || window.location.pathname === '/';
     cardLink.href = isIndexPage ? `html/detail.html?id=${product.id}` : `detail.html?id=${product.id}`;
 
-    const card = document.createElement('div');
+    const card = document.createElement('article');
     card.className = 'product-card';
 
     const image = document.createElement('img');
@@ -929,51 +1035,40 @@ function createProductCard(product) {
     image.alt = product.titleId;
 
     image.onerror = () => {
-        // Ganti gambar dengan placeholder jika URL gambar asli tidak ditemukan
         image.src = 'https://placehold.co/220x220?text=Gambar+Tidak+Ditemukan';
-        console.warn(`Gambar untuk produk ${product.titleId} gagal dimuat. Menggunakan placeholder.`);
+        console.warn(`Gambar untuk produk ${product.titleId} gagal dimuat.`);
     };
 
     const cardBody = document.createElement('div');
     cardBody.className = 'product-card-body';
+
     const title = document.createElement('h3');
+    // 1. Simpan data terjemahan di dataset (untuk fungsi translateUI)
     title.dataset.titleId = product.titleId;
     title.dataset.titleEn = product.titleEn;
+    // 2. Langsung isi teks sesuai bahasa saat ini
+    title.textContent = lang === 'id' ? product.titleId : product.titleEn;
+
     const description = document.createElement('p');
     description.className = 'description';
+    // 1. Simpan data terjemahan di dataset
     description.dataset.descriptionId = product.descriptionId;
     description.dataset.descriptionEn = product.descriptionEn;
+    // 2. Langsung isi teks sesuai bahasa saat ini
+    description.textContent = lang === 'id' ? product.descriptionId : product.descriptionEn;
 
     const cardFooter = document.createElement('div');
     cardFooter.className = 'product-card-footer';
+
     const price = document.createElement('span');
     price.className = 'price';
     price.textContent = `Rp ${parseInt(product.price).toLocaleString('id-ID')}`;
 
     const buyButton = document.createElement('button');
     buyButton.className = 'buy-btn';
-    buyButton.dataset.translateKey = 'buy-button';
     buyButton.dataset.productId = product.id;
-
-    buyButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation(); // Mencegah event menyebar ke link induk
-
-        const { isLoggedIn } = checkLoginStatus();
-
-        if (isLoggedIn) {
-            const productId = e.target.dataset.productId;
-            if (productId) {
-                addToCart(productId);
-            }
-        } else {
-            showToast('toast-must-login', 'error');
-            // setTimeout(() => {
-            //     const loginPagePath = window.location.pathname.includes('/html/') ? 'login.html' : 'html/login.html';
-            //     window.location.href = loginPagePath;
-            // }, 3000);
-        }
-    });
+    buyButton.dataset.translateKey = 'buy-button'; // Tetap gunakan ini untuk translateUI
+    buyButton.textContent = translations[lang]['buy-button'];
 
     cardBody.appendChild(title);
     cardBody.appendChild(description);
@@ -986,7 +1081,6 @@ function createProductCard(product) {
     cardLink.appendChild(card);
     return cardLink;
 }
-
 /**
  * Fetches and displays recommended products on the homepage.
  */
@@ -1008,9 +1102,15 @@ async function displayFeaturedProducts() {
         clearContainer(productGrid);
 
         recommendedProducts.forEach(product => {
-            const cardElement = createProductCard(product);
+            const cardElement = createProductCard(product, currentLang);
             productGrid.appendChild(cardElement);
         });
+
+        const cards = productGrid.querySelectorAll('.product-card-link');
+        cards.forEach((card, index) => {
+            card.classList.add('animate');
+        });
+
         translateUI(currentLang);
 
     } catch (error) {
@@ -1031,34 +1131,79 @@ async function displayFeaturedProducts() {
 async function displayAllProducts() {
     const allProductsGrid = document.getElementById('all-products-grid');
     const categoryFiltersContainer = document.getElementById('category-filters');
-    if (!allProductsGrid || !categoryFiltersContainer) return;
+    const sortDropdown = document.getElementById('sort-products'); // Ambil dropdown baru
 
+    if (!allProductsGrid || !categoryFiltersContainer || !sortDropdown) return;
+
+    // Tampilkan skeleton loading awal
     clearContainer(allProductsGrid);
-
-    const loadingEl = document.createElement('p');
-    loadingEl.dataset.translateKey = 'loading-text';
-    allProductsGrid.appendChild(loadingEl);
-    translateUI(currentLang);
+    for (let i = 0; i < 8; i++) {
+        allProductsGrid.appendChild(createSkeletonCard());
+    }
 
     try {
         await ensureProductsLoaded();
 
+        // Buat tombol-tombol kategori
         const categories = ['Semua', ...new Set(allProductsData.map(p => p.category))];
-
         clearContainer(categoryFiltersContainer);
-
         categories.forEach(category => {
             const button = document.createElement('button');
             button.textContent = category;
             button.dataset.category = category;
             if (category === 'Semua') button.classList.add('active');
             categoryFiltersContainer.appendChild(button);
-            button.dataset.translateKey = `categories.${category}`;
-            // categoryFiltersContainer.appendChild(button);
         });
 
-        const renderProducts = (products) => {
+        // --- FUNGSI BARU UNTUK MENG-UPDATE TAMPILAN ---
+        const updateProductsDisplay = () => {
+            const selectedCategory = categoryFiltersContainer.querySelector('button.active').dataset.category;
+            const sortBy = sortDropdown.value;
 
+            // 1. FILTER PRODUK BERDASARKAN KATEGORI
+            const filteredProducts = selectedCategory === 'Semua' ?
+                allProductsData :
+                allProductsData.filter(p => p.category === selectedCategory);
+
+            // 2. BUAT SALINAN BARU UNTUK DISORTIR
+            let productsToDisplay = [...filteredProducts];
+
+            // 3. LOGIKA SORTIR BARU YANG LEBIH LENGKAP
+            if (sortBy === 'price-asc') {
+                productsToDisplay.sort((a, b) => a.price - b.price);
+            } else if (sortBy === 'price-desc') {
+                productsToDisplay.sort((a, b) => b.price - a.price);
+            } else if (sortBy === 'name-asc') {
+                productsToDisplay.sort((a, b) => (a.titleId || '').localeCompare(b.titleId || ''));
+            } else if (sortBy === 'name-desc') {
+                productsToDisplay.sort((a, b) => (b.titleId || '').localeCompare(a.titleId || ''));
+            } else if (sortBy === 'stock-desc') {
+                productsToDisplay.sort((a, b) => b.stock - a.stock);
+            } else if (sortBy === 'stock-asc') {
+                productsToDisplay.sort((a, b) => a.stock - b.stock);
+            } else if (sortBy === 'location-asc' || sortBy === 'location-desc') {
+                const { isLoggedIn, username } = checkLoginStatus();
+                const allUsers = getLocalStorage('userAccounts', []);
+                const currentUser = allUsers.find(user => user.username === username);
+                const userAddress = currentUser ? currentUser.address : null;
+
+                if (isLoggedIn && userAddress && userAddress.fullAddress) {
+                    productsToDisplay.sort((a, b) => {
+                        const costA = calculateShippingCost(a.address, userAddress);
+                        const costB = calculateShippingCost(b.address, userAddress);
+                        return sortBy === 'location-asc' ? costA - costB : costB - costA;
+                    });
+                } else {
+                    // Jika user tidak login atau alamat tidak ada, beri peringatan
+                    showToast('toast-sort-location-error', 'error');
+                }
+            }
+
+            // 4. RENDER HASIL AKHIR
+            renderProducts(productsToDisplay);
+        };
+
+        const renderProducts = (products) => {
             clearContainer(allProductsGrid);
             if (products.length === 0) {
                 const noProductEl = document.createElement('p');
@@ -1067,27 +1212,32 @@ async function displayAllProducts() {
                 return;
             }
             products.forEach(product => {
-                const cardElement = createProductCard(product);
+                const cardElement = createProductCard(product, currentLang);
                 allProductsGrid.appendChild(cardElement);
             });
+
+            // Terapkan animasi fade-in
+            const cards = allProductsGrid.querySelectorAll('.product-card-link');
+            cards.forEach((card, index) => {
+                card.classList.add('animate');
+            });
+
             translateUI(currentLang);
         };
 
-        // const categoryFiltersContainer = document.getElementById('category-filters');
-        if (categoryFiltersContainer) {
-            categoryFiltersContainer.addEventListener('click', (e) => {
-                if (e.target.tagName === 'BUTTON') {
-                    categoryFiltersContainer.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
-                    e.target.classList.add('active');
-                    const selectedCategory = e.target.dataset.category;
-                    const filteredProducts = selectedCategory === 'Semua' ? allProductsData : allProductsData.filter(p => p.category === selectedCategory);
-                    renderProducts(filteredProducts);
-                }
-            });
-        }
+        // Tambahkan event listener ke container kategori dan dropdown sortir
+        categoryFiltersContainer.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                categoryFiltersContainer.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                updateProductsDisplay(); // Panggil fungsi update
+            }
+        });
 
+        sortDropdown.addEventListener('change', updateProductsDisplay);
 
-        renderProducts(allProductsData);
+        // Tampilkan produk untuk pertama kali saat halaman dimuat
+        updateProductsDisplay();
 
     } catch (error) {
         console.error('Failed to load products:', error);
@@ -1178,6 +1328,28 @@ async function displayProductDetail() {
         productImagesContainer.appendChild(mainImage);
         productImagesContainer.appendChild(thumbnailContainer);
 
+        const relatedProductsGrid = document.getElementById('related-products-grid');
+        const relatedProductsSection = relatedProductsGrid.closest('.featured-products');
+
+        if (relatedProductsGrid && relatedProductsSection) {
+            clearContainer(relatedProductsGrid); // Bersihkan kontainer
+
+            const currentCategory = product.category;
+            const relatedProducts = allProductsData.filter(p =>
+                p.category === currentCategory && p.id != productId // Cari produk di kategori yg sama, KECUALI produk ini sendiri
+            ).slice(0, 6); // Ambil maksimal 6 produk
+
+            if (relatedProducts.length > 0) {
+                relatedProductsSection.classList.remove('hidden-element'); // Tampilkan section jika ada produk
+                relatedProducts.forEach(relatedProduct => {
+                    const card = createProductCard(relatedProduct, currentLang);
+                    relatedProductsGrid.appendChild(card);
+                });
+            } else {
+                relatedProductsSection.classList.add('hidden-element'); // Sembunyikan section jika tidak ada produk
+            }
+        }
+
     } catch (error) {
         console.error("Failed to display product detail:", error);
         const layout = document.querySelector('.product-detail-layout');
@@ -1246,8 +1418,13 @@ async function displaySearchResults() {
 
         if (results.length > 0) {
             results.forEach(product => {
-                const cardElement = createProductCard(product);
+                const cardElement = createProductCard(product, currentLang);
                 searchResultsGrid.appendChild(cardElement);
+            });
+
+            const cards = searchResultsGrid.querySelectorAll('.product-card-link');
+            cards.forEach((card, index) => {
+                card.classList.add('animate');
             });
         } else {
             // Jika tidak ada hasil
@@ -1653,50 +1830,40 @@ async function displayCart() {
 
 async function processOrder(orderedItems, username) {
     // Logika pengurangan stok (simulasi, karena API tidak menyediakan endpoint update)
-    let updatedProductsData = [...allProductsData]; // Buat salinan data produk
     let hasStockIssues = false;
 
-
     orderedItems.forEach(orderedItem => {
-        const productIndex = updatedProductsData.findIndex(p => p.id == orderedItem.id);
+        const productIndex = allProductsData.findIndex(p => p.id == orderedItem.id);
         if (productIndex !== -1) {
-            if (updatedProductsData[productIndex].stock >= orderedItem.quantity) {
-                updatedProductsData[productIndex].stock -= orderedItem.quantity;
+            if (allProductsData[productIndex].stock >= orderedItem.quantity) {
+                allProductsData[productIndex].stock -= orderedItem.quantity;
             } else {
-                // Stok tidak cukup (ini seharusnya dicek di keranjang/checkout sebelumnya)
                 console.error(`Stok tidak cukup untuk produk ID: ${orderedItem.id}`);
                 hasStockIssues = true;
-                // Anda bisa tambahkan logika toast atau penanganan error yang lebih baik di sini
             }
         }
     });
 
-    // Jika tidak ada masalah stok, perbarui allProductsData global
-    if (!hasStockIssues) {
-        allProductsData = updatedProductsData;
-        // Opsional: Simpan allProductsData ke localStorage jika Anda ingin persistensi stok
-        // Namun, ini hanya simulasi dan akan hilang jika cache browser di clear
-        // localStorage.setItem('allProductsData', JSON.stringify(allProductsData));
-    } else {
-        // Jika ada masalah stok, mungkin batalkan pesanan atau beri pesan error
-        showToast('toast-stock-issue', 'error'); // Tambah terjemahan
-        return false;
+    if (hasStockIssues) {
+        showToast('toast-stock-issue', 'error');
+        return false; // Hentikan proses jika ada masalah stok
     }
+
+    let savedStock = getLocalStorage('productStockData', {});
+    orderedItems.forEach(orderedItem => {
+        const updatedProduct = allProductsData.find(p => p.id == orderedItem.id);
+        if (updatedProduct) {
+            savedStock[orderedItem.id] = updatedProduct.stock;
+        }
+    });
+    setLocalStorage('productStockData', savedStock);
 
     // Kosongkan keranjang pengguna setelah pesanan berhasil
     const userCartKey = `cart_${username}`;
     let currentCart = getLocalStorage(userCartKey, []);
-
-    // Dapatkan ID dari item-item yang BARU SAJA diproses/dibeli
     const orderedItemIds = orderedItems.map(item => item.id);
-
-    // Filter keranjang: simpan hanya item yang ID-nya TIDAK ada di orderedItemIds
     const updatedCart = currentCart.filter(item => !orderedItemIds.includes(item.id));
-
-    // Simpan kembali keranjang yang sudah diperbarui ke localStorage
     setLocalStorage(userCartKey, updatedCart);
-
-    // Perbarui tampilan counter keranjang di header
     updateCartCounter();
 
     return true;
@@ -2172,17 +2339,17 @@ function initializeHamburgerMenu() {
 }
 
 // Tambahkan fungsi ini di script.js
-function initFaqAccordion() {
-    const faqContainer = document.querySelector('.faq-container');
-    if (!faqContainer) return;
+// function initFaqAccordion() {
+//     const faqContainer = document.querySelector('.faq-container');
+//     if (!faqContainer) return;
 
-    faqContainer.addEventListener('click', e => {
-        const question = e.target.closest('.faq-question');
-        if (question) {
-            question.classList.toggle('active');
-        }
-    });
-}
+//     faqContainer.addEventListener('click', e => {
+//         const question = e.target.closest('.faq-question');
+//         if (question) {
+//             question.classList.toggle('active');
+//         }
+//     });
+// }
 
 function initializeCSPopup() {
     const popup = document.getElementById('cs-popup');
@@ -2251,9 +2418,9 @@ document.addEventListener('DOMContentLoaded', () => {
         displayAccountInfo();
         initAccountPage();
     }
-    if (document.querySelector('.faq-container')) {
-        initFaqAccordion();
-    }
+    // if (document.querySelector('.faq-container')) {
+    //     initFaqAccordion();
+    // }
     if (document.getElementById('search-results-grid')) {
         displaySearchResults();
     }
@@ -2400,46 +2567,85 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.body.addEventListener('click', (e) => {
-        // --- LOGIKA TOMBOL BELI (DENGAN CEK LOGIN) ---
-        const buyButton = e.target.closest('.buy-btn') || e.target.closest('#add-to-cart-btn');
-        if (buyButton) {
-            e.preventDefault();
-            const { isLoggedIn } = checkLoginStatus(); // Cek status login
+    // --- LOGIKA TOMBOL BELI (DENGAN CEK LOGIN) ---
+    const buyButton = e.target.closest('.buy-btn') || e.target.closest('#add-to-cart-btn');
+    if (buyButton) {
+        e.preventDefault();
+        const { isLoggedIn } = checkLoginStatus();
 
-            if (isLoggedIn) {
-                // Jika sudah login, tambahkan ke keranjang
-                const productId = buyButton.dataset.productId;
-                if (productId) {
-                    addToCart(productId);
+        if (isLoggedIn) {
+            const productId = buyButton.dataset.productId;
+            if (productId) {
+                // ▼▼▼ LOGIKA ANIMASI BARU DENGAN VARIABEL CSS ▼▼▼
+                const cartIconEl = document.getElementById('cart-icon-img');
+                const productCard = buyButton.closest('.product-card') || buyButton.closest('.product-detail-layout');
+                const productImage = productCard.querySelector('img');
+
+                if (cartIconEl && productImage) {
+                    const startRect = productImage.getBoundingClientRect();
+                    const endRect = cartIconEl.getBoundingClientRect();
+
+                    const flyingImage = productImage.cloneNode(true);
+                    
+                    // Set Variabel CSS untuk posisi & ukuran AWAL
+                    flyingImage.style.setProperty('--start-left', `${startRect.left}px`);
+                    flyingImage.style.setProperty('--start-top', `${startRect.top}px`);
+                    flyingImage.style.setProperty('--start-width', `${startRect.width}px`);
+                    flyingImage.style.setProperty('--start-height', `${startRect.height}px`);
+
+                    // Hitung jarak perpindahan untuk transform
+                    const translateX = endRect.left - startRect.left + (endRect.width / 2) - (startRect.width / 2);
+                    const translateY = endRect.top - startRect.top + (endRect.height / 2) - (startRect.height / 2);
+
+                    // Set Variabel CSS untuk posisi AKHIR (untuk properti transform)
+                    flyingImage.style.setProperty('--end-translate-x', `${translateX}px`);
+                    flyingImage.style.setProperty('--end-translate-y', `${translateY}px`);
+
+                    flyingImage.classList.add('flying-image');
+                    document.body.appendChild(flyingImage);
+                    
+                    // Picu animasi dengan menambahkan class .fly-to-end
+                    requestAnimationFrame(() => {
+                        flyingImage.classList.add('fly-to-end');
+                    });
+                    
+                    // Hapus gambar duplikat dan goyangkan ikon
+                    setTimeout(() => {
+                        flyingImage.remove();
+                        cartIconEl.classList.add('shake');
+                        setTimeout(() => {
+                            cartIconEl.classList.remove('shake');
+                        }, 500);
+                    }, 700);
                 }
-            } else {
-                // Jika belum login, tampilkan notif dan arahkan ke halaman login
-                showToast('toast-must-login', 'error');
-                setTimeout(() => {
-                    const loginPagePath = window.location.pathname.includes('/html/') ? 'login.html' : 'html/login.html';
-                    window.location.href = loginPagePath;
-                }, 3000); // Beri jeda agar notif terbaca
+                // ▲▲▲ AKHIR DARI LOGIKA ANIMASI ▲▲▲
+
+                addToCart(productId);
             }
+        } else {
+            showToast('toast-must-login', 'error');
+            setTimeout(() => {
+                const loginPagePath = window.location.pathname.includes('/html/') ? 'login.html' : 'html/login.html';
+                window.location.href = loginPagePath;
+            }, 3000);
         }
+    }
 
-        // --- LOGIKA TOMBOL LOGOUT (DESKTOP & MOBILE) ---
-        if (e.target.id === 'logout-btn' || e.target.id === 'logout-btn-mobile') {
-            e.preventDefault(); // Mencegah link # diikuti
-            logoutUser();
-        }
+    // --- LOGIKA TOMBOL LOGOUT (DESKTOP & MOBILE) ---
+    if (e.target.id === 'logout-btn' || e.target.id === 'logout-btn-mobile') {
+        e.preventDefault();
+        logoutUser();
+    }
 
-        // --- LOGIKA PENGALIH BAHASA MOBILE ---
-        if (e.target.closest('#mobile-lang-switcher')) {
-            e.preventDefault();
-            // Ganti bahasa
-            currentLang = (currentLang === 'id') ? 'en' : 'id';
-            localStorage.setItem('userLanguage', currentLang);
-
-            // Perbarui seluruh UI dan juga teks di dalam menu mobile
-            translateUI(currentLang);
-            updateMobileNavState();
-        }
-    });
+    // --- LOGIKA PENGALIH BAHASA MOBILE ---
+    if (e.target.closest('#mobile-lang-switcher')) {
+        e.preventDefault();
+        currentLang = (currentLang === 'id') ? 'en' : 'id';
+        localStorage.setItem('userLanguage', currentLang);
+        translateUI(currentLang);
+        updateMobileNavState();
+    }
+});
 
     window.addEventListener('click', (event) => {
         // Close account dropdown if clicking outside

@@ -62,7 +62,7 @@ body {
     min-height: 100vh; /* Mengatur tinggi minimal body adalah 100% tinggi layar */
 }
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -349,6 +349,7 @@ header {
     }
     .search-bar {
         width: 100%;
+        margin: 0;
     }
     .header-main-nav { /* Atur style dasar & transisi untuk menu mobile */
         position: absolute;
@@ -831,25 +832,47 @@ body.dark-mode .dropdown-content button#logout-btn:hover {
     scroll-margin-top: 120px;
 }
 .featured-products {
-    padding: 4rem 0;
-    background: var(--section-bg);
+    padding: 1rem 0;
 }
 .featured-products h2 {
     font-family: var(--font-heading);
     color: var(--heading-color);
     text-align: center;
     font-size: 2rem;
-    margin-bottom: 3rem;
+    margin: 3rem;
 }
 .product-grid { /* Aturan untuk Wadah Grid Utama */
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 30px;
 }
+/* Animasi jeda (staggered) untuk kartu produk */
+.product-card-link:nth-child(1) { animation-delay: 0.1s; }
+.product-card-link:nth-child(2) { animation-delay: 0.2s; }
+.product-card-link:nth-child(3) { animation-delay: 0.3s; }
+.product-card-link:nth-child(4) { animation-delay: 0.4s; }
+.product-card-link:nth-child(5) { animation-delay: 0.5s; }
+.product-card-link:nth-child(6) { animation-delay: 0.6s; }
+.product-card-link:nth-child(7) { animation-delay: 0.7s; }
+.product-card-link:nth-child(8) { animation-delay: 0.8s; }
 a.product-card-link { /* Mengatur link pembungkus agar fleksibel */
     text-decoration: none;
     color: inherit;
     display: flex; /* Membuat link ini menjadi flex container */
+    opacity: 0;
+}
+@keyframes card-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Mulai dari posisi 20px di bawah */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Kembali ke posisi normal */
+    }
+}
+.product-card-link.animate {
+    animation: card-fade-in 0.5s ease-out forwards;
 }
 .product-card { /* Aturan untuk Setiap Kartu Produk */
     background: var(--card-bg);
@@ -917,7 +940,57 @@ a.product-card-link { /* Mengatur link pembungkus agar fleksibel */
 }
 .see-more-container {
     text-align: center;
-    margin-top: 3rem; /* Jarak dari grid produk di atasnya */
+    margin: 3rem; /* Jarak dari grid produk di atasnya */
+}
+
+/* --- Skeleton Loading --- */
+.skeleton-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--subtle-border-color);
+}
+.skeleton {
+    background-color: var(--subtle-border-color);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+.skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 150%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 1.5s infinite;
+}
+body.dark-mode .skeleton::after {
+     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+}
+@keyframes shimmer {
+    0% {
+        left: -150%;
+    }
+    100% {
+        left: 150%;
+    }
+}
+.skeleton-img { /* Ukuran spesifik untuk setiap bagian kerangka */
+    width: 100%;
+    height: 160px; /* Samakan dengan tinggi gambar produk sejenis */
+}
+.skeleton-title {
+    width: 70%;
+    height: 1rem;
+    margin-bottom: 10px;
+}
+.skeleton-text {
+    width: 100%;
+    height: 0.8rem;
+    margin-bottom: 8px;
+}
+.skeleton-text:last-child {
+    width: 80%;
 }
 
 /* --- Cart Icon --- */
@@ -939,6 +1012,41 @@ a.product-card-link { /* Mengatur link pembungkus agar fleksibel */
 }
 .cart-counter.visible { /* Kelas untuk menampilkan counter jika isinya lebih dari 0 */
     display: block;
+}
+
+/* Styling untuk gambar duplikat yang akan terbang */
+.flying-image {
+    position: fixed;
+    z-index: 2000;
+    border-radius: 50%;
+    object-fit: cover;
+    
+    /* Atur posisi & ukuran awal dari Variabel CSS */
+    left: var(--start-left, 0px);
+    top: var(--start-top, 0px);
+    width: var(--start-width, 100px);
+    height: var(--start-height, 100px);
+    
+    /* Transisi sekarang menggunakan transform agar lebih mulus */
+    transition: transform 0.7s cubic-bezier(0.5, 0, 1, 0.5), opacity 0.7s ease-in;
+}
+
+/* Class baru untuk state akhir animasi */
+.flying-image.fly-to-end {
+    /* Pindah & kecilkan menggunakan transform, bukan mengubah left/top/width/height */
+    transform: translate(var(--end-translate-x), var(--end-translate-y)) scale(0.1) rotate(180deg);
+    opacity: 0;
+}
+/* Animasi untuk ikon keranjang bergoyang */
+@keyframes cart-shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+    75% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+}
+.shake {
+    animation: cart-shake 0.5s ease-in-out;
 }
 
 @media (max-width: 768px) {
@@ -965,7 +1073,7 @@ a.product-card-link { /* Mengatur link pembungkus agar fleksibel */
 }
 
 /* ============================================= */
-/* --- Filter Kategori --- */
+/* --- Filter Kategori & Sortir --- */
 /* ============================================= */
 .category-filters {
     display: flex;
@@ -995,6 +1103,27 @@ a.product-card-link { /* Mengatur link pembungkus agar fleksibel */
     background-color: var(--accent-color);
     color: var(--accent-text-color);
     border-color: var(--accent-color);
+}
+/* Styling untuk Dropdown Sortir */
+.sorting-controls {
+    display: flex;
+    justify-content: flex-end; /* Posisikan di kanan */
+    align-items: center;
+    margin-bottom: 1.5rem; /* Jarak ke filter kategori */
+    gap: 10px;
+}
+.sorting-controls label {
+    font-weight: 500;
+}
+.sorting-controls select {
+    padding: 8px 12px;
+    border: 1px solid var(--subtle-border-color);
+    border-radius: 6px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    cursor: pointer;
 }
 
 /* ============================================= */
@@ -1599,6 +1728,46 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     margin-bottom: 2rem;
 }
 
+/* --- Detail Rekomendasi Produk --- */
+.related-products-section {
+    padding: 3rem 0;
+    border-top: 1px solid var(--subtle-border-color);
+    background: transparent;
+}
+.related-products-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+.related-products-section .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px; /* Samakan dengan gap produk utama agar konsisten */
+}
+.related-products-section .product-card img {  /* Aturan untuk GAMBAR di dalam Kartu Produk */
+    height: 160px;
+}
+.related-products-section .product-card-body h3 {
+    font-size: 0.9rem;
+}
+.related-products-section .product-card-body .description {
+    font-size: 0.8rem;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.related-products-section .product-card-footer {
+    padding: 12px;
+}
+.related-products-section .product-card-footer .price {
+    font-size: 0.8rem;
+}
+.related-products-section .product-card-footer .buy-btn {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+}
+
+
 /* --- Tombol & Interaksi --- */
 #add-to-cart-btn {
     background: var(--accent-color);
@@ -1645,7 +1814,6 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
         text-align: center; /* Pusatkan teks */
     }
     .product-detail-info h1 {
-        font-size: 2rem; /* Sesuaikan ukuran font judul */
         text-align: center;
     }
     .product-detail-info p,
@@ -1681,6 +1849,26 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
         padding: 5px 3px !important; /* Sesuaikan padding */
         flex-grow: 0;         /* Mencegah tombol meregang mengisi ruang kosong */
     }
+    /* Penyesuaian untuk bagian Produk Sejenis */
+    .related-products-section h2 {
+        font-size: 1.4rem; /* Kecilkan judul di mobile */
+    }
+
+    .related-products-section .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* Ubah menjadi 2 kolom */
+    }
+    .related-products-section .product-card-footer .price {
+        font-size: 0.9rem;
+    }
+    .related-products-section .product-card-footer .buy-btn {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+    @media (max-width: 430px) {
+        .related-products-section .product-card-footer .price {
+            font-size: 0.6rem;
+        }
+    }
 }
 
 /* ============================================= */
@@ -1693,8 +1881,7 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
 }
 .about-layout {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    /* Dua kolom sama besar */
+    grid-template-columns: 1fr 1fr; /* Dua kolom sama besar */
     gap: 40px;
     align-items: center;
 }
@@ -1712,20 +1899,21 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     width: 100%;
     border-radius: 8px;
 }
-.about-image-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--accent-color);
-    background-color: transparent;
-    border: none;
-    border-radius: 8px;
+.about-image { /* Gaya untuk gambar kantor */
+    margin: 0; /* Menghapus margin default dari <figure> */
+    text-align: center;
 }
-.about-image-text h2 {
-    font-family: var(--font-heading);
-    color: var(--accent-color);
-    font-size: 2.5rem;
-    margin: 0;
+.about-image img {
+    width: 100%;
+    max-width: 450px; /* Batasi lebar maksimum gambar */
+    border-radius: 8px;
+    border: 1px solid var(--subtle-border-color);
+}
+.about-image figcaption {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-style: italic;
 }
 .dev-tribute {
     display: flex;
@@ -1753,6 +1941,19 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     font-family: var(--font-body);
     line-height: 1.6;
 }
+
+/* Styling untuk Video & Audio */
+.about-text video {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    border: 1px solid var(--subtle-border-color);
+}
+.about-text audio {
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
 /* Responsivitas untuk halaman About */
 @media (max-width: 768px) { 
     .dev-tribute p,
@@ -1789,7 +1990,6 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
 .faq-item {
     border-bottom: 1px solid var(--subtle-border-color);
 }
-/* --- Pertanyaan & Jawaban --- */
 .faq-question {
     width: 100%;
     background: none;
@@ -1804,36 +2004,55 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    list-style: none; /* Menyembunyikan panah/marker default */
+}
+.faq-question::-webkit-details-marker {
+    display: none; /* Menyembunyikan panah/marker di Chrome/Safari */
 }
 .faq-question::after {
-    content: '+'; /* Ikon plus */
+    content: '+';
     font-size: 1.5rem;
-    transition: transform 0.2s;
+    transition: transform 0.3s ease-out;
 }
-.faq-question.active::after {
-    content: '-'; /* Ikon minus saat aktif */
-    transform: rotate(180deg);
-}
-.faq-question:hover { /* Efek hover untuk pertanyaan */
+.faq-question:hover {
     color: var(--accent-color);
 }
-.faq-answer p {
-    padding: 0 0 20px 0;
-    line-height: 1.7;
-}
-.faq-answer {
+.faq-answer { /* KODE ANIMASI BUKA-TUTUP CONTAINER */
     display: grid;
-    grid-template-rows: 0fr; /* Awalnya tersembunyi */
+    grid-template-rows: 0fr;
     overflow: hidden;
     transition: grid-template-rows 0.3s ease-out;
 }
-.faq-question.active+.faq-answer {
-    grid-template-rows: 1fr; /* Tampil saat aktif */
-}
-.faq-answer>div {
-    min-height: 0;
-}
 
+details[open] > .faq-answer {
+    grid-template-rows: 1fr;
+}
+.faq-answer p { /* KODE ANIMASI UNTUK TEKS DI DALAMNYA */
+    padding: 0 0 20px 0;
+    line-height: 1.7;
+    opacity: 0; /* Awalnya teks transparan */
+    transition: opacity 0.2s ease-out 0.15s; /* Animasi fade-in dengan sedikit delay */
+}
+details[open] > .faq-answer p {
+    opacity: 1; /* Saat terbuka, teks menjadi terlihat */
+}
+details[open] > .faq-question::after { /* Mengubah ikon '+' menjadi '-' saat terbuka */
+    content: '-';
+    transform: rotate(180deg);
+}
+.faq-answer ol { /* Styling untuk daftar berurutan di dalam FAQ */
+    padding-left: 25px; /* Memberi ruang di kiri untuk nomor urut */
+    margin-bottom: 20px; /* Jarak bawah agar tidak terlalu mepet */
+}
+.faq-answer ol li {
+    margin-bottom: 8px; /* Jarak antar poin di dalam daftar */
+}
+.audio-controls,
+.video-controls{
+    border-radius: 8px;
+    max-width: 100%;
+    width: 100%;
+}
 /* ============================================= */
 /* --- Halaman Checkout --- */
 /* ============================================= */
@@ -2256,6 +2475,18 @@ footer {
 /* ============================================= */
 /* --- RESPONSIVE (MEDIA QUERIES) --- */
 /* ============================================= */
+@media (max-width: 320px) {
+    /* Pastikan Produk Sejenis menjadi 1 kolom */
+    .related-products-section .product-grid {
+        grid-template-columns: 1fr;
+    }
+    .product-detail-info{
+        font-size: 0.4rem;
+    }
+    .related-products-section .product-card img {
+        height: 80px; /* Ukuran gambar lebih kecil */
+    }
+}
 @media (max-width: 280px) {
     html {
         font-size: 9px;

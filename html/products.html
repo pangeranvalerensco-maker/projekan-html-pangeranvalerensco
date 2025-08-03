@@ -54,7 +54,7 @@
             <div class="container">
                 <div class="header-main-left">
                     <a href="../index.html" class="logo">
-                        <img src="../assets/logo-MineCart.png" alt="MineCart Logo">
+                        <img src="../assets/logo-minecart.png" alt="MineCart Logo">
                         <span>MineCart</span>
                     </a>
                     <button class="hamburger-btn" aria-label="Buka Menu">
@@ -84,7 +84,8 @@
                                 data-translate-key="logout">Keluar</a></li>
 
                         <li><a href="../index.html" data-translate-key="home-title">Beranda</a></li>
-                        <li><a href="products.html" data-translate-key="all-products-title" class="active">Semua Produk</a></li>
+                        <li><a href="products.html" data-translate-key="all-products-title" class="active">Semua
+                                Produk</a></li>
 
                         <li class="mobile-only"><a href="about.html" data-translate-key="about-us-title">Tentang
                                 Kami</a></li>
@@ -121,8 +122,24 @@
         <section class="all-products-page">
             <div class="container">
                 <h1 class="page-title" data-translate-key="all-products-title">Semua Produk</h1>
-
                 <div id="category-filters" class="category-filters"></div>
+                <div id="category-filters" class="category-filters"></div>
+                <div class="sorting-controls">
+                    <label for="sort-products" data-translate-key="sort-title">Urutkan berdasarkan:</label>
+                    <select id="sort-products">
+                        <option value="default">Default</option>
+                        <option value="price-asc" data-translate-key="sort-price-asc">Harga: Terendah ke Tertinggi
+                        </option>
+                        <option value="price-desc" data-translate-key="sort-price-desc">Harga: Tertinggi ke Terendah
+                        </option>
+                        <option value="name-asc" data-translate-key="sort-name-asc">Nama: A-Z</option>
+                        <option value="name-desc" data-translate-key="sort-name-desc">Nama: Z-A</option>
+                        <option value="stock-desc" data-translate-key="sort-stock-desc">Stok: Terbanyak</option>
+                        <option value="stock-asc" data-translate-key="sort-stock-asc">Stok: Paling Sedikit</option>
+                        <option value="location-asc" data-translate-key="sort-location-asc">Lokasi: Terdekat</option>
+                        <option value="location-desc" data-translate-key="sort-location-desc">Lokasi: Terjauh</option>
+                    </select>
+                </div>
                 <div id="all-products-grid" class="product-grid"></div>
             </div>
         </section>
