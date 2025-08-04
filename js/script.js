@@ -1368,7 +1368,7 @@ async function displayProductDetail() {
             const currentCategory = product.category;
             const relatedProducts = allProductsData.filter(p =>
                 p.category === currentCategory && p.id != productId // Cari produk di kategori yg sama, KECUALI produk ini sendiri
-            ).slice(0, 6); // Ambil maksimal 6 produk
+            ).slice(0, 10); // Ambil maksimal 10 produk
 
             if (relatedProducts.length > 0) {
                 relatedProductsSection.classList.remove('hidden-element'); // Tampilkan section jika ada produk
