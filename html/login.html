@@ -14,8 +14,7 @@
 </head>
 
 <body>
-
-    <header>
+    <header> <!-- header di semua halaman sama, hanya di index yang berbeda src nya-->
         <div class="header-top">
             <div class="container">
                 <div class="social-media">
@@ -26,6 +25,8 @@
                             src="../assets/logo-facebook.webp" alt="Facebook" class="logo-fb" title="Facebook"></a>
                     <a href="https://wa.me/6282181296229" target="_blank"><img src="../assets/logo-whatsapp.webp"
                             alt="WhatsApp" class="logo-wa" title="WhatsApp"></a>
+                    <a href="https://github.com/pangeranvalerensco-maker" target="_blank"><img
+                            src="../assets/logo-github.jpg" alt="WhatsApp" class="logo-github" title="GitHub"></a>
                 </div>
                 <nav class="header-top-nav">
                     <ul>
@@ -129,22 +130,22 @@
     </header>
 
     <main>
-        <div class="auth-container">
-            <form id="login-form" class="auth-form" novalidate>
+        <div class="auth-container"> <!-- Kontainer untuk form masuk -->
+            <form id="login-form" class="auth-form" novalidate> <!-- Form masuk -->
                 <h1 data-translate-key="login-title">Masuk ke Akun Anda</h1>
 
-                <div class="form-group">
-                    <label for="username" data-translate-key="label-username">Nama Pengguna</label>
+                <div class="form-group"> <!-- Grup input untuk nama pengguna -->
+                    <label for="username" data-translate-key="label-username">Nama Pengguna</label> 
                     <input type="text" id="username" name="username" required autocomplete="username">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group"> <!-- Grup input untuk kata sandi -->
                     <label for="password" data-translate-key="label-password">Password</label>
                     <input type="password" id="password" name="password" required minlength="6" autocomplete="current-password">
                 </div>
 
                 <button type="submit" class="cta-button" data-translate-key="btn-login">Masuk</button>
-                <p class="auth-switch">
+                <p class="auth-switch"> <!-- Tautan untuk beralih ke halaman pendaftaran -->
                     <span data-translate-key="auth-switch-text-register">Belum punya akun? </span>
                     <a href="register.html" data-translate-key="auth-switch-link-register">Daftar di sini</a>
                 </p>
@@ -159,7 +160,7 @@
         </div>
     </footer>
 
-    <div id="toast-container"></div>
+    <div id="toast-container"></div> <!-- Tempat untuk menampilkan notifikasi toast (sukses atau error) -->
     <script src="../js/script.js"></script>
 </body>
 

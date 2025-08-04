@@ -14,9 +14,7 @@
 </head>
 
 <body>
-
-
-    <header>
+    <header> <!-- header dan footer di semua halaman sama, hanya di index yang berbeda src nya-->
         <div class="header-top">
             <div class="container">
                 <div class="social-media">
@@ -27,6 +25,8 @@
                             src="../assets/logo-facebook.webp" alt="Facebook" class="logo-fb" title="Facebook"></a>
                     <a href="https://wa.me/6282181296229" target="_blank"><img src="../assets/logo-whatsapp.webp"
                             alt="WhatsApp" class="logo-wa" title="WhatsApp"></a>
+                    <a href="https://github.com/pangeranvalerensco-maker" target="_blank"><img
+                            src="../assets/logo-github.jpg" alt="WhatsApp" class="logo-github" title="GitHub"></a>
                 </div>
                 <nav class="header-top-nav">
                     <ul>
@@ -131,12 +131,12 @@
     </header>
 
     <main>
-        <section class="all-products-page">
+        <section class="all-products-page"> <!-- Halaman semua produk -->
             <div class="container">
                 <h1 class="page-title" data-translate-key="all-products-title">Semua Produk</h1>
-                <div id="category-filters" class="category-filters"></div>
-                <div id="category-filters" class="category-filters"></div>
-                <div class="sorting-controls">
+                <div id="category-filters" class="category-filters"></div> <!-- Tempat untuk filter kategori produk -->
+                <div id="category-filters" class="category-filters"></div> <!
+                <div class="sorting-controls"> <!-- Kontrol untuk mengurutkan produk -->
                     <label for="sort-products" data-translate-key="sort-title">Urutkan berdasarkan:</label>
                     <select id="sort-products">
                         <option value="default">Default</option>
@@ -152,7 +152,7 @@
                         <option value="location-desc" data-translate-key="sort-location-desc">Lokasi: Terjauh</option>
                     </select>
                 </div>
-                <div id="all-products-grid" class="product-grid"></div>
+                <div id="all-products-grid" class="product-grid"></div> <!-- Grid untuk menampilkan semua produk -->
             </div>
         </section>
     </main>
@@ -163,7 +163,7 @@
                 Hutabarat. Semua hak cipta dilindungi.</p>
         </div>
     </footer>
-    <div id="toast-container"></div>
+    <div id="toast-container"></div> <!-- Tempat untuk menampilkan notifikasi toast (sukses atau error) -->
     <script src="../js/script.js"></script>
 </body>
 

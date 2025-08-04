@@ -1,5 +1,6 @@
 <!DOCTYPE html> <!-- Deklarasi Tipe Dokumen HTML5-->
 <html lang="id"> <!-- Bahasa Indonesia sebagai bahasa utama halaman ini -->
+<!-- Data Translate key di semua teks untuk menerjemahkan kata -->
 
 <head> <!-- Bagian kepala dari dokumen HTML -->
     <meta charset="UTF-8"> <!-- Menentukan karakter encoding sebagai UTF-8 -->
@@ -11,11 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Menghubungkan font dari Google Fonts -->
 </head>
 
-<body> <!-- Bagian utama dari dokumen HTML, tempat konten halaman berada -->
-    <header> <!-- Bagian header yang berisi navigasi dan logo -->
+<body>
+    <header> <!-- Bagian header untuk menampilkan informasi penting di bagian atas halaman -->
         <div class="header-top"> <!-- Bagian atas header untuk informasi sosial media dan navigasi -->
             <div class="container"> <!-- Kontainer untuk mengatur tata letak -->
-                <div class="social-media"> <!-- Bagian untuk ikon media sosial -->
+                <div class="social-media">
                     <span data-translate-key="follow-us-title">Ikuti Kami di</span> 
                     <a href="https://www.instagram.com/varelrivaldi_hutabarat/" target="_blank"><img
                             src="assets/logo-instagram.webp" alt="Instagram" class="logo-ig" title="Instagram"></a>
@@ -23,15 +24,17 @@
                             src="assets/logo-facebook.webp" alt="Facebook" class="logo-fb" title="Facebook"></a>
                     <a href="https://wa.me/6282181296229" target="_blank"><img
                             src="assets/logo-whatsapp.webp" alt="WhatsApp" class="logo-wa" title="WhatsApp"></a>
+                    <a href="https://github.com/pangeranvalerensco-maker" target="_blank"><img
+                            src="assets/logo-github.jpg" alt="WhatsApp" class="logo-github" title="GitHub"></a>
                 </div>
-                <nav class="header-top-nav">
-                    <ul>
+                <nav class="header-top-nav"> <!-- Navigasi bagian atas -->
+                    <ul> 
                         <li><a href="html/about.html" data-translate-key="about-us-title" class="a-header-top">Tentang
-                                Kami</a></li>
+                                Kami</a></li> 
                         <li><a href="html/help.html" data-translate-key="help-title" class="a-header-top">Bantuan</a>
                         </li>
-                        <li class="language-selector-wrapper">
-                            <div class="custom-select">
+                        <li class="language-selector-wrapper"> <!-- Dropdown untuk memilih bahasa -->
+                            <div class="custom-select"> 
                                 <button class="select-button" aria-haspopup="listbox" aria-expanded="false"
                                     title="Ganti Bahasa" data-translate-key="select-lang">
                                     <span id="selected-lang-text">Bahasa Indonesia</span>
@@ -43,15 +46,15 @@
                                 </ul>
                             </div>
                         </li>
-                        <li id="account-menu"></li>
+                        <li id="account-menu"></li> <!-- Bagian untuk menu akun atau login & register kalau belum masuk -->
                     </ul>
                 </nav>
             </div>
         </div>
 
-        <div class="header-main">
-            <div class="container">
-                <div class="header-main-left">
+        <div class="header-main"> <!-- Bagian utama header untuk logo dan navigasi -->
+            <div class="container"> <!-- Kontainer untuk mengatur tata letak -->
+                <div class="header-main-left"> <!-- Bagian kiri header untuk logo dan tombol hamburger -->
                     <a href="index.html" class="logo">
                         <img src="assets/logo-minecart.png" alt="MineCart Logo">
                         <span>MineCart</span>
@@ -62,62 +65,67 @@
                         <span></span>
                     </button>
                 </div>
-                <form class="search-bar" action="html/search.html" method="GET">
+                <form class="search-bar" action="html/search.html" method="GET"> <!-- Form untuk pencarian -->
                     <input type="search" name="q" placeholder="Cari di MineCart..." data-translate-key="search-title" required>
                     <button type="submit" title="Cari" data-translate-key="search-btn"><img src="assets/logo-search.png" alt="Cari"></button>
                 </form>
 
-                <nav class="header-main-nav">
+                <nav class="header-main-nav"> <!-- Navigasi bagian utama -->
                     <ul>
+                        <!-- Tautan untuk masuk, hanya terlihat di perangkat mobile dan saat pengguna belum masuk -->
                         <li class="mobile-only mobile-only-logged-out"><a href="html/login.html"
-                                data-translate-key="login">Masuk</a></li>
+                                data-translate-key="login">Masuk</a></li> 
                         <li class="mobile-only mobile-only-logged-out"><a href="html/register.html"
                                 data-translate-key="register">Daftar</a></li>
 
+                        <!-- Tautan untuk akun pengguna, hanya terlihat di perangkat mobile dan saat pengguna sudah masuk -->
                         <li class="mobile-only mobile-only-logged-in"><a href="html/account.html"
                                 data-translate-key="my-account">My Account</a></li>
                         <li class="mobile-only mobile-only-logged-in"><a href="#" id="logout-btn-mobile"
                                 data-translate-key="logout">Logout</a></li>
-
+                        
                         <li><a href="#recommended" data-translate-key="recommended-title">Rekomendasi</a></li>
                         <li><a href="index.html" data-translate-key="home-title" class="active">Beranda</a></li>
                         <li><a href="html/products.html" data-translate-key="all-products-title">Semua Produk</a></li>
 
+                        <!-- Tautan untuk halaman tentang dan bantuan, hanya terlihat di perangkat mobile -->
                         <li class="mobile-only"><a href="html/about.html" data-translate-key="about-us-title">Tentang
                                 Kami</a></li>
                         <li class="mobile-only"><a href="html/help.html" data-translate-key="help-title">Bantuan</a>
                         </li>
 
+                        <!-- Keranjang belanja -->
                         <li class="cart-icon-wrapper">
                             <a href="html/cart.html" title="Keranjang Belanja" data-translate-key="cart-link-title">
                                 <img src="assets/logo-keranjang-gelap.png" alt="Keranjang" class="icon-nav"
                                     id="cart-icon-img">
-                                <span id="cart-counter" class="cart-counter">0</span>
+                                <span id="cart-counter" class="cart-counter">0</span> <!-- Jumlah item di keranjang -->
                             </a>
 
-                            <div id="cart-preview-dropdown" class="cart-preview">
-                                <div class="cart-preview-header">
-                                    <h4 id="cart-preview-title">Keranjang Belanja (0)</h4>
+                            <div id="cart-preview-dropdown" class="cart-preview"> <!-- Dropdown untuk pratinjau keranjang belanja -->
+                                <div class="cart-preview-header"> 
+                                    <h4 id="cart-preview-title">Keranjang Belanja (0)</h4> 
                                     <a href="html/cart.html" id="cart-preview-view-link"
                                         data-translate-key="view-cart-btn">Lihat Keranjang</a>
                                 </div>
-                                <div id="cart-preview-items">
+                                <div id="cart-preview-items"> <!-- Tempat untuk menampilkan item di keranjang -->
                                 </div>
                             </div>
                         </li>
                         <li>
                             <button id="theme-toggle-btn" class="theme-button" title="Ubah Tema"
-                                data-translate-key="theme-toggle-title">
+                                data-translate-key="theme-toggle-title"> <!-- Tombol untuk mengubah tema -->
                                 <img id="theme-icon" src="../assets/logo-gelap.png" alt="Tema"
                                     data-translate-key="theme-link-title">
                             </button>
                         </li>
-                        <li id="mobile-lang-switcher" class="mobile-only"><a href="#"></a></li>
+                        <!-- Tautan untuk pemilih bahasa, hanya terlihat di perangkat mobile -->
+                        <li id="mobile-lang-switcher" class="mobile-only"><a href="#"></a></li> 
 
                     </ul>
                 </nav>
 
-                <button class="search-toggle-btn" aria-label="Buka Pencarian">
+                <button class="search-toggle-btn" aria-label="Buka Pencarian"> <!-- Tombol untuk membuka pencarian -->
                     <img src="assets/logo-search.png" alt="Ikon Cari">
                 </button>
 
@@ -126,9 +134,9 @@
     </header>
 
     <main>
-        <section class="hero">
-            <div class="carousel-container">
-                <div class="carousel-slide">
+        <section class="hero"> <!-- wadah untuk menampilkan semua gambar slide carousel dan isinya-->
+            <div class="carousel-container"> <!-- wadah untuk menampilkan gambar slide -->
+                <div class="carousel-slide"> <!-- setiap slide berisi gambar yang akan ditampilkan -->
                     <img src="assets/carousel-1.jpg" alt="Gaming Accessories">
                 </div>
                 <div class="carousel-slide">
@@ -139,28 +147,28 @@
                 </div>
             </div>
 
-            <div class="hero-overlay"></div>
+            <div class="hero-overlay"></div> <!-- Overlay untuk efek visual pada gambar slide (gelap transparan supaya tulisan terbaca) -->
 
-            <div class="hero-content">
+            <div class="hero-content"> <!-- Teks yang ditampilkan di atas gambar slide -->
                 <h1 data-translate-key="hero-title">Koleksi Terbaru Musim Ini</h1>
                 <p data-translate-key="hero-subtitle">Temukan gaya terbaik Anda dengan produk pilihan berkualitas
                     tinggi.</p>
                 <a href="html/products.html" class="cta-button" data-translate-key="hero-cta">Lihat Semua Produk</a>
             </div>
-            <button id="prevBtn" class="carousel-btn prev">&#10094;</button>
-            <button id="nextBtn" class="carousel-btn next">&#10095;</button>
+            <button id="prevBtn" class="carousel-btn prev">&#10094;</button> <!-- Tombol ke slide sebelumnya -->
+            <button id="nextBtn" class="carousel-btn next">&#10095;</button> <!-- Tombol ke slide berikutnya -->
         </section>
 
-        <section class="featured-products" id="recommended">
+        <section class="featured-products" id="recommended"> <!-- Bagian untuk menampilkan produk rekomendasi -->
             <div class="container">
                 <h2 class="rekom-mobile" data-translate-key="featured-title">Produk Rekomendasi</h2>
                 <div class="product-grid"></div> <!--- Tempat untuk menampilkan produk rekomendasi -->
-                <div class="see-more-container">
+                <div class="see-more-container"> <!-- Tombol untuk melihat lebih banyak produk -->
                     <a href="html/products.html" class="cta-button" data-translate-key="see-more-btn">Lihat Lainnya</a>
                 </div>
             </div>
         </section>
-        <div id="cs-popup" class="cs-popup hidden-element">
+        <div id="cs-popup" class="cs-popup hidden-element"> <!-- Pop-up selamat datang, hanya muncul sekali di index (harus klik silang biar ga muncul lagi) -->
             <div class="cs-popup-header">
                 <h3 data-translate-key="cs-title">Customer Service</h3>
                 <button class="close-btn" aria-label="Tutup pop-up">x</button>
@@ -173,14 +181,14 @@
         </div>
     </main>
 
-    <footer>
+    <footer> <!-- Bagian footer untuk informasi hak cipta -->
         <div class="container">
             <p data-translate-key="footer-title">&copy; 2025 MineCart. Dibuat oleh Pangeran Valerensco Rivaldi
                 Hutabarat. Semua hak cipta dilindungi.</p>
         </div>
     </footer>
-    <div id="toast-container"></div>
-    <script src="js/script.js"></script>
+    <div id="toast-container"></div> <!-- Tempat untuk menampilkan notifikasi toast (sukses atau error) -->
+    <script src="js/script.js"></script> <!-- Menghubungkan file JavaScript eksternal untuk interaktivitas halaman -->
 </body>
 
 </html>

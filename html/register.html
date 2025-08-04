@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    < <header>
+    <header> <!-- header dan footer di semua halaman sama, hanya di index yang berbeda src nya-->
         <div class="header-top">
             <div class="container">
                 <div class="social-media">
@@ -25,6 +25,8 @@
                             src="../assets/logo-facebook.webp" alt="Facebook" class="logo-fb" title="Facebook"></a>
                     <a href="https://wa.me/6282181296229" target="_blank"><img src="../assets/logo-whatsapp.webp"
                             alt="WhatsApp" class="logo-wa" title="WhatsApp"></a>
+                    <a href="https://github.com/pangeranvalerensco-maker" target="_blank"><img
+                            src="../assets/logo-github.jpg" alt="WhatsApp" class="logo-github" title="GitHub"></a>
                 </div>
                 <nav class="header-top-nav">
                     <ul>
@@ -125,65 +127,67 @@
 
             </div>
         </div>
-        </header>
+    </header>
 
-        <main>
-            <div class="auth-container">
-                <form id="register-form" class="auth-form" novalidate>
-                    <h1 data-translate-key="register-title">Daftar Akun Baru</h1>
+    <main>
+        <div class="auth-container"> <!-- Kontainer untuk form pendaftaran -->
+            <form id="register-form" class="auth-form" novalidate> <!-- Form pendaftaran dengan validasi -->
+                <h1 data-translate-key="register-title">Daftar Akun Baru</h1>
 
-                    <div class="form-group">
-                        <label for="username" data-translate-key="label-username">Nama Pengguna</label>
-                        <input type="text" id="username" name="username" required autocomplete="username">
-                    </div>
+                <div class="form-group"> <!-- input nama lengkap -->
+                    <label for="username" data-translate-key="label-username">Nama Pengguna</label>
+                    <input type="text" id="username" name="username" required autocomplete="username">
+                </div>
 
-                    <div class="form-group">
-                        <label for="email" data-translate-key="label-email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
+                <div class="form-group"> <!-- input email -->
+                    <label for="email" data-translate-key="label-email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
 
-                    <div class="form-group">
-                        <label for="password" data-translate-key="label-password">Password</label>
-                        <input type="password" id="password" name="password" required minlength="6" autocomplete="current-password">
-                    </div>
+                <div class="form-group"> <!-- input password -->
+                    <label for="password" data-translate-key="label-password">Password</label>
+                    <input type="password" id="password" name="password" required minlength="6"
+                        autocomplete="current-password">
+                </div>
 
-                    <div class="form-group">
-                        <label for="dob" data-translate-key="label-dob">Tanggal Lahir</label>
-                        <input type="date" id="dob" name="dob" required>
-                    </div>
+                <div class="form-group"> <!-- input konfirmasi password -->
+                    <label for="dob" data-translate-key="label-dob">Tanggal Lahir</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
 
-                    <div class="form-group">
-                        <label data-translate-key="label-gender">Jenis Kelamin</label>
-                        <div class="radio-container">
-                            <div class="radio-option">
-                                <input type="radio" id="male" name="gender" value="Pria" required>
-                                <label for="male" data-translate-key="gender-male">Pria</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="female" name="gender" value="Wanita" required>
-                                <label for="female" data-translate-key="gender-female">Wanita</label>
-                            </div>
+                <div class="form-group"> <!-- input jenis kelamin -->
+                    <label data-translate-key="label-gender">Jenis Kelamin</label>
+                    <div class="radio-container">
+                        <div class="radio-option">
+                            <input type="radio" id="male" name="gender" value="Pria" required>
+                            <label for="male" data-translate-key="gender-male">Pria</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="female" name="gender" value="Wanita" required>
+                            <label for="female" data-translate-key="gender-female">Wanita</label>
                         </div>
                     </div>
+                </div>
 
-                    <button type="submit" class="cta-button" data-translate-key="btn-register">Daftar</button>
-                    <p class="auth-switch">
-                        <span data-translate-key="auth-switch-text-login">Sudah punya akun? </span>
-                        <a href="login.html" data-translate-key="auth-switch-link-login">Masuk di sini</a>
-                    </p>
-                </form>
-            </div>
-        </main>
+                <button type="submit" class="cta-button" data-translate-key="btn-register">Daftar</button>
+                <p class="auth-switch">
+                    <span data-translate-key="auth-switch-text-login">Sudah punya akun? </span>
+                    <!-- Teks untuk mengarahkan ke halaman login -->
+                    <a href="login.html" data-translate-key="auth-switch-link-login">Masuk di sini</a>
+                </p>
+            </form>
+        </div>
+    </main>
 
-        <footer>
-            <div class="container">
-                <p data-translate-key="footer-title">&copy; 2025 MineCart. Dibuat oleh Pangeran Valerensco Rivaldi
-                    Hutabarat. Semua hak cipta dilindungi.</p>
-            </div>
-        </footer>
+    <footer>
+        <div class="container">
+            <p data-translate-key="footer-title">&copy; 2025 MineCart. Dibuat oleh Pangeran Valerensco Rivaldi
+                Hutabarat. Semua hak cipta dilindungi.</p>
+        </div>
+    </footer>
 
-        <div id="toast-container"></div>
-        <script src="../js/script.js"></script>
+    <div id="toast-container"></div> <!-- Tempat untuk menampilkan notifikasi toast (sukses atau error) -->
+    <script src="../js/script.js"></script>
 </body>
 
 </html>

@@ -2,72 +2,71 @@
 /* --- Variabel Global & Reset Dasar --- */
 /* ============================================= */
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; /* Untuk membuat scroll halaman menjadi smooth */
 }
 
 :root { /* TEMA TERANG ("Overworld") */
-    --body-bg: #F5F5F5;
-    --header-top-bg: #2D3748;
-    --header-main-bg: #FFFFFF;
-    --card-bg: #FFFFFF;
-    --section-bg: #e0dede;
-    --hero-bg: #1A202C;
+    --body-bg: #F5F5F5; /* Warna latar belakang */
+    --header-top-bg: #2D3748; /* Warna latar belakang header atas */
+    --header-main-bg: #FFFFFF; /* Warna latar belakang header utama */
+    --card-bg: #FFFFFF; /* Warna latar belakang kartu produk */
+    --section-bg: #e0dede; /* Warna latar belakang section */
+    --hero-bg: #1A202C; /* Warna latar belakang hero section */
 
-    --heading-color: #222222;
-    --text-color: #404040;
-    --hero-text-color: #FFFFFF;
-    --light-text-color: #F5F5F5;
+    --heading-color: #222222; /* Warna teks judul */
+    --text-color: #404040; /* Warna teks umum */
+    --hero-text-color: #FFFFFF; /* Warna teks hero section */
+    --light-text-color: #F5F5F5; /* Warna teks terang untuk kontras di atas latar belakang gelap */
 
     --accent-color: #3DCEC4;/* Aksen Diamond */
     --accent-text-color: #181A1B;/* Teks di atas aksen */
-    --subtle-border-color: #EAEAEA;
+    --subtle-border-color: #EAEAEA; /* Warna border halus untuk elemen seperti dropdown, tombol, dll. */
 
-    /* Tipografi */
-    --font-heading: 'Press Start 2P', cursive;
-    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Press Start 2P', cursive; /* Font untuk heading */
+    --font-body: 'Inter', sans-serif; /* Font untuk teks umum */
 }
 
 body.dark-mode { /* TEMA GELAP ("Cave/Mining") */
-    --body-bg: #181A1B;
-    --header-top-bg: #101112;
-    --header-main-bg: #242628;
-    --card-bg: #3A3D41;
-    --section-bg: #242628;
-    --hero-bg: #101112;
+    --body-bg: #181A1B; /* Warna latar belakang untuk mode gelap */
+    --header-top-bg: #101112; /* Warna latar belakang header atas */
+    --header-main-bg: #242628; /* Warna latar belakang header utama */
+    --card-bg: #3A3D41; /* Warna latar belakang kartu produk */
+    --section-bg: #242628; /* Warna latar belakang section */
+    --hero-bg: #101112; /* Warna latar belakang hero section */
 
-    --heading-color: #FFFFFF;
-    --text-color: #D1D5DB;
-    --hero-text-color: #FFFFFF;
-    --light-text-color: #ffffff;
+    --heading-color: #FFFFFF; /* Warna teks judul untuk mode gelap */
+    --text-color: #D1D5DB; /* Warna teks umum untuk mode gelap */
+    --hero-text-color: #FFFFFF; /* Warna teks hero section untuk mode gelap */
+    --light-text-color: #ffffff; /* Warna teks terang untuk kontras di atas latar belakang gelap */
 
-    --accent-color: #45E8DA; /* Aksen Diamond lebih cerah */
-    --accent-text-color: #181A1B;
-    --subtle-border-color: #4B5563;
+    --accent-color: #45E8DA; /* Warna Khas Diamond Minecraft */
+    --accent-text-color: #181A1B; /* Counter untuk teks di accent(jika sebagai background), jika kurang kelihatan*/
+    --subtle-border-color: #4B5563; /* Warna border halus untuk elemen seperti dropdown, tombol, dll. */
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    box-sizing: border-box; /* Mengatur box-sizing untuk semua elemen */
+    margin: 0; /* Menghapus margin default */
+    padding: 0; /* Menghapus padding default */
 }
 
 body {
     background-color: var(--body-bg);
     color: var(--text-color);
     font-family: var(--font-body);
-    line-height: 1.6;
-    transition: background-color 0.3s, color 0.3s;
-    display: flex;
+    line-height: 1.6; 
+    transition: background-color 0.3s, color 0.3s; /* Transisi halus saat tema berubah */
+    display: flex; 
     flex-direction: column; /* Membuat elemen di dalamnya (header, main, footer) menumpuk ke bawah */
     min-height: 100vh; /* Mengatur tinggi minimal body adalah 100% tinggi layar */
 }
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    max-width: 1200px; /* Batas maksimal lebar konten */
+    margin: 0 auto; /* Pusatkan konten ketengah */
+    padding: 0 20px; 
 }
 main {
-    flex-grow: 1;
+    flex-grow: 1; /* Membuat main mengambil sisa ruang yang tersedia (footer berpengaruh akan selalu kebawah) */
 }
 
 /* --- Utility & Button Global --- */
@@ -95,65 +94,70 @@ main {
 /* ============================================= */
 /* --- Struktur Utama Header --- */
 header {
-    background: var(--header-main-bg);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky;
+    background: var(--header-main-bg); /* Warna latar belakang header utama (dinamis tergantung tema) */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Bayangan halus di bawah header */  
+    position: sticky; /* Membuat header tetap di atas saat scroll */
     top: 0;
-    z-index: 100;
-    transition: background-color 0.3s;
-}
-.header-top {
-    background-color: var(--header-top-bg);
-    color: var(--light-text-color);
-    padding: 0.3rem 0;
-    font-size: 0.85rem;
-    transition: background-color 0.3s;
-}
-.header-top-nav ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-.header-top-nav a {
-    color: var(--light-text-color);
-    text-decoration: none;
-}
-.a-header-top:hover {
-    color: var(--accent-color)
+    z-index: 100; /* Pastikan header berada di atas elemen lain */
+    transition: background-color 0.3s; /* Transisi halus saat tema berubah */
 }
 .header-top .container,
 .header-main .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; /* Mengaktifkan Flexbox: membuat elemen di dalamnya berjajar horizontal */
+    justify-content: space-between; /* Mendorong elemen pertama ke kiri dan elemen terakhir ke kanan */
+    align-items: center; /* Memastikan semua elemen sejajar secara vertikal di tengah */
+}
+.header-top {
+    background-color: var(--header-top-bg); 
+    color: var(--light-text-color); 
+    padding: 0.3rem 0; 
+    font-size: 0.85rem; 
+    transition: background-color 0.3s; /* Transisi halus saat tema berubah */
+}
+.header-top-nav ul {
+    list-style: none; /* Menghilangkan tanda titik (bullet) dari daftar */
+    display: flex; /* Membuat item menu (<li>) berjajar horizontal */
+    align-items: center; /* Memastikan semua item menu sejajar di tengah */
+    gap: 20px; /* Memberi jarak antar setiap item menu */
+}
+.header-top-nav a {
+    color: var(--light-text-color);
+    text-decoration: none; /* Menghilangkan garis bawah dari link */
+}
+.a-header-top:hover {
+    color: var(--accent-color); /* Mengubah warna link menjadi warna aksen saat kursor menyentuh */
 }
 .social-media {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    display: flex; /* Membuat ikon-ikon di dalamnya berjajar horizontal */
+    align-items: center; /* Memastikan ikon sejajar di tengah secara vertikal */
+    gap: 15px; /* Memberi jarak 15px antar setiap ikon */
 }
 .logo-ig {
-    height: 20px;
-    border-radius: 4px;
+    height: 20px; /* Mengatur tinggi masing-masing ikon */
+    border-radius: 4px; /* Memberi sedikit lengkungan pada sudut ikon */
 }
 .logo-fb {
     height: 30px;
+}
+.logo-github {
+    height: 21px;
+    border-radius: 20px;
 }
 .logo-wa {
     height: 21px;
     border-radius: 6px;
 }
 .logo-wa,
+.logo-github,
 .logo-ig,
 .logo-fb {
-    transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease-out; /* Animasi halus saat ikon membesar/terangkat */
 }
+.social-media a:hover .logo-github,
 .social-media a:hover .logo-wa,
 .social-media a:hover .logo-ig,
 .social-media a:hover .logo-fb {
-    /* Ikon akan sedikit terangkat ke atas dan membesar */
-    transform: translateY(-1px) scale(1.1);
+    transform: translateY(-1px) scale(1.1); /* Efek saat kursor menyentuh: ikon sedikit terangkat dan membesar */
 }
 .logo {
     display: flex;
@@ -495,8 +499,8 @@ header {
 
 /* Wrapper untuk menjaga posisi dropdown */
 .language-selector-wrapper {
-    position: relative;
-    display: inline-block;
+    position: relative; /* Membuat posisi relatif untuk dropdown */
+    display: inline-block; /* Membuat elemen inline-block agar bisa diatur lebarnya */
 }
 
 /* Tombol utama yang terlihat */
@@ -504,39 +508,39 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between; /*membuat teks dan panah terpisah*/
-    background: transparent;
-    border: 1px solid var(--light-text-color);
+    background: transparent; /* Hapus background agar tidak terlihat */
+    border: 1px solid var(--light-text-color); /* Border tipis untuk tombol */
     border-radius: 6px;
     padding: 6px 14px;
-    cursor: pointer;
-    width: 150px; /* Beri lebar tetap agar rapi */
-    text-align: left;
+    cursor: pointer; 
+    width: 150px; /* lebar tetap agar rapi */
+    text-align: left; /* Teks rata kiri */
 }
 #selected-lang-text {
     color: var(--light-text-color);
     font-size: 0.85rem;
 }
 .arrow-down { /* Ikon panah dropdown kustom */
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid var(--light-text-color);
+    width: 0; 
+    height: 0; /* Membuat segitiga */
+    border-left: 5px solid transparent; /* Panah ke kiri */
+    border-right: 5px solid transparent; /* Panah ke kanan */
+    border-top: 5px solid var(--light-text-color); /* Warna panah */
 }
 .select-dropdown { /* Menu dropdown yang tersembunyi */
-    display: block;
-    position: absolute;
+    display: block; /* Membuat dropdown sebagai blok */
+    position: absolute; /* Membuat posisi absolute */
     top: calc(100% + 5px);/* Jarak dari tombol */
     left: 0;
     width: 100%;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Menghitung lebar dengan border */
 
-    list-style: none;
+    list-style: none; /* Menghilangkan tanda daftar */
     background: var(--card-bg);
-    border: 1px solid var(--subtle-border-color);
+    border: 1px solid var(--subtle-border-color); /* Border tipis */
     border-radius: 6px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: 10;
+    z-index: 10; /* Pastikan dropdown di atas elemen lain */
     padding: 5px 0;
 
     display: flex; /* Aktifkan flexbox */
@@ -545,27 +549,26 @@ header {
     width: max-content; /* Lebar akan menyesuaikan dengan teks terpanjang */
 
     /* Sembunyikan dengan transisi halus */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.2s ease-out;
+    opacity: 0; /* Sembunyikan */
+    visibility: hidden; /* Sembunyikan dari tampilan */
+    transform: translateY(-10px); /* Posisikan sedikit ke atas */
+    transition: all 0.2s ease-out; /* Transisi halus saat muncul */
 }
-
 .select-dropdown.show { /* Tampilkan dropdown saat ada kelas .show */
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+    opacity: 1; /* Mengubah opacity menjadi 1 untuk membuatnya terlihat */
+    visibility: visible; /* Membuat elemen kembali bisa diklik dan berinteraksi. */
+    transform: translateY(0); /* Kembalikan posisi ke normal */
 }
 .select-dropdown li { /* Setiap item di dalam dropdown */
     padding: 4px 14px;
     color: var(--text-color);
     cursor: pointer;
     font-size: 0.9rem;
-    white-space: nowrap;
+    white-space: nowrap; /* Mencegah teks panjang (seperti "Bahasa Indonesia") pindah ke baris baru */
 }
 .select-dropdown li:hover {
     background: var(--accent-color);
-    color: var(--accent-text-color);
+    color: var(--accent-text-color); /* Mengubah warna teks agar tetap terbaca */
     border-radius: 6px;
 }
 
@@ -2068,7 +2071,6 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     border-top: 1px solid var(--subtle-border-color);
     text-align: center; /* Tambahkan ini untuk menengahkan grid */
 }
-
 .contact-section h2 {
     text-align: center;
     font-family: var(--font-heading);
@@ -2076,14 +2078,12 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     margin-bottom: 2.5rem;
     font-size: 1.5rem;
 }
-
 .contact-grid {
     display: inline-grid; /* <-- UBAH INI dari 'grid' */
     grid-template-columns: repeat(5, 1fr); /* Atur 5 kolom */
     gap: 20px;
     text-align: left; /* Kembalikan perataan teks untuk konten di dalam kartu */
 }
-
 .contact-item {
     background-color: var(--card-bg);
     padding: 25px;
@@ -2095,28 +2095,27 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     align-items: center;
     justify-content: center;
 }
-
 .contact-item img {
     height: 40px;
     margin-bottom: 1rem;
 }
-
 .contact-item h3 {
     font-family: var(--font-heading);
     font-size: 1.1rem;
     color: var(--heading-color);
     margin-bottom: 0.5rem;
 }
-
 .contact-item p {
     font-size: 0.9rem;
     word-break: break-all;
 }
-
 .contact-item a {
     color: var(--accent-color);
     text-decoration: none;
     font-weight: 500;
+}
+.contact-item a:hover {
+    text-decoration: underline;
 }
 
 /* Responsivitas untuk halaman About */

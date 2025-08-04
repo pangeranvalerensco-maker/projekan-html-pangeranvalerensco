@@ -14,8 +14,7 @@
 </head>
 
 <body>
-
-    <header>
+    <header> <!-- header di semua halaman sama, hanya di index yang berbeda src nya-->
         <div class="header-top">
             <div class="container">
                 <div class="social-media">
@@ -26,6 +25,8 @@
                             src="../assets/logo-facebook.webp" alt="Facebook" class="logo-fb" title="Facebook"></a>
                     <a href="https://wa.me/6282181296229" target="_blank"><img src="../assets/logo-whatsapp.webp"
                             alt="WhatsApp" class="logo-wa" title="WhatsApp"></a>
+                    <a href="https://github.com/pangeranvalerensco-maker" target="_blank"><img
+                            src="../assets/logo-github.jpg" alt="WhatsApp" class="logo-github" title="GitHub"></a>
                 </div>
                 <nav class="header-top-nav">
                     <ul>
@@ -129,10 +130,10 @@
     </header>
 
     <main>
-        <div class="container page-content">
+        <div class="container page-content"> <!-- Kontainer untuk konten halaman -->
             <h1 class="page-title" data-translate-key="my-account">Akun Saya</h1>
 
-            <div class="account-details">
+            <div class="account-details"> <!-- Kontainer untuk detail akun -->
                 <h2><span data-translate-key="account-info">Informasi Akun</span></h2>
                 <div id="user-info-display">
                     <div class="user-info-item">
@@ -144,7 +145,7 @@
                         <span id="display-email"></span>
                     </div>
                 </div>
-
+                <!-- Tombol untuk mengedit informasi akun -->
                 <h2><span data-translate-key="address-info">Informasi Alamat</span></h2>
                 <div id="address-info-display">
                     <div class="user-info-item">
@@ -173,28 +174,28 @@
 
                 <form id="address-form" class="auth-form">
                     <h2><span data-translate-key="edit-address-title">Edit Alamat</span></h2>
-                    <div class="form-group">
+                    <div class="form-group"> <!-- Grup input untuk nama lengkap -->
                         <label for="edit-fullname" data-translate-key="label-fullname">Nama Lengkap:</label>
                         <input type="text" id="edit-fullname" required>
                         <p class="error-message" data-translate-key="validation-required"></p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"> <!-- Grup input untuk alamat lengkap -->
                         <label for="edit-address" data-translate-key="label-address">Alamat Lengkap:</label>
                         <input type="text" id="edit-address" required>
-                        <p class="error-message" data-translate-key="validation-required"></p>
+                        <p class="error-message" data-translate-key="validation-required"></p> 
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"> <!-- Grup input untuk kota -->
                         <label for="edit-city" data-translate-key="label-city">Kota:</label>
                         <input type="text" id="edit-city" required>
                         <p class="error-message" data-translate-key="validation-required"></p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"> <!-- Grup input untuk kode pos -->
                         <label for="edit-postalcode" data-translate-key="label-postalcode">Kode Pos:</label>
                         <input type="text" id="edit-postalcode" pattern="[0-9]{5}" title="Kode pos harus 5 digit angka"
                             required>
                         <p class="error-message" data-translate-key="validation-required"></p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"> <!-- Grup input untuk nomor telepon -->
                         <label for="edit-phone" data-translate-key="label-phone">Nomor Telepon:</label>
                         <input type="tel" id="edit-phone" pattern="[0-9]{10,13}"
                             title="Nomor telepon minimal 10 digit, maksimal 13 digit angka" required>
@@ -218,7 +219,7 @@
         </div>
     </footer>
 
-    <div id="toast-container"></div>
+    <div id="toast-container"></div> <!-- Tempat untuk menampilkan notifikasi toast (sukses atau error) -->
     <script src="../js/script.js"></script>
 </body>
 

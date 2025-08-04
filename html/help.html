@@ -14,8 +14,7 @@
 </head>
 
 <body>
-
-    <header>
+    <header> <!-- header di semua halaman sama, hanya di index yang berbeda src nya-->
         <div class="header-top">
             <div class="container">
                 <div class="social-media">
@@ -26,6 +25,8 @@
                             src="../assets/logo-facebook.webp" alt="Facebook" class="logo-fb" title="Facebook"></a>
                     <a href="https://wa.me/6282181296229" target="_blank"><img src="../assets/logo-whatsapp.webp"
                             alt="WhatsApp" class="logo-wa" title="WhatsApp"></a>
+                    <a href="https://github.com/pangeranvalerensco-maker" target="_blank"><img
+                            src="../assets/logo-github.jpg" alt="WhatsApp" class="logo-github" title="GitHub"></a>
                 </div>
                 <nav class="header-top-nav">
                     <ul>
@@ -129,14 +130,14 @@
     </header>
 
     <main>
-        <div class="container page-content">
+        <div class="container page-content"> <!-- Kontainer utama untuk konten halaman Bantuan -->
             <h1 class="page-title" data-translate-key="help-title">Pusat Bantuan</h1>
 
-            <div class="faq-container">
-                <details class="faq-item">
+            <div class="faq-container"> <!-- Kontainer untuk daftar FAQ -->
+                <details class="faq-item"> <!-- Setiap item FAQ menggunakan elemen details -->
                     <summary class="faq-question" data-translate-key="help-q-features">Apa saja fitur utama di website
                         ini?</summary>
-                    <div class="faq-answer">
+                    <div class="faq-answer"> <!-- Jawaban untuk setiap pertanyaan dengan class faq-answer -->
                         <div>
                             <ol>
                                 <li data-translate-key="help-a-features-1">Pencarian Produk: Pengguna dapat mencari
@@ -290,12 +291,12 @@
                         </div>
                     </div>
                 </details>
-                <details class="faq-item">
+                <details class="faq-item"> 
                     <summary class="faq-question" data-translate-key="help-q-video">Apakah ada video perkenalan
                         MineCart?</summary>
                     <div class="faq-answer">
                         <div>
-                            <video autoplay muted loop class="video-controls">
+                            <video autoplay muted loop class="video-controls"> <!-- Video perkenalan MineCart -->
                                 <source src="../assets/video-minecart-hq.mp4" type="video/mp4">
                                 Browser Anda tidak mendukung tag video.
                             </video>
@@ -308,7 +309,7 @@
                     </summary>
                     <div class="faq-answer">
                         <div>
-                            <audio controls class="audio-controls">
+                            <audio controls class="audio-controls"> <!-- Audio jingle MineCart -->
                                 <source src="../assets/minecart-sound.m4a" type="audio/mpeg">
                                 Browser Anda tidak mendukung elemen audio.
                             </audio>
@@ -326,7 +327,7 @@
         </div>
     </footer>
 
-    <div id="toast-container"></div>
+    <div id="toast-container"></div>  <!-- Tempat untuk menampilkan notifikasi toast (sukses atau error) -->
     <script src="../js/script.js"></script>
 </body>
 

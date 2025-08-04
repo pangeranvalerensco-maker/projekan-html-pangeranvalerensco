@@ -14,8 +14,7 @@
 </head>
 
 <body>
-
-    <header>
+    <header> <!-- header di semua halaman sama, hanya di index yang berbeda src nya-->
         <div class="header-top">
             <div class="container">
                 <div class="social-media">
@@ -26,6 +25,8 @@
                             src="../assets/logo-facebook.webp" alt="Facebook" class="logo-fb" title="Facebook"></a>
                     <a href="https://wa.me/6282181296229" target="_blank"><img src="../assets/logo-whatsapp.webp"
                             alt="WhatsApp" class="logo-wa" title="WhatsApp"></a>
+                    <a href="https://github.com/pangeranvalerensco-maker" target="_blank"><img
+                            src="../assets/logo-github.jpg" alt="WhatsApp" class="logo-github" title="GitHub"></a>
                 </div>
                 <nav class="header-top-nav">
                     <ul>
@@ -127,18 +128,18 @@
     </header>
 
     <main>
-        <div class="container page-content">
+        <div class="container page-content"> <!-- Kontainer utama untuk halaman checkout -->
             <h1 class="page-title" data-translate-key="checkout-title">Checkout Pesanan</h1>
 
-            <div class="checkout-layout">
-                <div class="checkout-section order-summary">
+            <div class="checkout-layout"> <!-- Layout untuk halaman checkout -->
+                <div class="checkout-section order-summary"> <!-- Bagian ringkasan belanja -->
                     <h2 data-translate-key="order-summary-title">Ringkasan Belanja Anda</h2>
                     <div id="checkout-items-summary">
                     </div>
                     <div id="checkout-total-summary">
                         <p>
-                            <span id="summary-subtotal-label"></span>
-                            <span id="summary-subtotal-price"></span>
+                            <span id="summary-subtotal-label"></span> <!-- Label subtotal -->
+                            <span id="summary-subtotal-price"></span> <!-- Harga subtotal akan dimuat di sini -->
                         </p>
                         <p><span data-translate-key="summary-shipping">Ongkir</span> <span
                                 id="summary-shipping-price">Rp 0</span></p>
@@ -150,7 +151,7 @@
                     </div>
                 </div>
 
-                <div class="checkout-section shipping-info">
+                <div class="checkout-section shipping-info"> 
                     <h2 data-translate-key="shipping-info-title">Informasi Pengiriman</h2>
                     <div id="shipping-address-display">
                         <p><strong data-translate-key="label-fullname">Nama Lengkap:</strong> <span
@@ -159,16 +160,16 @@
                                 id="checkout-phone"></span></p>
                         <p><strong data-translate-key="label-address">Alamat Lengkap:</strong> <span
                                 id="checkout-address"></span></p>
-                        <p><strong data-translate-key="label-city">Kota:</strong> <span id="checkout-city"></span></p>
+                        <p><strong data-translate-key="label-city">Kota:</strong> <span id="checkout-city"></span></p> <!-- Kota tempat pengiriman -->
                         <p><strong data-translate-key="label-postalcode">Kode Pos:</strong> <span
-                                id="checkout-postalcode"></span></p>
+                                id="checkout-postalcode"></span></p> <!-- Kode pos untuk pengiriman -->
                     </div>
                     <button id="change-address-btn" class="cta-button" data-translate-key="change-address-btn">Ubah
                         Alamat</button>
                 </div>
 
-                <form id="checkout-form" class="checkout-section payment-courier-note">
-                    <h2 data-translate-key="payment-method-title">Metode Pembayaran</h2>
+                <form id="checkout-form" class="checkout-section payment-courier-note"> <!-- Form untuk pengiriman pesanan -->
+                    <h2 data-translate-key="payment-method-title">Metode Pembayaran</h2> 
                     <div class="form-group payment-methods">
                         <div class="radio-option">
                             <input type="radio" id="payment-bca" name="paymentMethod" value="BCA Virtual Account"
@@ -186,18 +187,18 @@
                         </div>
                     </div>
 
-                    <h2 id="courier-note-title" data-translate-key="courier-note-title">Catatan untuk Kurir (Opsional)
+                    <h2 id="courier-note-title" data-translate-key="courier-note-title">Catatan untuk Kurir (Opsional) <!-- Judul untuk catatan kurir -->
                     </h2>
-                    <div class="form-group">
+                    <div class="form-group"> 
                         <label for="courier-note" class="sr-only" data-translate-key="courier-note-label">Catatan untuk
-                            Kurir</label>
+                            Kurir</label> <!-- Label untuk textarea catatan kurir -->
                         <textarea id="courier-note" rows="4"
                             placeholder="Contoh: Titip ke satpam jika tidak ada orang di rumah."
                             data-translate-key="courier-note-placeholder"></textarea>
                     </div>
 
-                    <button type="submit" id="place-order-btn" class="cta-button"
-                        data-translate-key="place-order-btn">Selesaikan Pembayaran</button>
+                    <button type="submit" id="place-order-btn" class="cta-button" 
+                        data-translate-key="place-order-btn">Selesaikan Pembayaran</button> <!-- Tombol untuk menyelesaikan pembayaran -->
                 </form>
             </div>
         </div>
@@ -210,7 +211,7 @@
         </div>
     </footer>
 
-    <div id="toast-container"></div>
+    <div id="toast-container"></div> <!-- Tempat untuk menampilkan notifikasi toast (sukses atau error) -->
     <script src="../js/script.js"></script>
 </body>
 

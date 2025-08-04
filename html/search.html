@@ -15,7 +15,7 @@
 
 <body>
 
-    <header>
+    <header> <!-- header di semua halaman sama, hanya di index yang berbeda src nya-->
         <div class="header-top">
             <div class="container">
                 <div class="social-media">
@@ -26,6 +26,8 @@
                             src="../assets/logo-facebook.webp" alt="Facebook" class="logo-fb" title="Facebook"></a>
                     <a href="https://wa.me/6282181296229" target="_blank"><img src="../assets/logo-whatsapp.webp"
                             alt="WhatsApp" class="logo-wa" title="WhatsApp"></a>
+                    <a href="https://github.com/pangeranvalerensco-maker" target="_blank"><img
+                            src="../assets/logo-github.jpg" alt="WhatsApp" class="logo-github" title="GitHub"></a>
                 </div>
                 <nav class="header-top-nav">
                     <ul>
@@ -129,14 +131,15 @@
     </header>
 
     <main>
-        <section class="search-results-page">
-            <div class="container">
-                <h1 class="page-title">
+        <section class="search-results-page"> <!-- Halaman hasil pencarian -->
+            <div class="container"> 
+                <h1 class="page-title"> <!-- Judul halaman hasil pencarian -->
                     <span data-translate-key="search-results-for">Hasil Pencarian untuk</span>
-                    "<span id="search-query-display"></span>"
+                    "<span id="search-query-display"></span>" <!-- Tempat untuk menampilkan query pencarian -->
                 </h1>
 
-                <div id="search-results-grid" class="product-grid">
+                <div id="search-results-grid" class="product-grid"> <!-- Grid untuk menampilkan hasil pencarian -->
+                    <!-- Hasil pencarian akan dimasukkan di sini melalui JavaScript -->
                 </div>
             </div>
         </section>
@@ -149,7 +152,7 @@
         </div>
     </footer>
 
-    <div id="toast-container"></div>
+    <div id="toast-container"></div> <!-- Tempat untuk menampilkan notifikasi toast (sukses atau error) -->
     <script src="../js/script.js"></script>
 </body>
 

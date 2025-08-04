@@ -1,5 +1,5 @@
 // =================================================================================
-// == CONFIGURATION & GLOBAL VARIABLES
+// == Konfigurasi dan Variable Global
 // =================================================================================
 const API_URL = 'https://my-api-theta-three.vercel.app/pangeran/api';
 let allProductsData = [];
@@ -18,7 +18,7 @@ const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const hamburgerBtn = document.querySelector('.hamburger-btn');
 const mainNav = document.querySelector('.header-main-nav');
-const customSelect = document.querySelector('.custom-select');
+const customSelect = document.querySelector('.custom-select'); // Dropdown untuk bahasa
 
 // --- SIMULASI DATA ONGKIR ---
 const shippingCostsData = {
@@ -468,7 +468,7 @@ const translations = {
 };
 
 // =================================================================================
-// == HELPER & UTILITY FUNCTIONS
+// == Fungsi Pembantu Umum untuk Seluruh Halaman ==
 // =================================================================================
 async function ensureProductsLoaded() {
     if (allProductsData.length === 0) {
@@ -517,10 +517,6 @@ function showToast(messageKey, type = 'success', data = {}) {
     }, 3000);
 }
 
-/**
- * Checks if the user is logged in by checking localStorage.
- * @returns {{isLoggedIn: boolean, username: string}}
-*/
 function checkLoginStatus() {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const username = localStorage.getItem('username') || 'Pengguna';
@@ -635,88 +631,87 @@ function createSkeletonCard() {
 }
 
 // =================================================================================
-// == FEATURE: AUTHENTICATION & ACCOUNT
+// == fitur : autentikasi akun dan menu akun
 // =================================================================================
-/**
-     * Updates the account menu based on the user's login status.
-     */
 function updateAccountMenu() {
     if (!accountMenu) return;
 
-    clearContainer(accountMenu);
+    clearContainer(accountMenu); // Membersihkan Konten Lama
 
-    const { isLoggedIn, username } = checkLoginStatus();
+    const { isLoggedIn, username } = checkLoginStatus(); // Memeriksa Status Login
 
     if (isLoggedIn) {
-        const userProfileButton = document.createElement('button');
+        // --- Membuat Tombol Profil Utama ---
+        const userProfileButton = document.createElement('button'); // Membuat elemen <button> baru di memori.
         userProfileButton.className = 'user-profile';
-        userProfileButton.setAttribute('aria-haspopup', 'true');
-        userProfileButton.setAttribute('aria-expanded', 'false');
-        const userIcon = document.createElement('img');
-        userIcon.src = '/assets/logo-akun-terang.png';
-        userIcon.alt = 'Akun';
-        userIcon.className = 'profile-icon';
-        const userNameSpan = document.createElement('span');
-        userNameSpan.textContent = username;
-        userProfileButton.appendChild(userIcon);
-        userProfileButton.appendChild(userNameSpan);
+        userProfileButton.setAttribute('aria-haspopup', 'true');    // (Aksesibilitas) Memberitahu screen reader bahwa tombol ini punya menu pop-up.
+        userProfileButton.setAttribute('aria-expanded', 'false');   // (Aksesibilitas) Memberitahu screen reader bahwa menu awalnya tertutup.
+        
+        const userIcon = document.createElement('img');             // Membuat elemen <img> untuk ikon.
+        userIcon.src = '/assets/logo-akun-terang.png';              // Mengatur sumber file gambar ikon.
+        userIcon.alt = 'Akun';                                      // Teks alternatif jika gambar gagal dimuat.
+        userIcon.className = 'profile-icon';                        // Memberi class untuk styling.
 
-        const dropdownContent = document.createElement('div');
-        dropdownContent.className = 'dropdown-content';
+        const userNameSpan = document.createElement('span');        // Membuat elemen <span> untuk nama pengguna.
+        userNameSpan.textContent = username;                        // Mengisi span tersebut dengan nama pengguna yang didapat dari checkLoginStatus().
+
+        userProfileButton.appendChild(userIcon);                    // Memasukkan ikon <img> ke dalam <button>.
+        userProfileButton.appendChild(userNameSpan);                // Memasukkan nama <span> ke dalam <button>.
+
+         // --- Membuat Menu Dropdown yang Tersembunyi ---
+        const dropdownContent = document.createElement('div');       
+        dropdownContent.className = 'dropdown-content'; // Memberi class untuk styling (termasuk menyembunyikannya di awal).
         dropdownContent.id = 'user-dropdown';
 
         const myAccountLink = document.createElement('a');
-        myAccountLink.href = '/html/account.html';
+        myAccountLink.href = '/html/account.html'; // Mengatur tujuannya ke halaman akun.
         myAccountLink.dataset.translateKey = 'my-account';
 
-        const logoutButton = document.createElement('button');
+        const logoutButton = document.createElement('button'); // Membuat tombol "Keluar".
         logoutButton.id = 'logout-btn';
         logoutButton.dataset.translateKey = 'logout';
 
-        dropdownContent.appendChild(myAccountLink);
-        dropdownContent.appendChild(logoutButton);
+        dropdownContent.appendChild(myAccountLink); // Memasukkan link "Akun Saya" ke dalam dropdown.
+        dropdownContent.appendChild(logoutButton); // Memasukkan tombol "Keluar" ke dalam dropdown.
 
         accountMenu.appendChild(userProfileButton);
         accountMenu.appendChild(dropdownContent);
 
-        translateUI(currentLang); // Translate text immediately upon menu creation
+        translateUI(currentLang); // Menerjemahkan teks di dalam menu dropdown.
 
-        logoutButton.addEventListener('click', () => {
-            logoutUser();
+        logoutButton.addEventListener('click', () => { // Saat tombol "Keluar" diklik...
+            logoutUser(); 
         });
 
-        userProfileButton.addEventListener('click', (event) => {
-            event.stopPropagation();
-            dropdownContent.classList.toggle('show');
-            const isExpanded = dropdownContent.classList.contains('show');
+        userProfileButton.addEventListener('click', (event) => { // Saat tombol profil utama diklik..
+            event.stopPropagation(); // Mencegah event 'click' menyebar ke elemen lain (seperti 'window')
+            dropdownContent.classList.toggle('show'); // Toggle (tambah/hapus) class "show" pada dropdown untuk memicu animasi CSS.
+            const isExpanded = dropdownContent.classList.contains('show') ;
             userProfileButton.setAttribute('aria-expanded', isExpanded);
         });
 
     } else {
-        // --- View if user is not logged in ---
-        const loginLink = document.createElement('a');
-        loginLink.href = '/html/login.html';
-        loginLink.className = 'btn btn-secondary';
-        loginLink.dataset.translateKey = 'login';
+        // --- Membuat Tombol Login dan Register ---
+        const loginLink = document.createElement('a');          // Membuat elemen <a> untuk tombol "Masuk".
+        loginLink.href = '/html/login.html';                    // Mengatur tujuannya ke halaman login.
+        loginLink.className = 'btn btn-secondary';              // Memberi class untuk styling (tombol outline).
+        loginLink.dataset.translateKey = 'login';               // Memberi kunci terjemahan.
 
-        const registerLink = document.createElement('a');
-        registerLink.href = '/html/register.html';
-        registerLink.className = 'btn btn-primary';
-        registerLink.dataset.translateKey = 'register';
+        const registerLink = document.createElement('a');       // Membuat elemen <a> untuk tombol "Daftar".
+        registerLink.href = '/html/register.html';              // Mengatur tujuannya ke halaman register.
+        registerLink.className = 'btn btn-primary';             // Memberi class untuk styling (tombol utama).
+        registerLink.dataset.translateKey = 'register';         // Memberi kunci terjemahan.
 
-        accountMenu.appendChild(loginLink);
-        accountMenu.appendChild(registerLink);
+        // --- Menampilkan Tombol ke Halaman ---
+        accountMenu.appendChild(loginLink);                     // Memasukkan tombol "Masuk" ke dalam <li id="account-menu">.
+        accountMenu.appendChild(registerLink);                  // Memasukkan tombol "Daftar" ke dalam <li id="account-menu">.
 
-        accountMenu.classList.add('is-logged-out');
+        accountMenu.classList.add('is-logged-out');             // Menambahkan class penanda bahwa pengguna belum login.
 
-        translateUI(currentLang);
+        translateUI(currentLang);                               // Memanggil fungsi terjemahan untuk mengisi teks pada kedua tombol.
     }
 }
 
-// Tambahkan fungsi baru ini di script.js Anda
-/**
- * Mengelola visibilitas item menu mobile berdasarkan status login dan bahasa.
- */
 function updateMobileNavState() {
     const { isLoggedIn } = checkLoginStatus();
     const loggedOutItems = document.querySelectorAll('.mobile-only-logged-out');
@@ -739,7 +734,7 @@ function updateMobileNavState() {
 }
 
 // =================================================================================
-// == FEATURE: ACCOUNT PAGE MANAGEMENT
+// == fitur : manajemen akun dan informasi akun pengguna ==
 // =================================================================================
 
 function displayAccountInfo() {
@@ -873,7 +868,7 @@ function initAccountPage() {
 }
 
 // =================================================================================
-// == FEATURE: DARK/LIGHT THEME
+// == fitur : tema gelap/terang dan ikon keranjang belanja
 // =================================================================================
 
 const sunIconPath = '/assets/logo-terang.png';
@@ -898,57 +893,45 @@ function applyTheme(theme) {
 }
 
 // =================================================================================
-// == FEATURE: LANGUAGE SWITCHER
+// == fitur : terjemahan antarmuka pengguna (UI) ==
 // =================================================================================
-
-/**
- * Translates the UI elements based on the selected language.
- * @param {string} lang - The language code ('id' or 'en').
- */
 function translateUI(lang) {
-    // --- AWAL PERUBAHAN LOGIKA JUDUL ---
-
-    // Tentukan kunci judul berdasarkan elemen unik di setiap halaman
-    let titleKey = 'page-title-home'; // Default untuk Beranda
-
-    if (document.getElementById('all-products-grid')) {
-        // Cek jika ini halaman Semua Produk
-        titleKey = 'page-title-products';
-    } else if (document.querySelector('.faq-container')) {
-        // Cek jika ini halaman Bantuan (yang memiliki kontainer FAQ)
-        titleKey = 'page-title-help';
-    } else if (document.querySelector('.about-layout')) {
-        // Cek jika ini halaman Tentang Kami
-        titleKey = 'page-title-about';
-    } else if (document.getElementById('cart-items-container')) {
-        // Cek jika ini halaman Keranjang
-        titleKey = 'page-title-cart';
-    } else if (document.getElementById('login-form')) {
-        // Cek jika ini halaman Masuk
-        titleKey = 'page-title-login';
-    } else if (document.getElementById('register-form')) {
-        // Cek jika ini halaman Daftar
-        titleKey = 'page-title-register';
-    } else if (document.getElementById('search-query-display')) {
-        titleKey = 'head-title-search';
-    }
-
+    // Cek dulu apakah ini halaman hasil pencarian (kasus khusus)
     if (document.getElementById('search-results-grid')) {
         const urlParams = new URLSearchParams(window.location.search);
         const query = urlParams.get('q');
         const titlePrefix = translations[lang]['page-title-search'] || 'Hasil untuk';
         document.title = `${titlePrefix} "${query}" - MineCart`;
     } else {
-        // Atur judul untuk semua halaman statis lainnya
-        document.title = translations[lang][titleKey];
+        let titleKey = 'page-title-home'; // Default
+
+        if (document.getElementById('all-products-grid')) {
+            // Jika ini halaman semua produk
+            titleKey = 'page-title-products';
+        } else if (document.querySelector('.faq-container')) {
+            // Jika ini halaman FAQ
+            titleKey = 'page-title-help';
+        } else if (document.querySelector('.about-layout')) {
+            // Jika ini halaman About Us
+            titleKey = 'page-title-about';
+        } else if (document.getElementById('cart-items-container')) {
+            // Jika ini halaman keranjang belanja
+            titleKey = 'page-title-cart';
+        } else if (document.getElementById('login-form')) {
+            // Jika ini halaman login
+            titleKey = 'page-title-login';
+        } else if (document.getElementById('register-form')) {
+            // Jika ini halaman register
+            titleKey = 'page-title-register';
+        }
+
+        // Langsung terapkan judulnya
+        if (translations[lang] && translations[lang][titleKey]) {
+            document.title = translations[lang][titleKey];
+        }
     }
 
-    // Terapkan judul yang sesuai
-    if (translations[lang] && translations[lang][titleKey]) {
-        document.title = translations[lang][titleKey];
-    }
-
-    // Translate Product Detail Page Title & Description
+    // terjemahan untuk produk (nama, deskripsi, kategori)
     if (document.getElementById('product-images')) {
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get('id');
@@ -973,18 +956,16 @@ function translateUI(lang) {
         }
     }
 
-    // Cari elemen pesan "tidak ada hasil"
+    // terjemahan elemen pesan "tidak ada hasil"
     const noResultsMessage = document.getElementById('no-results-message');
     if (noResultsMessage) {
-        // Ambil kembali query yang tersimpan
         const query = noResultsMessage.dataset.query;
         // Ambil teks terjemahan yang baru
         const noResultText = translations[lang]['no-search-results'] || 'Tidak ada hasil';
-        // Gabungkan lagi dan perbarui teksnya
         noResultsMessage.textContent = `${noResultText} "${query}".`;
     }
 
-    // Translate Category Filter Buttons
+    // terjemahkan tombol kategori di halaman produk
     document.querySelectorAll('#category-filters button').forEach(button => {
         const categoryKey = button.dataset.category;
         if (translations[lang]?.categories?.[categoryKey]) {
@@ -992,13 +973,15 @@ function translateUI(lang) {
         }
     });
 
-    // Translate all other elements with data-translate-key
+    // terjemahan untuk elemen-elemen yang punya atribut data-translate-key
     document.querySelectorAll('[data-translate-key]').forEach(el => {
-        const key = el.dataset.translateKey;
-        if (translations[lang] && translations[lang][key]) {
-            const translatedText = translations[lang][key];
+        const key = el.dataset.translateKey; // Ambil kunci terjemahan 
+        if (translations[lang] && translations[lang][key]) { 
+            const translatedText = translations[lang][key]; // Cari terjemahannya di kamus
+            // Cek apakah elemennya input (untuk placeholder), punya title, atau teks biasa
             if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
                 el.placeholder = translatedText;
+            // Jika elemen punya title, ubah title-nya
             } else if (el.hasAttribute('title')) {
                 el.title = translatedText;
             } else {
@@ -1007,6 +990,7 @@ function translateUI(lang) {
         }
     });
 
+    // menerjemahkan nama produk di halaman keranjang
     document.querySelectorAll('.cart-item').forEach(item => {
         const titleEl = item.querySelector('h3');
         if (titleEl) {
@@ -1014,7 +998,7 @@ function translateUI(lang) {
         }
     });
 
-    // Translate Dynamic Product Content
+    // terjemahan nama produk disemua kartu produk dinamis (index, semua produk, detail, pencarian)
     document.querySelectorAll('.product-card').forEach(card => {
         const titleEl = card.querySelector('h3');
         const descEl = card.querySelector('.description');
@@ -1028,7 +1012,7 @@ function translateUI(lang) {
         }
     });
 
-    // PENTING: Panggil renderSummary jika di halaman checkout
+    // terjemahan jika dihalaman checkout
     const checkoutPage = document.querySelector('.checkout-layout');
     if (checkoutPage) {
         // Panggil ulang kedua fungsi rendering untuk memperbarui tampilan
@@ -1042,7 +1026,7 @@ function translateUI(lang) {
 }
 
 // =================================================================================
-// == FEATURE: PRODUCT MANAGEMENT
+// == fitur : kartu produk dinamis dan rekomendasi produk ==
 // =================================================================================
 
 /**
@@ -1486,7 +1470,7 @@ async function displaySearchResults() {
 
 
 // =================================================================================
-// == FEATURE: CART & CHECKOUT
+// == Fitur : Keranjang belanja dan preview keranjang ==
 // =================================================================================
 /**
      * Adds a product to the cart or increments its quantity if it already exists.
@@ -2440,51 +2424,49 @@ function initializeCarousel() {
     startSlideShow();
 }
 
-/**
- * Initializes the custom language dropdown functionality.
- */
+// fungsi untuk mengganti bahasa website
 function initializeLanguageDropdown() {
     if (!customSelect) return;
 
-    const selectButton = customSelect.querySelector('.select-button');
-    const dropdown = customSelect.querySelector('.select-dropdown');
-    const selectedLangText = document.getElementById('selected-lang-text');
+    const selectButton = customSelect.querySelector('.select-button'); // Tombol untuk membuka dropdown
+    const dropdown = customSelect.querySelector('.select-dropdown'); // Dropdown yang berisi pilihan bahasa
+    const selectedLangText = document.getElementById('selected-lang-text'); // Teks yang menampilkan bahasa yang dipilih
 
-    selectButton.addEventListener('click', () => {
+    selectButton.addEventListener('click', () => { // event listener untuk tombol dropdown
         dropdown.classList.toggle('show');
         const isExpanded = dropdown.classList.contains('show');
         selectButton.setAttribute('aria-expanded', isExpanded);
     });
 
-    dropdown.addEventListener('click', (e) => {
-        if (e.target.tagName === 'LI') {
+    dropdown.addEventListener('click', (e) => { // event listener untuk pilihan bahasa
+        if (e.target.tagName === 'LI') { // Pastikan yang diklik adalah elemen <li>
             const selectedValue = e.target.dataset.value;
             const selectedText = e.target.textContent;
 
-            selectedLangText.textContent = selectedText;
-            currentLang = selectedValue;
-            localStorage.setItem('userLanguage', currentLang);
-            translateUI(currentLang);
+            selectedLangText.textContent = selectedText; // Perbarui teks yang menampilkan bahasa yang dipilih
+            currentLang = selectedValue; // Simpan bahasa yang dipilih ke variabel global
+            localStorage.setItem('userLanguage', currentLang); // Simpan bahasa yang dipilih ke localStorage
+            translateUI(currentLang); // Panggil fungsi translateUI untuk menerapkan terjemahan
 
-            updateCartPreview();
+            updateCartPreview(); // Perbarui pratinjau keranjang jika ada
             // Periksa apakah kita di halaman keranjang, jika ya, perbarui ringkasannya
             if (document.querySelector('.cart-section')) {
                 updateCartSummary();
             }
 
-            dropdown.classList.remove('show');
+            dropdown.classList.remove('show'); // Sembunyikan dropdown setelah memilih
             selectButton.setAttribute('aria-expanded', 'false');
         }
     });
 
-    window.addEventListener('click', (e) => {
+    window.addEventListener('click', (e) => { // Tutup dropdown jika klik di luar dropdown
         if (!customSelect.contains(e.target)) {
             dropdown.classList.remove('show');
             selectButton.setAttribute('aria-expanded', 'false');
         }
     });
 
-    selectedLangText.textContent = (currentLang === 'en') ? 'English' : 'Bahasa Indonesia';
+    selectedLangText.textContent = (currentLang === 'en') ? 'English' : 'Bahasa Indonesia'; // Set teks awal sesuai bahasa yang dipilih
 }
 
 /**
@@ -2502,7 +2484,6 @@ function initializeHamburgerMenu() {
     }
 }
 
-// Tambahkan fungsi ini di script.js
 // function initFaqAccordion() {
 //     const faqContainer = document.querySelector('.faq-container');
 //     if (!faqContainer) return;
@@ -2541,10 +2522,10 @@ function initializeCSPopup() {
     }
 }
 
+// =================================================================================
+// == Inisialisasi dan Event Listeners
+// =================================================================================
 document.addEventListener('DOMContentLoaded', () => {
-    // =================================================================================
-    // == INITIALIZATION & GLOBAL EVENT LISTENERS
-    // =================================================================================
     const { isLoggedIn } = checkLoginStatus();
     if (isLoggedIn) {
         document.body.classList.add('user-is-logged-in');
@@ -2552,7 +2533,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('user-is-logged-out');
     }
 
-    // Apply saved theme
+    //  saved theme
     const savedTheme = localStorage.getItem('theme') || 'light';
     applyTheme(savedTheme);
 
