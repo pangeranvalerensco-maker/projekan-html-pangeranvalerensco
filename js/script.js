@@ -79,6 +79,12 @@ const translations = {
         'dev-praise-3': 'DIVDIK BAIK HATI',
         'thank-you-note-a': 'Terima kasih kami ucapkan kepada Divisi Pendidikan yang dengan sabar mengajari dan menghadapi kami.',
         'thank-you-note-b': ' Terkhusus juga Kepada Teh Mora Fidela, Instruktur terbaik kami.',
+        'contact-title': 'Hubungi Kami',
+        'contact-social-title': 'Media Sosial',
+        'contact-email-title': 'Email',
+        'contact-phone-title': 'Telepon',
+        'contact-location-title': 'Lokasi',
+        'contact-location-detail': 'Bandung, Jawa Barat',
         'help-title': 'Bantuan',
         'page-title-about': 'MineCart - Tentang Kami',
         'login': 'Masuk',
@@ -279,6 +285,12 @@ const translations = {
         'help-title': 'Help',
         'thank-you-note-a': 'We would like to thank the Education Division for patiently teaching and guiding us.',
         'thank-you-note-b': 'A special thanks to Teh Mora Fidela, our best instructor.',
+        'contact-title': 'Contact Us',
+        'contact-email-title': 'Email',
+        'contact-phone-title': 'Phone',
+        'contact-location-title': 'Location',
+        'contact-location-detail': 'Bandung, West Java',
+        'contact-social-title': 'Social Media',
         'page-title-about': 'MineCart - About Us',
         'page-title-cart': 'MineCart - Shopping Cart',
         'page-title-login': 'MineCart - Login',
@@ -1363,6 +1375,12 @@ async function displayProductDetail() {
                 relatedProducts.forEach(relatedProduct => {
                     const card = createProductCard(relatedProduct, currentLang);
                     relatedProductsGrid.appendChild(card);
+                });
+
+                const cards = relatedProductsGrid.querySelectorAll('.product-card-link');
+                cards.forEach((card, index) => {
+                    card.style.animationDelay = `${index * 100}ms`;
+                    card.classList.add('animate');
                 });
             } else {
                 relatedProductsSection.classList.add('hidden-element'); // Sembunyikan section jika tidak ada produk

@@ -141,7 +141,8 @@ header {
     height: 30px;
 }
 .logo-wa {
-    height: 22px;
+    height: 21px;
+    border-radius: 6px;
 }
 .logo-wa,
 .logo-ig,
@@ -1342,11 +1343,19 @@ body.dark-mode .skeleton::after {
     margin-top: 5px;
     display: none; /* Sembunyikan secara default */
 }
-input.is-invalid+.error-message { /* Tampilkan pesan saat input tidak valid */
+/* Aturan baru yang lebih fleksibel untuk menampilkan pesan error */
+.is-invalid ~ .error-message {
     display: block;
 }
 input.is-invalid {/* Beri border merah pada input yang tidak valid */
     border-color: #e63946;
+}
+/* Styling untuk validasi error di radio button */
+.radio-container.is-invalid {
+    border: 1px solid #e63946; /* Beri border merah di sekeliling grup */
+    border-radius: 5px;
+    padding: 10px;
+    margin-left: -10px; /* Sedikit offset agar rapi */
 }
 
  /* Styling untuk Notifikasi Toast */
@@ -1395,6 +1404,27 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     to { /* Akhir di atas */
         opacity: 0;
         transform: translateY(-100%);
+    }
+}
+
+/* --- Responsif untuk Halaman Login/Register --- */
+@media (max-width: 576px) {
+    .auth-container {
+        padding: 2rem 15px; /* Kurangi padding container utama */
+    }
+    .auth-form {
+        padding: 30px 25px; /* Kurangi padding di dalam form */
+    }
+    .auth-form h1 {
+        font-size: 1.5rem; /* Kecilkan judul form */
+    }
+}   
+@media (max-width: 320px) {
+    .auth-form {
+        padding: 25px 20px;
+    }
+    .auth-form h1 {
+        font-size: 1.3rem;
     }
 }
 
@@ -1454,7 +1484,7 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
         align-items: flex-start; /* Rata kiri */
         padding: 10px 0; /* Kurangi padding */
         gap: 5px; /* Jarak antar label dan nilai */
-        overflow-wrap: break-word;
+        overflow-wrap: break-all; /* Agar teks panjang tidak merusak layout */
     }
     .user-info-item strong {
         min-width: unset; /* Hapus min-width agar tidak memanjang di mobile */
@@ -1481,8 +1511,7 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
         /* Sesuaikan ukuran font tombol */
     }
 }
-
-/* Media Query untuk layar yang lebih kecil lagi, seperti smartphone */
+/* Media Query untuk layar yang lebih kecil lagi */
 @media (max-width: 576px) {
     .account-details {
         padding: 15px; /* Lebih kecil lagi paddingnya */
@@ -2032,6 +2061,64 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     margin-top: 1.5rem;
 }
 
+/* --- Contact Section --- */
+.contact-section {
+    padding: 4rem 0;
+    background-color: var(--section-bg);
+    border-top: 1px solid var(--subtle-border-color);
+    text-align: center; /* Tambahkan ini untuk menengahkan grid */
+}
+
+.contact-section h2 {
+    text-align: center;
+    font-family: var(--font-heading);
+    color: var(--heading-color);
+    margin-bottom: 2.5rem;
+    font-size: 1.5rem;
+}
+
+.contact-grid {
+    display: inline-grid; /* <-- UBAH INI dari 'grid' */
+    grid-template-columns: repeat(5, 1fr); /* Atur 5 kolom */
+    gap: 20px;
+    text-align: left; /* Kembalikan perataan teks untuk konten di dalam kartu */
+}
+
+.contact-item {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid var(--subtle-border-color);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-item img {
+    height: 40px;
+    margin-bottom: 1rem;
+}
+
+.contact-item h3 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--heading-color);
+    margin-bottom: 0.5rem;
+}
+
+.contact-item p {
+    font-size: 0.9rem;
+    word-break: break-all;
+}
+
+.contact-item a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
 /* Responsivitas untuk halaman About */
 @media (max-width: 768px) { 
     .dev-tribute p,
@@ -2044,8 +2131,9 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
         font-size: 1.6rem; /* Ukuran font lebih kecil di mobile */
     }
     .dev-tribute {
-        flex-direction: column;
-        font-size: 1.2rem;
+        flex-direction: column; /* Tumpuk item ke bawah di mobile */
+        gap: 1rem; /* Beri jarak vertikal */
+        font-size: 1rem; /* Kecilkan sedikit font di mobile */
     }
     .about-layout {
         grid-template-columns: 1fr; /* Satu kolom di mobile */
@@ -2054,6 +2142,19 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     .about-text h2,
     .about-text h3 {
         text-align: center; /* Ukuran font lebih kecil di mobile */
+    }
+    .contact-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 kolom untuk tablet kecil/hp besar */
+    }
+}
+@media (max-width: 992px) {
+    .contact-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Izinkan 3 atau 2 kolom */
+    }
+}
+@media (max-width: 576px) {
+    .contact-grid {
+        grid-template-columns: 1fr; /* 1 kolom untuk hp */
     }
 }
 
@@ -2670,6 +2771,9 @@ footer {
     h1 {
         font-size: 1rem;
     }
+    .contact-social-links img {
+        height: 25px; /* Kecilkan ikon sosial */
+    }
 }
 @media (max-width: 120px) {
     .container, /* Reset PADDING yang memakan tempat */
@@ -2711,37 +2815,176 @@ footer {
         gap: 8px;                 /* Beri sedikit jarak vertikal antara harga dan tombol */
     }
     /* Letakkan di dalam @media (max-width: 120px) */
-
-.product-card {
-    /* Kurangi padding di dalam kartu itu sendiri */
-    padding: 5px;
+    .product-card {
+        /* Kurangi padding di dalam kartu itu sendiri */
+        padding: 5px;
+    }
+    .product-card-body, .product-card-footer {
+        /* Kurangi padding di bagian body dan footer kartu */
+        padding: 5px;
+    }
+    .product-card-body h3,
+    .product-card-body h2 {
+        font-size: 0.9rem; /* Ukuran judul lebih kecil lagi */
+    }
+    /* Opsi: Sembunyikan deskripsi di layar sangat kecil agar tidak ramai */
+    .product-card-body .description {
+        display: none;
+    }
+    .product-card-footer .price {
+        font-size: 0.9rem; /* HARUS sangat kecil agar angka harga tidak overflow */
+        margin-bottom: 5px; /* Beri jarak ke tombol di bawahnya */
+    }
+    .product-card-footer .buy-btn {
+        font-size: 0.8rem;
+        padding: 4px 8px; /* Padding minimal agar tombol tetap bisa diklik */
+        width: 100%; /* Buat tombol memenuhi lebar footer */
+    }
+    /* Penyesuaian untuk bagian kontak */
+    .contact-section {
+        padding: 1rem 0;
+    }
+    .contact-grid {
+        gap: 10px;
+    }
+    .contact-item {
+        padding: 10px;
+    }
+    .contact-section h2 {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    .contact-item img {
+        height: 25px; /* Ikon utama lebih kecil */
+        margin-bottom: 0.5rem;
+    }
+    .contact-item h3 {
+        font-size: 0.9rem;
+    }
+    .contact-item p {
+        font-size: 0.8rem;
+    }
+    .contact-social-links img {
+        height: 20px; /* Ikon sosial lebih kecil */
+    }
+    /* Penyesuaian untuk form login/register */
+    .auth-container {
+        padding: 1rem 10px;
+    }
+    .auth-form {
+        padding: 15px;
+    }
+    /* judul di halaman Login & Register */
+    .auth-form h1 {
+        font-size: 1rem; /* Kecilkan font secara drastis */
+        word-break: break-all; /* Paksa teks untuk pindah baris */
+        line-height: 1.3; /* Atur jarak baris jika teksnya jadi 2 baris atau lebih */
+    }
+    /* teks di halaman Akun */
+    .user-info-item {
+        word-break: break-all; /* Pastikan aturan ini tetap aktif dan kuat */
+    }
+    .form-group {
+        margin-bottom: 0.8rem;
+    }
+    .auth-form input, .auth-form .cta-button {
+        padding: 8px;
+        font-size: 0.8rem;
+    }
+    /* Memastikan label form bisa pindah baris jika namanya panjang */
+    .form-group label {
+        white-space: normal;
+    }
+    /* Membuat radio button jenis kelamin menumpuk ke bawah */
+    .radio-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
 }
 
-.product-card-body, .product-card-footer {
-    /* Kurangi padding di bagian body dan footer kartu */
-    padding: 5px;
-}
+@media (max-width: 60px) {
+    html,
+    body {
+        width: 100%;
+        overflow-x: hidden !important;
+    }
+    * {
+        box-sizing: border-box;
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+    header,
+    nav,
+    .header-top,
+    .header-main,
+    .search-bar,
+    .product-grid,
+    .hero,
+    .hero-content,
+    .container,
+    .logo,
+    .logo img {
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        white-space: normal !important;
+    }
+    .container { /* Hapus padding horizontal besar */
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    .search-bar input,
+    .search-bar button,
+    .cta-button,
+    .product-card,
+    .product-card img {
+        width: 100% !important;
+    }
+    .header-top-nav,
+    .language-selector-wrapper,
+    .social-media {
+        display: none !important;
+    }
+    .featured-products h2 {
+        font-size: 0.2rem;        /* Kecilkan ukuran font secara drastis */
+        word-break: break-all;    /* Paksa teks untuk patah jika tidak muat */
+        line-height: 1.4;         /* Beri sedikit jarak antar baris jika teksnya patah */
+    }
+    /* Penyesuaian ekstrem untuk form login/register */
+    .auth-container {
+        padding: 1rem 5px; /* Kurangi padding container */
+    }
+    .auth-form {
+        padding: 10px; /* Kurangi padding form */
+    }
+    .auth-form h1 {
+        font-size: 0.8rem; /* Perkecil lagi judul */
+        margin-bottom: 0.8rem;
+    }
+    .form-group {
+        margin-bottom: 0.5rem; /* Kurangi jarak antar field */
+    }
+    .auth-form input,
+    .auth-form .cta-button {
+        padding: 6px; /* Perkecil padding input dan tombol */
+        font-size: 0.7rem;
+    }
+    .auth-switch {
+        font-size: 0.7rem;
+        margin-top: 1rem;
+    }
+    /* Membuat tombol Login & Register di header menumpuk ke bawah */
+    #account-menu.is-logged-out {
+        flex-direction: column;
+        align-items: stretch; /* Agar tombolnya sama lebar */
+        gap: 5px; /* Jarak vertikal antar tombol */
+    }
 
-.product-card-body h3,
-.product-card-body h2 {
-    font-size: 0.9rem; /* Ukuran judul lebih kecil lagi */
-}
-
-/* Opsi: Sembunyikan deskripsi di layar sangat kecil agar tidak ramai */
-.product-card-body .description {
-    display: none;
-}
-
-.product-card-footer .price {
-    font-size: 0.9rem; /* HARUS sangat kecil agar angka harga tidak overflow */
-    margin-bottom: 5px; /* Beri jarak ke tombol di bawahnya */
-}
-
-.product-card-footer .buy-btn {
-    font-size: 0.8rem;
-    padding: 4px 8px; /* Padding minimal agar tombol tetap bisa diklik */
-    width: 100%; /* Buat tombol memenuhi lebar footer */
-}
+    #account-menu.is-logged-out .btn {
+        width: 100%; /* Buat tombol memenuhi lebar yang tersedia */
+        text-align: center;
+    }
 }
 
 @media (max-width: 50px) {
@@ -2835,56 +3078,6 @@ footer {
     .language-selector-wrapper,
     .social-media,
     .search-toggle-btn {
-        display: none !important;
-    }
-    .featured-products h2 {
-        font-size: 0.2rem;        /* Kecilkan ukuran font secara drastis */
-        word-break: break-all;    /* Paksa teks untuk patah jika tidak muat */
-        line-height: 1.4;         /* Beri sedikit jarak antar baris jika teksnya patah */
-    }
-}
-
-@media (max-width: 60px) {
-    html,
-    body {
-        width: 100%;
-        overflow-x: hidden !important;
-    }
-    * {
-        box-sizing: border-box;
-        max-width: 100%;
-        overflow-wrap: break-word;
-        word-break: break-word;
-    }
-    header,
-    nav,
-    .header-top,
-    .header-main,
-    .search-bar,
-    .product-grid,
-    .hero,
-    .hero-content,
-    .container,
-    .logo,
-    .logo img {
-        max-width: 100% !important;
-        overflow-x: hidden !important;
-        white-space: normal !important;
-    }
-    .container { /* Hapus padding horizontal besar */
-        padding-left: 2px;
-        padding-right: 2px;
-    }
-    .search-bar input,
-    .search-bar button,
-    .cta-button,
-    .product-card,
-    .product-card img {
-        width: 100% !important;
-    }
-    .header-top-nav,
-    .language-selector-wrapper,
-    .social-media {
         display: none !important;
     }
     .featured-products h2 {
