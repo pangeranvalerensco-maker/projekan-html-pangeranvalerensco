@@ -2,22 +2,22 @@
 // == Konfigurasi dan Variable Global
 // =================================================================================
 const API_URL = 'https://my-api-theta-three.vercel.app/pangeran/api';
-let allProductsData = [];
+let allProductsData = []; // Data produk yang akan diambil dari API
 let currentLang = localStorage.getItem('userLanguage') || 'id'; // Default to Indonesian
 
 // --- DOM ELEMENTS ---
-const body = document.body;
-const accountMenu = document.getElementById('account-menu');
-const themeToggleBtn = document.getElementById('theme-toggle-btn');
-const themeIcon = document.getElementById('theme-icon');
-const productGrid = document.querySelector('.featured-products .product-grid');
-const cartIcon = document.getElementById('cart-icon-img');
-const heroSection = document.querySelector('.hero');
-const carouselContainer = document.querySelector('.carousel-container');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const hamburgerBtn = document.querySelector('.hamburger-btn');
-const mainNav = document.querySelector('.header-main-nav');
+const body = document.body; // untuk nyimpan referensi ke seluruh tag body
+const accountMenu = document.getElementById('account-menu'); // menu login & register atau akun saya
+const themeToggleBtn = document.getElementById('theme-toggle-btn'); // tombol untuk mengubah tema
+const themeIcon = document.getElementById('theme-icon'); // ikon tema
+const productGrid = document.querySelector('.featured-products .product-grid'); // grid produk di halaman beranda
+const cartIcon = document.getElementById('cart-icon-img'); // ikon keranjang belanja terang atau gelap
+const heroSection = document.querySelector('.hero'); // bagian hero di halaman beranda
+const carouselContainer = document.querySelector('.carousel-container'); //
+const prevBtn = document.getElementById('prevBtn'); // tombol sebelumnya
+const nextBtn = document.getElementById('nextBtn'); // tombol berikutnya
+const hamburgerBtn = document.querySelector('.hamburger-btn'); // tombol hamburger
+const mainNav = document.querySelector('.header-main-nav'); // navigasi utama
 const customSelect = document.querySelector('.custom-select'); // Dropdown untuk bahasa
 
 // --- SIMULASI DATA ONGKIR ---
@@ -29,12 +29,12 @@ const shippingCostsData = {
     'bandung': { baseCost: 9000, interProvincialCost: 30000, province: 'Jawa Barat' },
     'jakarta': { baseCost: 10000, interProvincialCost: 35000, province: 'DKI Jakarta' },
     'bogor': { baseCost: 9500, interProvincialCost: 32000, province: 'Jawa Barat' },
-    'depok': { baseCost: 9500, interProvincialCost: 32000, province: 'Jawa Barat' }, // Depok di Jawa Barat
+    'depok': { baseCost: 9500, interProvincialCost: 32000, province: 'Jawa Barat' },
     'surabaya': { baseCost: 11000, interProvincialCost: 40000, province: 'Jawa Timur' },
     'yogyakarta': { baseCost: 12000, interProvincialCost: 42000, province: 'DIY' },
-    'sleman': { baseCost: 12000, interProvincialCost: 42000, province: 'DIY' }, // Sleman di DIY
+    'sleman': { baseCost: 12000, interProvincialCost: 42000, province: 'DIY' },
     'medan': { baseCost: 15000, interProvincialCost: 50000, province: 'Sumatera Utara' },
-    'tangerang': { baseCost: 10500, interProvincialCost: 36000, province: 'Banten' }, // Untuk Tangerang & Tangsel
+    'tangerang': { baseCost: 10500, interProvincialCost: 36000, province: 'Banten' },
     'kuta': { baseCost: 13000, interProvincialCost: 45000, province: 'Bali' },
     'denpasar': { baseCost: 13000, interProvincialCost: 45000, province: 'Bali' },
     'semarang': { baseCost: 12500, interProvincialCost: 43000, province: 'Jawa Tengah' },
@@ -52,7 +52,7 @@ const shippingTimesData = {
     'interProvince': [3, 7]
 };
 
-// --- STATIC UI TRANSLATION DICTIONARY ---
+// --- Kamus Bahasa Statis
 const translations = {
     id: {
         'page-title-home': 'MineCart - Beranda',
@@ -471,11 +471,11 @@ const translations = {
 // == Fungsi Pembantu Umum untuk Seluruh Halaman ==
 // =================================================================================
 async function ensureProductsLoaded() {
-    if (allProductsData.length === 0) {
+    if (allProductsData.length === 0) { // Cek: Apakah data produk sudah ada
         const response = await fetch(API_URL);
-        allProductsData = await response.json();
+        allProductsData = await response.json(); // Konversi data mentah menjadi format JSON yang bisa dibaca JavaScript.
 
-        const savedStock = getLocalStorage('productStockData', {});
+        const savedStock = getLocalStorage('productStockData', {}); // Setelah data API didapat, cek localStorage untuk data stok yang tersimpan.
         if (Object.keys(savedStock).length > 0) {
             allProductsData.forEach(product => {
                 // Jika ID produk ada di dalam data stok tersimpan, perbarui stoknya
@@ -487,14 +487,18 @@ async function ensureProductsLoaded() {
     }
 }
 
+// Mengumpulkan ID dari semua produk yang checkbox-nya sedang dicentang di halaman keranjang.
 function getSelectedProductIds() {
+    // .map(...) adalah perulangan yang akan mengambil HANYA 'dataset.productId' dari setiap checkbox dan mengembalikannya sebagai array baru.
     return Array.from(document.querySelectorAll('.cart-item-select input:checked')).map(cb => cb.dataset.productId);
 }
 
+// fungsi notifikasi toast diatas (sukses atau error)
 function showToast(messageKey, type = 'success', data = {}) {
     const toastContainer = document.getElementById('toast-container');
     if (!toastContainer) return;
 
+    // Ambil teks pesan dari kamus 'translations' berdasarkan 'messageKey'.
     let message = translations[currentLang][messageKey] || 'Pesan tidak ditemukan';
 
     // Logika untuk mengganti placeholder seperti {{username}}
@@ -506,10 +510,10 @@ function showToast(messageKey, type = 'success', data = {}) {
     }
 
     const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
+    toast.className = `toast ${type}`; // Beri class agar bisa di-styling oleh CSS (misal: 'toast success').
     toast.textContent = message;
 
-    toastContainer.appendChild(toast);
+    toastContainer.appendChild(toast); // Tampilkan notifikasi tersebut di halaman.
 
     // Hapus toast setelah 3 detik
     setTimeout(() => {
@@ -517,12 +521,26 @@ function showToast(messageKey, type = 'success', data = {}) {
     }, 3000);
 }
 
+// fungsi ngecek status login
 function checkLoginStatus() {
+    // Ambil data 'isLoggedIn' dari localStorage. Jika tidak ada, hasilnya akan 'null'. '=== 'true'' akan mengubahnya menjadi boolean (true/false).
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    // Ambil nama pengguna dari localStorage. Jika tidak ada, gunakan 'Pengguna' sebagai nilai default.
     const username = localStorage.getItem('username') || 'Pengguna';
-    return { isLoggedIn, username };
+    return { isLoggedIn, username }; // kembalikan dalam bentuk objek.
 }
 
+// fungsi mendapatkan alamat pengguna saat ini
+function getCurrentUserAddress() {
+    const { isLoggedIn, username } = checkLoginStatus();
+    if (!isLoggedIn) return null;
+
+    const allUsers = getLocalStorage('userAccounts', []);
+    const currentUser = allUsers.find(user => user.username === username);
+    return currentUser ? currentUser.address : null;
+}
+
+// fungsi menghapus semua element anak (solus dari innerHTML = '' yang tidak disarankan )
 function clearContainer(element) {
     while (element.firstChild) {
         element.removeChild(element.firstChild);
@@ -532,26 +550,29 @@ function clearContainer(element) {
 // --- Utility Local Storage Helper ---
 function getLocalStorage(key, defaultValue = null) {
     try {
-        const value = localStorage.getItem(key);
-        return value ? JSON.parse(value) : defaultValue;
+        const value = localStorage.getItem(key); // Ambil data mentah 
+        return value ? JSON.parse(value) : defaultValue; // Jika ada data, coba ubah dari string JSON menjadi objek/array. Jika tidak ada, kembalikan nilai default.
     } catch {
-        return defaultValue;
+        return defaultValue; // Jika terjadi error saat JSON.parse (misal: datanya bukan JSON), kembalikan nilai default agar aplikasi tidak crash.
     }
 }
 
+// fungsi untuk menyimpan data ke localStorage
 function setLocalStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 }
 
+// fungsi untuk menghapus data login dari localStorage
 function logoutUser() {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('username');
-    window.location.reload();
+    window.location.reload(); // Muat ulang halaman agar semua tampilan (seperti menu header) diperbarui.
 }
 
+// fungsi untuk validasi form
 function validateForm(form) {
-    let isValid = true;
-    const inputs = form.querySelectorAll('input[required]');
+    let isValid = true; //  Asumsikan form valid di awal.
+    const inputs = form.querySelectorAll('input[required]'); //  Ambil semua input yang wajib diisi.
 
     // Hapus semua status error sebelumnya
     form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
@@ -562,7 +583,7 @@ function validateForm(form) {
         if (input.type === 'radio') return;
 
         if (!input.value.trim()) {
-            isValid = false;
+            isValid = false; // ...tandai form sebagai tidak valid...
             showValidationError(input, 'validation-required');
         }
 
@@ -588,6 +609,7 @@ function validateForm(form) {
     return isValid;
 }
 
+// fungsi untuk menampilkan pesan error validasi
 function showValidationError(inputElement, messageKey) {
     inputElement.classList.add('is-invalid');
     const errorMessage = document.createElement('p');
@@ -599,6 +621,7 @@ function showValidationError(inputElement, messageKey) {
     inputElement.parentNode.appendChild(errorMessage);
 }
 
+// fungsi untuk membuat card produk skeleton, digunakan saat data produk belum tersedia (lagi loading)
 function createSkeletonCard() {
     const cardLink = document.createElement('div');
     cardLink.className = 'product-card-link'; // Gunakan div agar tidak bisa diklik
@@ -646,7 +669,7 @@ function updateAccountMenu() {
         userProfileButton.className = 'user-profile';
         userProfileButton.setAttribute('aria-haspopup', 'true');    // (Aksesibilitas) Memberitahu screen reader bahwa tombol ini punya menu pop-up.
         userProfileButton.setAttribute('aria-expanded', 'false');   // (Aksesibilitas) Memberitahu screen reader bahwa menu awalnya tertutup.
-        
+
         const userIcon = document.createElement('img');             // Membuat elemen <img> untuk ikon.
         userIcon.src = '/assets/logo-akun-terang.png';              // Mengatur sumber file gambar ikon.
         userIcon.alt = 'Akun';                                      // Teks alternatif jika gambar gagal dimuat.
@@ -658,8 +681,8 @@ function updateAccountMenu() {
         userProfileButton.appendChild(userIcon);                    // Memasukkan ikon <img> ke dalam <button>.
         userProfileButton.appendChild(userNameSpan);                // Memasukkan nama <span> ke dalam <button>.
 
-         // --- Membuat Menu Dropdown yang Tersembunyi ---
-        const dropdownContent = document.createElement('div');       
+        // --- Membuat Menu Dropdown yang Tersembunyi ---
+        const dropdownContent = document.createElement('div');
         dropdownContent.className = 'dropdown-content'; // Memberi class untuk styling (termasuk menyembunyikannya di awal).
         dropdownContent.id = 'user-dropdown';
 
@@ -680,13 +703,13 @@ function updateAccountMenu() {
         translateUI(currentLang); // Menerjemahkan teks di dalam menu dropdown.
 
         logoutButton.addEventListener('click', () => { // Saat tombol "Keluar" diklik...
-            logoutUser(); 
+            logoutUser();
         });
 
         userProfileButton.addEventListener('click', (event) => { // Saat tombol profil utama diklik..
             event.stopPropagation(); // Mencegah event 'click' menyebar ke elemen lain (seperti 'window')
             dropdownContent.classList.toggle('show'); // Toggle (tambah/hapus) class "show" pada dropdown untuk memicu animasi CSS.
-            const isExpanded = dropdownContent.classList.contains('show') ;
+            const isExpanded = dropdownContent.classList.contains('show');
             userProfileButton.setAttribute('aria-expanded', isExpanded);
         });
 
@@ -714,8 +737,8 @@ function updateAccountMenu() {
 
 function updateMobileNavState() {
     const { isLoggedIn } = checkLoginStatus();
-    const loggedOutItems = document.querySelectorAll('.mobile-only-logged-out');
-    const loggedInItems = document.querySelectorAll('.mobile-only-logged-in');
+    const loggedOutItems = document.querySelectorAll('.mobile-only-logged-out'); // Cari dan kumpulkan semua elemen <li> yang HANYA untuk pengguna yang BELUM login.
+    const loggedInItems = document.querySelectorAll('.mobile-only-logged-in'); // Cari dan kumpulkan semua elemen <li> yang HANYA untuk pengguna yang SUDAH login.
 
     // Tampilkan/sembunyikan item menu berdasarkan status login
     if (isLoggedIn) {
@@ -728,7 +751,7 @@ function updateMobileNavState() {
 
     // Kelola teks pada pengalih bahasa mobile
     const mobileLangSwitcherLink = document.querySelector('#mobile-lang-switcher a');
-    if (mobileLangSwitcherLink) {
+    if (mobileLangSwitcherLink) { // atur teksnya menjadi kebalikan dari bahasa saat ini.
         mobileLangSwitcherLink.textContent = (currentLang === 'id') ? 'English' : 'Bahasa Indonesia';
     }
 }
@@ -745,12 +768,12 @@ function displayAccountInfo() {
         return;
     }
 
-    const allUsers = getLocalStorage('userAccounts', [])
-    const currentUser = allUsers.find(user => user.username === username);
+    const allUsers = getLocalStorage('userAccounts', []) // Ambil seluruh data akun pengguna dari localStorage.
+    const currentUser = allUsers.find(user => user.username === username); // Mencari akun pengguna yang sesuai dengan nama pengguna yang sedang login.
 
     if (!currentUser) {
         console.error("User data not found for logged in user!");
-        // Opsional: lakukan logout jika data user tidak ditemukan
+        // logout jika data user tidak ditemukan
         logoutUser();
         return;
     }
@@ -768,6 +791,7 @@ function displayAccountInfo() {
     const displayPostalcode = document.getElementById('display-postalcode');
     const displayPhone = document.getElementById('display-phone');
 
+    // logika jika belum di isi, maka menambahkan teks "Belum diisi" atau terjemahan yang sesuai.
     if (displayFullname) displayFullname.textContent = currentUser.address?.fullname || translations[currentLang]['not-filled'] || 'Belum diisi';
     if (displayAddress) displayAddress.textContent = currentUser.address?.fullAddress || translations[currentLang]['not-filled'] || 'Belum diisi';
     if (displayCity) displayCity.textContent = currentUser.address?.city || translations[currentLang]['not-filled'] || 'Belum diisi';
@@ -793,14 +817,14 @@ function displayAccountInfo() {
     translateUI(currentLang); // Terjemahkan teks "Belum diisi" jika ada.
 }
 
-function initAccountPage() {
+function initAccountPage() { // fungsi untuk tombol edit, batal, dan simpan
     const editAddressBtn = document.getElementById('edit-address-btn');
     const addressForm = document.getElementById('address-form');
     const cancelEditBtn = document.getElementById('cancel-edit-btn');
 
     if (!editAddressBtn || !addressForm || !cancelEditBtn) return;
 
-    if (editAddressBtn && addressForm) {
+    if (editAddressBtn && addressForm) { // logika tombol edit alamat
         editAddressBtn.addEventListener('click', () => {
             addressForm.classList.add('visible-block'); // Tampilkan formulir
             editAddressBtn.classList.add('hidden-element'); // Sembunyikan tombol edit
@@ -808,7 +832,7 @@ function initAccountPage() {
         });
     }
 
-    if (cancelEditBtn && addressForm && editAddressBtn) {
+    if (cancelEditBtn && addressForm && editAddressBtn) { // logika tombol batal
         cancelEditBtn.addEventListener('click', () => {
             addressForm.classList.remove('visible-block'); // Sembunyikan formulir
             editAddressBtn.classList.remove('hidden-element'); // Tampilkan tombol edit
@@ -816,7 +840,7 @@ function initAccountPage() {
         });
     }
 
-    if (addressForm) {
+    if (addressForm) { // logika nyimpan form
         addressForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -828,7 +852,7 @@ function initAccountPage() {
                 return; // Hentikan jika form tidak valid
             }
 
-            // 1. Nonaktifkan tombol dan ubah teksnya
+            // Nonaktifkan tombol dan ubah teksnya
             submitButton.disabled = true;
             submitButton.textContent = translations[currentLang]['btn-saving'];
 
@@ -838,7 +862,7 @@ function initAccountPage() {
                 let allUsers = getLocalStorage('userAccounts', []);
                 const currentUserIndex = allUsers.findIndex(user => user.username === username);
 
-                if (currentUserIndex !== -1) {
+                if (currentUserIndex !== -1) { // perbarui objek 'address' milik pengguna tersebut dengan nilai-nilai baru dari form.
                     allUsers[currentUserIndex].address = {
                         fullname: addressForm.querySelector('#edit-fullname').value.trim(),
                         fullAddress: addressForm.querySelector('#edit-address').value.trim(),
@@ -858,10 +882,9 @@ function initAccountPage() {
                     showToast('toast-address-error', 'error');
                 }
 
-                // 2. Aktifkan kembali tombol dan kembalikan teks aslinya
+                // Aktifkan kembali tombol dan kembalikan teks aslinya
                 submitButton.disabled = false;
                 submitButton.textContent = translations[currentLang][originalButtonKey];
-                // ▲▲▲ AKHIR DARI LOGIKA BARU ▲▲▲
             }, 500); // Jeda 500ms untuk simulasi
         });
     }
@@ -881,14 +904,14 @@ const cartDarkPath = '/assets/logo-keranjang-terang.png'; // for dark theme
  * @param {string} theme - The theme to apply ('dark' or 'light').
  */
 function applyTheme(theme) {
-    if (theme === 'dark') {
+    if (theme === 'dark') {  // Jika tema yang diminta adalah 'dark' Tambahkan class 'dark-mode' ke body
         body.classList.add('dark-mode');
-        if (themeIcon) themeIcon.src = sunIconPath;
-        if (cartIcon) cartIcon.src = cartDarkPath;
-    } else {
+        if (themeIcon) themeIcon.src = sunIconPath; // Ganti ikon tombol menjadi matahari
+        if (cartIcon) cartIcon.src = cartDarkPath; // Ganti ikon keranjang ke versi terang
+    } else { // Jika tema yang diminta adalah 'light' Hapus class 'dark-mode' dari body
         body.classList.remove('dark-mode');
-        if (cartIcon) cartIcon.src = cartLightPath;
-        if (themeIcon) themeIcon.src = moonIconPath;
+        if (cartIcon) cartIcon.src = cartLightPath; // Ganti ikon keranjang ke versi gelap
+        if (themeIcon) themeIcon.src = moonIconPath; // Ganti ikon tombol menjadi bulan
     }
 }
 
@@ -976,12 +999,12 @@ function translateUI(lang) {
     // terjemahan untuk elemen-elemen yang punya atribut data-translate-key
     document.querySelectorAll('[data-translate-key]').forEach(el => {
         const key = el.dataset.translateKey; // Ambil kunci terjemahan 
-        if (translations[lang] && translations[lang][key]) { 
+        if (translations[lang] && translations[lang][key]) {
             const translatedText = translations[lang][key]; // Cari terjemahannya di kamus
             // Cek apakah elemennya input (untuk placeholder), punya title, atau teks biasa
             if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
                 el.placeholder = translatedText;
-            // Jika elemen punya title, ubah title-nya
+                // Jika elemen punya title, ubah title-nya
             } else if (el.hasAttribute('title')) {
                 el.title = translatedText;
             } else {
@@ -1028,25 +1051,20 @@ function translateUI(lang) {
 // =================================================================================
 // == fitur : kartu produk dinamis dan rekomendasi produk ==
 // =================================================================================
-
-/**
- * Creates and returns a single product card HTML element.
- * @param {object} product - A single product object from the API data.
- * @param {string} lang - The current language ('id' or 'en').
- * @returns {HTMLElement} The product card link element.
- */
+// fungsi untuk membuat kartu produk dinamis
 function createProductCard(product, lang) {
-    const cardLink = document.createElement('a');
+    const cardLink = document.createElement('a'); // Buat elemen <a> sebagai pembungkus utama agar seluruh kartu bisa diklik.
     cardLink.className = 'product-card-link';
 
+    // Tentukan path URL yang benar (berbeda untuk index.html dan halaman di dalam /html).
     const isIndexPage = window.location.pathname.endsWith('/index.html') || window.location.pathname === '/';
     cardLink.href = isIndexPage ? `html/detail.html?id=${product.id}` : `detail.html?id=${product.id}`;
 
-    const card = document.createElement('article');
+    const card = document.createElement('article'); // Buat elemen <article> untuk kartu produk (sesuai tag semantik).
     card.className = 'product-card';
 
     const image = document.createElement('img');
-    image.src = product.images[0];
+    image.src = product.images[0]; // Ambil gambar pertama dari array gambar produk.
     image.alt = product.titleId;
 
     image.onerror = () => {
@@ -1058,18 +1076,18 @@ function createProductCard(product, lang) {
     cardBody.className = 'product-card-body';
 
     const title = document.createElement('h3');
-    // 1. Simpan data terjemahan di dataset (untuk fungsi translateUI)
+    // Simpan data terjemahan di dataset (untuk fungsi translateUI)
     title.dataset.titleId = product.titleId;
     title.dataset.titleEn = product.titleEn;
-    // 2. Langsung isi teks sesuai bahasa saat ini
+    // Langsung isi teks sesuai bahasa saat ini
     title.textContent = lang === 'id' ? product.titleId : product.titleEn;
 
     const description = document.createElement('p');
     description.className = 'description';
-    // 1. Simpan data terjemahan di dataset
+    // Simpan data terjemahan di dataset
     description.dataset.descriptionId = product.descriptionId;
     description.dataset.descriptionEn = product.descriptionEn;
-    // 2. Langsung isi teks sesuai bahasa saat ini
+    // Langsung isi teks sesuai bahasa saat ini
     description.textContent = lang === 'id' ? product.descriptionId : product.descriptionEn;
 
     const cardFooter = document.createElement('div');
@@ -1096,39 +1114,39 @@ function createProductCard(product, lang) {
     cardLink.appendChild(card);
     return cardLink;
 }
-/**
- * Fetches and displays recommended products on the homepage.
- */
+
+// fungsi untuk menampilkan produk-produk yang direkomendasikan di halaman utama
 async function displayFeaturedProducts() {
     if (!productGrid) return;
 
     clearContainer(productGrid);
 
-    const loadingElement = document.createElement('p');
-    loadingElement.dataset.translateKey = 'loading-text';
-    productGrid.appendChild(loadingElement);
-    translateUI(currentLang);
+    // Tampilkan 8 kartu skeleton sebagai placeholder saat data sedang dimuat.
+    for (let i = 0; i < 8; i++) {
+        productGrid.appendChild(createSkeletonCard());
+    }
 
     try {
-        await ensureProductsLoaded();
-
+        await ensureProductsLoaded(); // 'await' akan "menjeda" eksekusi di sini sampai data benar-benar datang.
+        // Setelah data produk sudah ada, filter produk yang direkomendasikan
         const recommendedProducts = allProductsData.filter(p => p.isRecommended === true);
 
-        clearContainer(productGrid);
+        clearContainer(productGrid); // Bersihkan lagi wadah untuk menghapus kartu-kartu skeleton.
 
         recommendedProducts.forEach(product => {
-            const cardElement = createProductCard(product, currentLang);
+            const cardElement = createProductCard(product, currentLang); // buat kartu produk
             productGrid.appendChild(cardElement);
         });
 
         const cards = productGrid.querySelectorAll('.product-card-link');
         cards.forEach((card, index) => {
-            card.classList.add('animate');
+            card.classList.add('animate'); // Tambahkan class 'animate' untuk memicu animasi CSS
         });
 
         translateUI(currentLang);
 
     } catch (error) {
+        // Jika terjadi error saat mengambil data produk, tampilkan pesan error
         console.error('Failed to load products:', error);
 
         clearContainer(productGrid);
@@ -1140,9 +1158,7 @@ async function displayFeaturedProducts() {
     }
 }
 
-/**
- * Fetches and displays all products on the products page.
- */
+// fungsi menampilkan semua produk di halaman produk
 async function displayAllProducts() {
     const allProductsGrid = document.getElementById('all-products-grid');
     const categoryFiltersContainer = document.getElementById('category-filters');
@@ -1170,20 +1186,20 @@ async function displayAllProducts() {
             categoryFiltersContainer.appendChild(button);
         });
 
-        // --- FUNGSI BARU UNTUK MENG-UPDATE TAMPILAN ---
+        // --- FUNGSI UNTUK MENG-UPDATE TAMPILAN ---
         const updateProductsDisplay = () => {
             const selectedCategory = categoryFiltersContainer.querySelector('button.active').dataset.category;
             const sortBy = sortDropdown.value;
 
-            // 1. FILTER PRODUK BERDASARKAN KATEGORI
+            // FILTER PRODUK BERDASARKAN KATEGORI
             const filteredProducts = selectedCategory === 'Semua' ?
                 allProductsData :
                 allProductsData.filter(p => p.category === selectedCategory);
 
-            // 2. BUAT SALINAN BARU UNTUK DISORTIR
+            // BUAT SALINAN BARU UNTUK DISORTIR
             let productsToDisplay = [...filteredProducts];
 
-            // 3. LOGIKA SORTIR BARU YANG LEBIH LENGKAP
+            // LOGIKA SORTIR BARU YANG LEBIH LENGKAP
             if (sortBy === 'price-asc') {
                 productsToDisplay.sort((a, b) => a.price - b.price);
             } else if (sortBy === 'price-desc') {
@@ -1197,12 +1213,9 @@ async function displayAllProducts() {
             } else if (sortBy === 'stock-asc') {
                 productsToDisplay.sort((a, b) => a.stock - b.stock);
             } else if (sortBy === 'location-asc' || sortBy === 'location-desc') {
-                const { isLoggedIn, username } = checkLoginStatus();
-                const allUsers = getLocalStorage('userAccounts', []);
-                const currentUser = allUsers.find(user => user.username === username);
-                const userAddress = currentUser ? currentUser.address : null;
+                const userAddress = getCurrentUserAddress();
 
-                if (isLoggedIn && userAddress && userAddress.fullAddress) {
+                if (userAddress && userAddress.fullAddress) {
                     productsToDisplay.sort((a, b) => {
                         const costA = calculateShippingCost(a.address, userAddress);
                         const costB = calculateShippingCost(b.address, userAddress);
@@ -1214,7 +1227,7 @@ async function displayAllProducts() {
                 }
             }
 
-            // 4. RENDER HASIL AKHIR
+            // RENDER HASIL AKHIR
             renderProducts(productsToDisplay);
         };
 
@@ -1263,9 +1276,7 @@ async function displayAllProducts() {
     }
 }
 
-/**
- * Fetches and displays the details of a single product.
- */
+// fungsi menampilkan detail produk
 async function displayProductDetail() {
     const productImagesContainer = document.getElementById('product-images');
     const productFullAddressSpan = document.getElementById('product-full-address');
@@ -1273,25 +1284,24 @@ async function displayProductDetail() {
     if (!productImagesContainer || !productFullAddressSpan || !productSellerNameSpan) return;
 
     try {
-        const urlParams = new URLSearchParams(window.location.search);
+        const urlParams = new URLSearchParams(window.location.search); // Baca URL saat ini untuk mendapatkan parameter.
         const productId = urlParams.get('id');
-        if (!productId) throw new Error("Product ID not found in URL");
+        if (!productId) throw new Error("Product ID not found in URL"); // Jika tidak ada 'id' di URL, lemparkan error untuk menghentikan proses.
 
         await ensureProductsLoaded();
 
-        const product = allProductsData.find(p => p.id == productId);
-        if (!product) throw new Error("Product not found");
+        const product = allProductsData.find(p => p.id == productId); // Cari satu produk spesifik di dalam 'allProductsData' yang ID-nya cocok dengan 'productId' dari URL.
+        if (!product) throw new Error("Product not found"); // Jika produk dengan ID tersebut tidak ditemukan, lemparkan error.
 
         document.getElementById('add-to-cart-btn').dataset.productId = product.id;
 
-        // Populate product details
-        // document.getElementById('product-category').textContent = product.category;
+        // Isi kategori, harga, dan stok produk.
         const categoryText = translations[currentLang]?.categories?.[product.category] || product.category;
         document.getElementById('product-category').textContent = categoryText;
         document.getElementById('product-price').textContent = `Rp ${parseInt(product.price).toLocaleString('id-ID')}`;
         document.getElementById('product-stock').textContent = `Stok: ${product.stock}`;
 
-        // Translate title and description
+        // Isi judul tab browser, judul halaman, dan deskripsi produk sesuai bahasa yang dipilih.
         if (currentLang === 'en') {
             document.title = `${product.titleEn} - MineCart`;
             document.getElementById('product-title').textContent = product.titleEn;
@@ -1302,8 +1312,7 @@ async function displayProductDetail() {
             document.getElementById('product-description').textContent = product.descriptionId;
         }
 
-        // START MODIFICATION FOR PRODUCT ADDRESS AND SELLER/STORE NAME IN JS
-        // Asumsi: Nama toko adalah bagian pertama dari string address sebelum koma pertama
+        // Logika untuk memisahkan nama toko dari alamat lengkap.
         const fullAddress = product.address || '';
         const firstCommaIndex = fullAddress.indexOf(',');
         let sellerName = translations[currentLang]['not-available'] || 'Tidak tersedia';
@@ -1317,22 +1326,24 @@ async function displayProductDetail() {
         productSellerNameSpan.textContent = sellerName;
         productFullAddressSpan.textContent = product.address || translations[currentLang]['not-available'] || 'Tidak tersedia';
 
-        // Populate image gallery
+        // --- Membuat Galeri Gambar ---
         clearContainer(productImagesContainer);
         const mainImage = document.createElement('img');
         mainImage.src = product.images[0];
         mainImage.alt = product.titleId;
 
+        // Buat <div> untuk menampung gambar-gambar kecil (thumbnail).
         const thumbnailContainer = document.createElement('div');
         thumbnailContainer.className = 'thumbnails';
 
+        // Lakukan perulangan untuk setiap URL gambar yang dimiliki produk.
         product.images.forEach((imageUrl, index) => {
             const thumb = document.createElement('img');
             thumb.src = imageUrl;
             thumb.alt = `${product.titleId} - Gambar ${index + 1}`;
-            if (index === 0) thumb.classList.add('active');
+            if (index === 0) thumb.classList.add('active'); // ... (atur alt dan beri class 'active' jika ini gambar pertama) ...
 
-            thumb.addEventListener('click', () => {
+            thumb.addEventListener('click', () => { // Saat thumbnail diklik, ganti gambar utama dengan gambar dari thumbnail ini.
                 mainImage.src = thumb.src;
                 thumbnailContainer.querySelectorAll('img').forEach(t => t.classList.remove('active'));
                 thumb.classList.add('active');
@@ -1363,7 +1374,6 @@ async function displayProductDetail() {
 
                 const cards = relatedProductsGrid.querySelectorAll('.product-card-link');
                 cards.forEach((card, index) => {
-                    card.style.animationDelay = `${index * 100}ms`;
                     card.classList.add('animate');
                 });
             } else {
@@ -1383,10 +1393,7 @@ async function displayProductDetail() {
     }
 }
 
-
-/**
-* Fetches, filters, and displays search results on the search page.
-*/
+// fungsi menampilkan hasil pencarian produk
 async function displaySearchResults() {
     const searchResultsGrid = document.getElementById('search-results-grid');
     const queryDisplay = document.getElementById('search-query-display');
@@ -1395,8 +1402,8 @@ async function displaySearchResults() {
     if (!searchResultsGrid || !queryDisplay) return;
 
     try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const query = urlParams.get('q');
+        const urlParams = new URLSearchParams(window.location.search); // Ambil parameter dari URL
+        const query = urlParams.get('q'); // Ambil nilai dari parameter 'q'
 
         // Jika tidak ada query di URL, tampilkan pesan
         if (!query) {
@@ -1412,7 +1419,7 @@ async function displaySearchResults() {
         const titlePrefix = translations[currentLang]['page-title-search'];
 
         queryDisplay.textContent = query;
-        document.title = `${titlePrefix} "${query}" - MineCart`;
+        document.title = `${titlePrefix} "${query}" - MineCart`; // Set judul halaman menyesuaikan bahasa
 
         // Tampilkan pesan loading
         const loadingEl = document.createElement('p');
@@ -1426,7 +1433,7 @@ async function displaySearchResults() {
 
         const lowerCaseQuery = query.toLowerCase();
         const results = allProductsData.filter(product =>
-            // Menambahkan pengecekan (product.titleId && ...) agar lebih aman
+            // Menambahkan pengecekan produk supaya tidak case sensitive agar lebih aman
             (product.titleId && product.titleId.toLowerCase().includes(lowerCaseQuery)) ||
             (product.titleEn && product.titleEn.toLowerCase().includes(lowerCaseQuery)) ||
             (product.descriptionId && product.descriptionId.toLowerCase().includes(lowerCaseQuery)) ||
@@ -1437,21 +1444,21 @@ async function displaySearchResults() {
         // Kosongkan grid sebelum menampilkan hasil
         clearContainer(searchResultsGrid);
 
-        if (results.length > 0) {
+        if (results.length > 0) { // Jika ada hasil pencarian, buat kartu berulang supaya nampil semua
             results.forEach(product => {
                 const cardElement = createProductCard(product, currentLang);
                 searchResultsGrid.appendChild(cardElement);
             });
 
             const cards = searchResultsGrid.querySelectorAll('.product-card-link');
-            cards.forEach((card, index) => {
+            cards.forEach((card, index) => { // memunculkan kartu produk halus dengan animasi
                 card.classList.add('animate');
             });
         } else {
             // Jika tidak ada hasil
             const noResultEl = document.createElement('p');
-            noResultEl.id = 'no-results-message'; // <-- Beri ID unik
-            noResultEl.dataset.query = query;     // <-- Simpan query pencarian
+            noResultEl.id = 'no-results-message'; // Beri ID unik
+            noResultEl.dataset.query = query;     // Simpan query pencarian
             const noResultText = translations[currentLang]['no-search-results'] || 'Tidak ada hasil';
             noResultEl.textContent = `${noResultText} "${query}".`;
             searchResultsGrid.appendChild(noResultEl);
@@ -1472,33 +1479,27 @@ async function displaySearchResults() {
 // =================================================================================
 // == Fitur : Keranjang belanja dan preview keranjang ==
 // =================================================================================
-/**
-     * Adds a product to the cart or increments its quantity if it already exists.
-     * @param {string} productId - The ID of the product to add.
-     */
-// Ganti fungsi addToCart Anda
+// fungsi untuk menambahkan barang ke keranjang
 function addToCart(productId) {
     const { username } = checkLoginStatus();
     const userCartKey = `cart_${username}`; // Kunci dinamis: 'cart_namauser'
 
-    let cart = getLocalStorage(userCartKey, []);
-    const existingProduct = cart.find(item => item.id === productId);
+    let cart = getLocalStorage(userCartKey, []); // Ambil data keranjang saat ini dari localStorage. Jika kosong, mulai dengan array kosong [].
+    const existingProduct = cart.find(item => item.id === productId); // cek jika barang sudah ada
 
-    if (existingProduct) {
+    if (existingProduct) { // jika ada tambah kuantitasnya
         existingProduct.quantity++;
-    } else {
+    } else { // jika belum, tambahkan objek produk baru ke dalam array keranjang dengan kuantitas 1.
         cart.push({ id: productId, quantity: 1 });
     }
 
-    setLocalStorage(userCartKey, cart);
-    showToast('toast-add-success', 'success');
-    updateCartCounter();
-    updateCartPreview();
+    setLocalStorage(userCartKey, cart); // simpan
+    showToast('toast-add-success', 'success'); // notif
+    updateCartCounter(); // perbarui angka merah
+    updateCartPreview(); // perbarui pratinjau untuk hover di header
 }
 
-/**
- * Updates the cart preview dropdown in the header.
- */
+// fungsi untuk konten pratinjau keranjang belanja di header
 async function updateCartPreview() {
     // Pastikan data produk dimuat HANYA jika pengguna sudah login
     const { isLoggedIn, username } = checkLoginStatus();
@@ -1524,19 +1525,21 @@ async function updateCartPreview() {
         const cart = getLocalStorage(userCartKey, []);
 
         const titleText = translations[currentLang]['cart-title'];
+        // Atur judul pratinjau menjadi "Keranjang (jumlah item)".
         previewTitle.textContent = `${titleText} (${cart.length})`;
 
+        // Atur agar link "Lihat" mengarah ke halaman keranjang.
         viewCartLink.href = cartPagePath;
         viewCartLink.dataset.translateKey = 'view-cart-btn';
         viewCartLink.textContent = translations[currentLang]['view-cart-btn'];
 
-        if (cart.length === 0) {
+        if (cart.length === 0) { // Jika keranjang kosong, buat dan tampilkan pesan "Keranjang Anda kosong".
             const emptyText = document.createElement('p');
             emptyText.className = 'empty-preview';
             emptyText.dataset.translateKey = 'empty-cart-message';
             emptyText.textContent = translations[currentLang]['empty-cart-message'];
             previewItemsContainer.appendChild(emptyText);
-        } else {
+        } else { // Jika ada item, ambil 3 yang terakhir ditambahkan.
             const recentItems = [...cart].reverse().slice(0, 3);
             recentItems.forEach(item => {
                 const product = allProductsData.find(p => p.id == item.id);
@@ -1562,49 +1565,42 @@ async function updateCartPreview() {
         // --- LOGIKA BARU UNTUK PENGGUNA YANG BELUM LOGIN ---
         previewTitle.textContent = translations[currentLang]['cart-title']; // Tampilkan judul tanpa jumlah
 
-        const loginMessage = document.createElement('p');
+        const loginMessage = document.createElement('p'); // Buat dan tampilkan pesan "Anda harus masuk...".
         loginMessage.className = 'empty-preview';
         loginMessage.dataset.translateKey = 'cart-must-login';
         loginMessage.textContent = translations[currentLang]['cart-must-login'];
         previewItemsContainer.appendChild(loginMessage);
 
-        viewCartLink.href = loginPagePath;
+        viewCartLink.href = loginPagePath; // Ubah link "Lihat Keranjang" menjadi tombol "Masuk".
         viewCartLink.dataset.translateKey = 'login';
         viewCartLink.textContent = translations[currentLang]['login'];
     }
 }
 
-/**
-* Updates the cart counter icon in the header.
-*/
-// Ganti fungsi updateCartCounter Anda
+// fungsi menampilkan ikon merah
 function updateCartCounter() {
-    const { isLoggedIn, username } = checkLoginStatus();
+    const { isLoggedIn, username } = checkLoginStatus(); // Cek status login pengguna
     const counterElement = document.getElementById('cart-counter');
     if (!counterElement) return;
 
     if (!isLoggedIn) {
         // Jika tidak login, sembunyikan counter
         counterElement.classList.remove('visible');
-        counterElement.textContent = '0';
+        counterElement.textContent = '0'; // Setel ke 0
         return;
     }
 
-    const userCartKey = `cart_${username}`;
-    const cart = getLocalStorage(userCartKey, []);
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const userCartKey = `cart_${username}`; // buat kunci unik untuk keranjang pengguna
+    const cart = getLocalStorage(userCartKey, []); // Ambil data keranjang dari localStorage. Jika kosong, anggap sebagai array kosong [].
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0); // Hitung total kuantitas semua item di dalam keranjang.
 
+    // Atur visibilitas counter: jika total item lebih dari 0, tambahkan class 'visible' agar muncul. Jika tidak, hapus class-nya agar tersembunyi.
     counterElement.textContent = totalItems;
     counterElement.classList.toggle('visible', totalItems > 0);
 }
 
-/**
-* FUNGSI BARU: Mengubah kuantitas atau menghapus item dari keranjang
-* @param {string} productId - ID produk yang akan diubah
-* @param {number} change - Jumlah perubahan (+1, -1, atau 0 untuk hapus)
-*/
-// GANTI SEMUA FUNGSI LAMA DENGAN BLOK BARU INI
 
+// FUNGSI Mengubah kuantitas atau menghapus item dari keranjang
 function updateCart(productId, change) {
     const { username } = checkLoginStatus();
     const userCartKey = `cart_${username}`;
@@ -1629,9 +1625,8 @@ function updateCart(productId, change) {
     saveSelectedCartItems();
 }
 
-/**
- * Menyelaraskan status checkbox "Select All" berdasarkan checkbox item.
- */
+
+// fungsi Menyelaraskan status checkbox "Select All" berdasarkan checkbox item.
 function syncSelectAllCheckbox() {
     const selectAllCheckbox = document.getElementById('select-all-checkbox');
     const itemsContainer = document.getElementById('cart-items-container');
@@ -1672,13 +1667,11 @@ function updateCartSummary() {
     const cart = getLocalStorage(userCartKey, []);
 
     // --- Ambil alamat pengguna yang sedang login dari localStorage ---
-    const allUsers = getLocalStorage('userAccounts', [])
-    const currentUser = allUsers.find(user => user.username === username);
-    const userAddress = currentUser ? currentUser.address : null; // Dapatkan objek alamat pengguna
+    const userAddress = getCurrentUserAddress();
 
     // Jika user belum mengisi alamat, kita tidak bisa menghitung ongkir spesifik
     // Anda bisa memilih untuk memberikan pesan error, biaya flat, atau 0
-    if (!userAddress || !userAddress.fullAddress || !userAddress.city || !userAddress.postalCode) {
+    if (!userAddress || !userAddress.fullAddress) {
         const warningMessage = document.createElement('p');
         warningMessage.classList.add('warning-message'); // Beri warna peringatan
         warningMessage.dataset.translateKey = 'shipping-address-missing';
@@ -1771,12 +1764,9 @@ function updateCartSummary() {
             return;
         }
 
-        // --- Cek apakah alamat pengguna sudah lengkap ---
-        const allUsers = getLocalStorage('userAccounts', [])
-        const currentUser = allUsers.find(user => user.username === username);
-        const userAddress = currentUser ? currentUser.address : null;
+        const userAddress = getCurrentUserAddress(); // --- Cek apakah alamat pengguna sudah lengkap ---
 
-        if (!userAddress || !userAddress.fullAddress || !userAddress.city || !userAddress.postalCode) {
+        if (!userAddress || !userAddress.fullAddress) {
             showToast('toast-checkout-no-address', 'error');
             // Opsional: Langsung arahkan ke halaman akun untuk melengkapi alamat
             setTimeout(() => { window.location.href = '../html/account.html'; }, 2000);
@@ -1795,18 +1785,16 @@ function updateCartSummary() {
     translateUI(currentLang);
 }
 
-/**
- * Menyimpan ID produk yang sedang terceklis di keranjang ke localStorage.
- */
 function saveSelectedCartItems() {
     const { isLoggedIn, username } = checkLoginStatus();
     if (!isLoggedIn) return;
 
-    const selectedProductIds = getSelectedProductIds(); // Fungsi ini sudah ada
-    const selectedItemsKey = `selectedItems_${username}`;
-    setLocalStorage(selectedItemsKey, selectedProductIds);
+    const selectedProductIds = getSelectedProductIds(); // untuk mendapatkan daftar ID produk yang sedang dicentang.
+    const selectedItemsKey = `selectedItems_${username}`; // Buat kunci unik untuk menyimpan daftar pilihan pengguna
+    setLocalStorage(selectedItemsKey, selectedProductIds); // simpan
 }
 
+// fungsi menampilkan keranjang
 async function displayCart() {
     const cartItemsContainer = document.getElementById('cart-items-container');
     const cartSummaryContainer = document.getElementById('cart-summary');
@@ -1848,7 +1836,7 @@ async function displayCart() {
 
     clearContainer(cartItemsContainer);
 
-    if (cart.length === 0) {
+    if (cart.length === 0) { // tampilkan pesan "Keranjang Anda kosong." dan sembunyikan bagian lain.
         const emptyCartMessage = document.createElement('p');
         emptyCartMessage.textContent = translations[currentLang]['empty-cart-message'] || 'Keranjang Anda kosong.';
         cartItemsContainer.appendChild(emptyCartMessage);
@@ -1868,7 +1856,7 @@ async function displayCart() {
     try {
         await ensureProductsLoaded();
 
-        cart.forEach(cartItem => {
+        cart.forEach(cartItem => { // Cari detail produk lengkap (gambar, nama, harga) berdasarkan ID.
             const productDetail = allProductsData.find(p => p.id == cartItem.id);
             if (productDetail) {
                 // Membuat semua elemen dengan createElement
@@ -1881,6 +1869,7 @@ async function displayCart() {
                 checkbox.type = 'checkbox';
                 checkbox.dataset.productId = productDetail.id;
                 const userCartKey = `cart_${username}`;
+                // Baca pilihan yang tersimpan di localStorage untuk menentukan apakah checkbox harus dicentang atau tidak.
                 const selectedItemsKey = `selectedItems_${username}`;
                 const selectedItems = getLocalStorage(selectedItemsKey, cart.map(item => item.id)); // Default pilih semua jika belum ada data
 
@@ -1950,9 +1939,9 @@ async function displayCart() {
             }
         });
 
-        updateCartSummary();
-        translateUI(currentLang);
-        syncSelectAllCheckbox();
+        updateCartSummary(); // tampilkan ringkasan belanja
+        translateUI(currentLang); // terjemahkan
+        syncSelectAllCheckbox(); // sinkronkan status pilih semua
 
         // Pasang event listener untuk "Pilih Semua"
         if (selectAllCheckbox) {
@@ -1975,27 +1964,27 @@ async function processOrder(orderedItems, username) {
     let hasStockIssues = false;
 
     orderedItems.forEach(orderedItem => {
-        const productIndex = allProductsData.findIndex(p => p.id == orderedItem.id);
-        if (productIndex !== -1) {
-            if (allProductsData[productIndex].stock >= orderedItem.quantity) {
-                allProductsData[productIndex].stock -= orderedItem.quantity;
+        const productIndex = allProductsData.findIndex(p => p.id == orderedItem.id); // Cari produk yang sesuai di dalam data utama 'allProductsData'.
+        if (productIndex !== -1) { // Jika produk ditemukan...
+            if (allProductsData[productIndex].stock >= orderedItem.quantity) { // cek apakah stok yang ada mencukupi jumlah yang dibeli.
+                allProductsData[productIndex].stock -= orderedItem.quantity; // Jika cukup, kurangi stoknya
             } else {
-                console.error(`Stok tidak cukup untuk produk ID: ${orderedItem.id}`);
+                console.error(`Stok tidak cukup untuk produk ID: ${orderedItem.id}`); // Jika tidak cukup, catat error dan tandai bahwa ada masalah stok.
                 hasStockIssues = true;
             }
         }
     });
 
     if (hasStockIssues) {
-        showToast('toast-stock-issue', 'error');
+        showToast('toast-stock-issue', 'error'); // notif stok tidak cukup
         return false; // Hentikan proses jika ada masalah stok
     }
 
     let savedStock = getLocalStorage('productStockData', {});
-    orderedItems.forEach(orderedItem => {
+    orderedItems.forEach(orderedItem => { // untuk memperbarui data stok yang akan disimpan.
         const updatedProduct = allProductsData.find(p => p.id == orderedItem.id);
         if (updatedProduct) {
-            savedStock[orderedItem.id] = updatedProduct.stock;
+            savedStock[orderedItem.id] = updatedProduct.stock; // Simpan jumlah stok yang BARU ke dalam objek 'savedStock'.
         }
     });
     setLocalStorage('productStockData', savedStock);
@@ -2011,10 +2000,12 @@ async function processOrder(orderedItems, username) {
     return true;
 }
 
+// fungsi untuk menampilkan di halaman checkout
 async function initCheckoutPage() {
     const checkoutPage = document.querySelector('.checkout-layout');
     if (!checkoutPage) return; // Hanya jalankan jika di halaman checkout
 
+    // Cek status login. Jika belum login, redirect ke halaman login.
     const { isLoggedIn, username } = checkLoginStatus();
     if (!isLoggedIn) {
         showToast('cart-must-login', 'error');
@@ -2022,9 +2013,9 @@ async function initCheckoutPage() {
         return;
     }
 
+    // Jika data ini tidak ada (misal: pengguna langsung membuka halaman checkout), redirect kembali ke keranjang.
     const selectedItemsJSON = sessionStorage.getItem('checkoutItems');
     const userAddressJSON = sessionStorage.getItem('checkoutUserAddress');
-
     if (!selectedItemsJSON || !userAddressJSON) {
         showToast('toast-checkout-data-missing', 'error');
         setTimeout(() => { window.location.href = '../html/cart.html'; }, 2000);
@@ -2044,6 +2035,7 @@ async function initCheckoutPage() {
         }
     }
 
+    // Tampilkan informasi alamat pengiriman di halaman.
     const shippingAddressDisplay = document.getElementById('shipping-address-display');
     if (shippingAddressDisplay) {
         document.getElementById('checkout-fullname').textContent = userAddress.fullname || '';
@@ -2053,9 +2045,9 @@ async function initCheckoutPage() {
         document.getElementById('checkout-postalcode').textContent = userAddress.postalCode || '';
     }
 
+    // Hitung ulang Subtotal dan Total Ongkir untuk semua item yang akan di-checkout.
     let subtotal = 0;
     let totalShippingCost = 0;
-
     selectedItems.forEach(cartItem => {
         const productDetail = allProductsData.find(p => p.id == cartItem.id);
         if (productDetail) {
@@ -2084,49 +2076,49 @@ async function initCheckoutPage() {
     renderCheckoutSummary(checkoutTotalSummary, checkoutState);
 
     const checkoutForm = document.getElementById('checkout-form');
-    if (checkoutForm) {
+    if (checkoutForm) { // Saat form di-submit (tombol "Selesaikan Pembayaran" diklik)...
         checkoutForm.addEventListener('submit', async (e) => {
             e.preventDefault(); // Mencegah halaman me-reload
 
-            // 1. Validasi apakah metode pembayaran sudah dipilih
+            // Validasi apakah metode pembayaran sudah dipilih
             const selectedPaymentMethod = checkoutForm.querySelector('input[name="paymentMethod"]:checked');
             if (!selectedPaymentMethod) {
                 showToast('toast-no-payment-method', 'error');
                 return; // Hentikan proses jika belum memilih
             }
 
-            // 2. Ambil data item yang dipesan dari session storage
+            // Ambil data item yang dipesan dari session storage
             const orderedItemsJSON = sessionStorage.getItem('checkoutItems');
             if (!orderedItemsJSON) {
                 showToast('toast-checkout-data-missing', 'error');
                 return;
             }
-            const orderedItems = JSON.parse(orderedItemsJSON);
+            const orderedItems = JSON.parse(orderedItemsJSON); // Ambil kembali item yang dipesan dari sessionStorage.
 
-            // 3. Panggil fungsi processOrder yang sudah ada
+            // Panggil fungsi processOrder yang sudah ada
             const { username } = checkLoginStatus();
             if (username) {
                 const success = await processOrder(orderedItems, username);
                 if (!success) return; // Stop jika gagal, jangan lanjut ke toast sukses
             }
 
-            // 4. Tampilkan notifikasi sukses
+            // Tampilkan notifikasi sukses
             showToast('toast-order-success', 'success');
 
-            // 5. Hapus data dari session storage agar tidak bisa di-checkout ulang
+            // Hapus data dari session storage agar tidak bisa di-checkout ulang
             sessionStorage.removeItem('checkoutItems');
             sessionStorage.removeItem('checkoutUserAddress');
 
-            // 6. Arahkan pengguna kembali ke halaman utama setelah 2 detik
+            // Arahkan pengguna kembali ke halaman utama setelah 2 detik
             setTimeout(() => {
                 window.location.href = '../index.html';
             }, 2000);
         });
     }
-    const changeAddressBtn = document.getElementById('change-address-btn');
+    const changeAddressBtn = document.getElementById('change-address-btn'); // jika tombol edit alamat diklik menuju ke halaman akun
     if (changeAddressBtn) {
         changeAddressBtn.addEventListener('click', () => {
-            window.location.href = 'account.html'; // <-- PERBAIKAN DI SINI
+            window.location.href = 'account.html';
         });
     }
 }
@@ -2196,7 +2188,7 @@ function renderCheckoutSummary() {
     summaryTotalPriceSpan.textContent = `Rp ${total.toLocaleString('id-ID')}`;
 }
 
-// --- FUNGSI UNTUK MERENDER DAFTAR ITEM CHECKOUT ---
+// FUNGSI UNTUK MERENDER DAFTAR ITEM CHECKOUT 
 function renderCheckoutItems(selectedItems) {
     const checkoutItemsSummary = document.getElementById('checkout-items-summary');
     if (!checkoutItemsSummary) return;
@@ -2238,12 +2230,7 @@ function renderCheckoutItems(selectedItems) {
     });
 }
 
-/**
- * Calculates the shipping cost for a given product from product location to user address.
- * @param {string} productAddress - The full address string of the product (e.g., "Harco Mangga Dua, Lantai 3, Blok B No. 5, Jakarta Pusat, DKI Jakarta").
- * @param {object} userAddress - The user's address object {city: "...", postalCode: "...", fullAddress: "..."}.
- * @returns {number} The calculated shipping cost.
- */
+// fungsi menghitung ongkos kirim
 function calculateShippingCost(productAddress, userAddress) {
     // Jika alamat user tidak lengkap atau tidak memiliki data yang cukup
     if (!userAddress || (!userAddress.city && !userAddress.fullAddress)) {
@@ -2286,12 +2273,7 @@ function calculateShippingCost(productAddress, userAddress) {
     return originData.interProvincialCost; // Ongkir antar provinsi
 }
 
-/**
- * Calculates the estimated shipping time based on product and user location.
- * @param {string} productAddress - The full address string of the product.
- * @param {object} userAddress - The user's address object.
- * @returns {string} The estimated shipping time.
- */
+// fungsi menghitung estimasi pengiriman
 function calculateShippingTime(productAddress, userAddress) {
     // Jika alamat user tidak lengkap, kembalikan pesan error
     if (!userAddress || (!userAddress.city && !userAddress.fullAddress)) {
@@ -2364,9 +2346,7 @@ function extractCityAndProvince(fullAddressString) {
 // =================================================================================
 // == FEATURE: UI COMPONENTS
 // =================================================================================
-/**
-     * Initializes the hero carousel functionality.
-     */
+// inisialiasi carousel slide yang ada di index
 function initializeCarousel() {
     // Penjaga: pastikan semua elemen ada sebelum menjalankan
     if (!carouselContainer || !prevBtn || !nextBtn || !heroSection) return;
@@ -2377,14 +2357,14 @@ function initializeCarousel() {
     let slideInterval;
 
     function goToSlide(index) {
-        // 1. Hapus semua class posisi slide sebelumnya
+        // Hapus semua class posisi slide sebelumnya
         carouselContainer.classList.remove('slide-1', 'slide-2', 'slide-3');
 
-        // 2. Tambahkan class posisi yang baru sesuai index
+        // Tambahkan class posisi yang baru sesuai index
         // (index 0 jadi slide-1, index 1 jadi slide-2, dst.)
         carouselContainer.classList.add(`slide-${index + 1}`);
 
-        // 3. Simpan index saat ini
+        // Simpan index saat ini
         currentIndex = index;
     }
 
@@ -2392,26 +2372,21 @@ function initializeCarousel() {
         let nextIndex = (currentIndex + 1) % slideCount;
         goToSlide(nextIndex);
     }
-
     function prevSlide() {
         let prevIndex = (currentIndex - 1 + slideCount) % slideCount;
         goToSlide(prevIndex);
     }
-
     function startSlideShow() {
         clearInterval(slideInterval);
         slideInterval = setInterval(nextSlide, 5000);
     }
-
     function stopSlideShow() {
         clearInterval(slideInterval);
     }
-
     nextBtn.addEventListener('click', () => {
         nextSlide();
         startSlideShow();
     });
-
     prevBtn.addEventListener('click', () => {
         prevSlide();
         startSlideShow();
@@ -2469,33 +2444,19 @@ function initializeLanguageDropdown() {
     selectedLangText.textContent = (currentLang === 'en') ? 'English' : 'Bahasa Indonesia'; // Set teks awal sesuai bahasa yang dipilih
 }
 
-/**
-* Initializes the hamburger menu for mobile navigation.
-*/
+// fungsi untuk menu hamburger
 function initializeHamburgerMenu() {
-    if (hamburgerBtn && mainNav) {
+    if (hamburgerBtn && mainNav) { // Pastikan elemen hamburger button dan main navigation ada (ini berjalan jika hamburger aktif alias ketika layar mobile)
         hamburgerBtn.addEventListener('click', () => {
-            const isActive = mainNav.classList.toggle('is-active');
-            // Panggil fungsi update setiap kali menu dibuka
-            if (isActive) {
+            const isActive = mainNav.classList.toggle('is-active'); // Saat diklik, toggle (tambah/hapus) class 'is-active' pada elemen menu navigasi
+            if (isActive) { // jalankan fungsi untuk menampilkan/menyembunyikan link 'Login'/'Logout'
                 updateMobileNavState();
             }
         });
     }
 }
 
-// function initFaqAccordion() {
-//     const faqContainer = document.querySelector('.faq-container');
-//     if (!faqContainer) return;
-
-//     faqContainer.addEventListener('click', e => {
-//         const question = e.target.closest('.faq-question');
-//         if (question) {
-//             question.classList.toggle('active');
-//         }
-//     });
-// }
-
+// fungsi untuk pop up pertama kali diindex
 function initializeCSPopup() {
     const popup = document.getElementById('cs-popup');
     if (!popup) return;
@@ -2514,7 +2475,7 @@ function initializeCSPopup() {
     }
 
     const closeBtn = popup.querySelector('.close-btn');
-    if (closeBtn) {
+    if (closeBtn) { // jika tombol silang ditekan
         closeBtn.addEventListener('click', () => {
             popup.classList.remove('is-active');
             localStorage.setItem('cs_popup_closed', 'true'); // Simpan status ditutup
@@ -2526,18 +2487,18 @@ function initializeCSPopup() {
 // == Inisialisasi dan Event Listeners
 // =================================================================================
 document.addEventListener('DOMContentLoaded', () => {
-    const { isLoggedIn } = checkLoginStatus();
+    const { isLoggedIn } = checkLoginStatus(); // cek status login
     if (isLoggedIn) {
         document.body.classList.add('user-is-logged-in');
     } else {
         document.body.classList.add('user-is-logged-out');
     }
 
-    //  saved theme
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    applyTheme(savedTheme);
+    // nyimpan tema
+    const savedTheme = localStorage.getItem('theme') || 'light'; // ngecek local storage, kalau tidak ada tema yang tersimpan maka default 'light'
+    applyTheme(savedTheme); // menerapkan tema
 
-    // 2. Set up UI components
+    // panggil komponen untuk tampilan
     updateAccountMenu();
     updateCartCounter();
     updateCartPreview();
@@ -2545,8 +2506,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeLanguageDropdown();
     initializeHamburgerMenu();
 
-    // 3. Display products based on the current page
-
+    // nampilin produk berdasarkan halaman sekarang
     if (document.querySelector('.featured-products')) {
         displayFeaturedProducts();
         initializeCSPopup();
@@ -2564,9 +2524,6 @@ document.addEventListener('DOMContentLoaded', () => {
         displayAccountInfo();
         initAccountPage();
     }
-    // if (document.querySelector('.faq-container')) {
-    //     initFaqAccordion();
-    // }
     if (document.getElementById('search-results-grid')) {
         displaySearchResults();
     }
@@ -2574,6 +2531,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initCheckoutPage();
     }
 
+    // logika register
     const registerForm = document.getElementById('register-form');
     if (registerForm) {
         registerForm.addEventListener('submit', (e) => {
@@ -2584,12 +2542,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const username = registerForm.querySelector('#username').value;
             const email = registerForm.querySelector('#email').value;
             const password = registerForm.querySelector('#password').value;
-            // ... (ambil data lain: dob, gender)
 
-            // 1. Ambil daftar pengguna yang sudah ada dari localStorage
+            // Ambil daftar pengguna yang sudah ada dari localStorage
             let users = getLocalStorage('userAccounts', [])
 
-            // 2. Cek apakah email sudah ada
+            // Cek apakah email sudah ada
             const emailExists = users.find(user => user.email === email);
 
             if (emailExists) {
@@ -2598,20 +2555,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // 3. Jika aman, tambahkan pengguna baru ke daftar
+            // Jika aman, tambahkan pengguna baru ke daftar
             const newUserAccount = { username, email, password, /*... dob, gender ...*/ };
             users.push(newUserAccount);
 
-            // 4. Simpan kembali seluruh daftar pengguna ke localStorage
+            // Simpan kembali seluruh daftar pengguna ke localStorage
             setLocalStorage('userAccounts', users);
-
             showToast('toast-register-success', 'success');
             setTimeout(() => { window.location.href = 'login.html'; }, 1500);
         });
     }
 
-    // Ganti blok logika form login Anda dengan ini
-
+    // logika login
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
@@ -2621,10 +2576,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const username = loginForm.querySelector('#username').value;
             const password = loginForm.querySelector('#password').value;
 
-            // 1. Ambil DAFTAR (ARRAY) semua pengguna
+            // Ambil DAFTAR (ARRAY) semua pengguna
             const allUsers = getLocalStorage('userAccounts', [])
 
-            // 2. Cari pengguna yang cocok di dalam DAFTAR tersebut
+            // Cari pengguna yang cocok di dalam DAFTAR tersebut
             const foundUser = allUsers.find(user => user.username === username && user.password === password);
 
             if (foundUser) {
@@ -2649,9 +2604,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectAllCheckbox = document.getElementById('select-all-checkbox');
         const itemsContainer = document.getElementById('cart-items-container');
 
-        // --- LOGIKA EVENT LISTENER YANG DIPERBAIKI ---
-
-        // 1. Event listener untuk 'Pilih Semua'
+        // Event listener untuk 'Pilih Semua'
         if (selectAllCheckbox) {
             selectAllCheckbox.addEventListener('change', () => {
                 const allItemCheckboxes = itemsContainer.querySelectorAll('.cart-item-select input');
@@ -2663,7 +2616,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // 2. Event listener untuk semua interaksi di dalam daftar item
+        // Event listener untuk semua interaksi di dalam daftar item
         if (itemsContainer) {
             itemsContainer.addEventListener('click', e => {
                 const target = e.target;
@@ -2691,12 +2644,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 4. Setup global event listeners
+    // saat tombol tema di klik
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
-            let newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
-            applyTheme(newTheme);
-            localStorage.setItem('theme', newTheme);
+            let newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark'; // Cek tema saat ini dengan melihat apakah body punya class 'dark-mode'
+            applyTheme(newTheme); // Terapkan tema yang baru
+            localStorage.setItem('theme', newTheme); // simpan ke local storage
         });
     }
 
@@ -2761,7 +2714,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     window.addEventListener('click', (event) => {
-        // Close account dropdown if clicking outside
+        // tutup dropdown akun, jika ngelik diluar
         if (!event.target.closest('#account-menu')) {
             const dropdowns = document.querySelectorAll('.dropdown-content.show');
             dropdowns.forEach(dropdown => {

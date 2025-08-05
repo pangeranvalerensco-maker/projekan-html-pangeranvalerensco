@@ -2,7 +2,7 @@
 <html lang="id"> <!-- Bahasa Indonesia sebagai bahasa utama halaman ini -->
 <!-- Data Translate key di semua teks untuk menerjemahkan kata -->
 
-<head> <!-- Bagian kepala dari dokumen HTML -->
+<head> 
     <meta charset="UTF-8"> <!-- Menentukan karakter encoding sebagai UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mengatur viewport untuk responsif -->
     <title>MineCart - Beranda</title> <!-- Judul halaman yang akan ditampilkan di tab browser -->
@@ -35,8 +35,7 @@
                         </li>
                         <li class="language-selector-wrapper"> <!-- Dropdown untuk memilih bahasa -->
                             <div class="custom-select"> 
-                                <button class="select-button" aria-haspopup="listbox" aria-expanded="false"
-                                    title="Ganti Bahasa" data-translate-key="select-lang">
+                                <button class="select-button" title="Ganti Bahasa" data-translate-key="select-lang">
                                     <span id="selected-lang-text">Bahasa Indonesia</span>
                                     <span class="arrow-down"></span>
                                 </button>
@@ -59,7 +58,7 @@
                         <img src="assets/logo-minecart.png" alt="MineCart Logo">
                         <span>MineCart</span>
                     </a>
-                    <button class="hamburger-btn" aria-label="Buka Menu">
+                    <button class="hamburger-btn">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -125,7 +124,7 @@
                     </ul>
                 </nav>
 
-                <button class="search-toggle-btn" aria-label="Buka Pencarian"> <!-- Tombol untuk membuka pencarian -->
+                <button class="search-toggle-btn"> <!-- Tombol untuk membuka pencarian -->
                     <img src="assets/logo-search.png" alt="Ikon Cari">
                 </button>
 
@@ -171,7 +170,7 @@
         <div id="cs-popup" class="cs-popup hidden-element"> <!-- Pop-up selamat datang, hanya muncul sekali di index (harus klik silang biar ga muncul lagi) -->
             <div class="cs-popup-header">
                 <h3 data-translate-key="cs-title">Customer Service</h3>
-                <button class="close-btn" aria-label="Tutup pop-up">x</button>
+                <button class="close-btn">x</button>
             </div>
             <div class="cs-popup-body">
                 <p data-translate-key="cs-welcome">Selamat datang di MineCart Web! Temukan berbagai produk berkualitas

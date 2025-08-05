@@ -132,6 +132,22 @@ header {
     align-items: center; /* Memastikan ikon sejajar di tengah secara vertikal */
     gap: 15px; /* Memberi jarak 15px antar setiap ikon */
 }
+
+/* styling logo */
+.logo {
+    display: flex;         /* Membuat gambar dan teks logo sejajar ke samping */
+    align-items: center;   /* Menyejajarkan gambar dan teks secara vertikal di tengah */
+    gap: 15px;             /* Memberi jarak antara gambar dan teks */
+    text-decoration: none; /* Menghilangkan garis bawah dari link */
+}
+.logo img {
+    height: 50px;
+}
+.logo span {
+    font-family: var(--font-heading); /* Menggunakan font 'Press Start 2P' */
+    font-size: 1.5rem;                /* Ukuran teks logo */
+    color: var(--heading-color);      /* Warna teks logo, bisa berubah saat ganti tema */
+}
 .logo-ig {
     height: 20px; /* Mengatur tinggi masing-masing ikon */
     border-radius: 4px; /* Memberi sedikit lengkungan pada sudut ikon */
@@ -159,37 +175,23 @@ header {
 .social-media a:hover .logo-fb {
     transform: translateY(-1px) scale(1.1); /* Efek saat kursor menyentuh: ikon sedikit terangkat dan membesar */
 }
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    text-decoration: none;
-}
-.logo img {
-    height: 50px;
-}
-.logo span {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    color: var(--heading-color);
-}
 .header-main {
     padding: 1rem 0;
 }
 .header-main-nav ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 25px;
+    list-style: none; /* Menghilangkan tanda titik (bullet) dari daftar */
+    display: flex; /* Membuat semua <li> berjajar horizontal */
+    align-items: center; /* Menyejajarkan semua item secara vertikal */
+    gap: 25px; /* Jarak antar item menu */
     margin-bottom: 10px;
 }
 .header-main-nav a {
-    text-decoration: none;
+    text-decoration: none; /* Menghilangkan garis bawah dari link */
     color: var(--text-color);
     font-weight: 500;
 }
-.header-main-nav a.active,
-.header-main-nav a:hover {
+.header-main-nav a.active, /* Gaya untuk link aktif */
+.header-main-nav a:hover { /* Gaya saat link di-hover dengan kursor */
     color: var(--accent-color);
 }
 .header-main-icons {
@@ -197,7 +199,7 @@ header {
     list-style: none;
     align-items: center;
     gap: 15px;
-    order: 1;
+    order: 1; /* Posisikan ikon di paling kanan */
 }
 .icon-nav {
     height: 28px;
@@ -221,42 +223,42 @@ header {
     /* Putar 360 derajat saat di-hover */
 }
 #theme-toggle-btn {
-    background-color: transparent;
+    background-color: transparent; /* Latar belakang transparan */
     border: none;
-    color: var(--light-text-color);
+    color: var(--light-text-color); 
     padding: 4px 8px;
     border-radius: 4px;
     cursor: pointer;
 }
 
 /* --- Search Bar --- */
-.search-bar button {
-    transition: filter 0.2s ease;
-}
-.search-bar button:hover {
-    filter: brightness(90%);
-}
 .search-bar {
-    flex-grow: 1;
-    display: flex;
+    flex-grow: 1; /* Membuat search bar "mengambil" sisa ruang kosong di tengah header. */
+    display: flex; /* Membuat jejer ke samping */
     border: 2px solid var(--subtle-border-color);
     border-radius: 8px;
-    overflow: hidden;
+    overflow: hidden; /* Memastikan sudut tumpul dari tombol tidak keluar dari border. */
     margin: 0 30px;
 }
 .search-bar input {
     border: none;
-    padding: 12px 15px;
+    padding: 12px 15px; /* Memberi ruang di dalam kolom input. */
     font-size: 1rem;
     flex-grow: 1;
-    outline: none;
-    background-color: var(--body-bg);
+    outline: none; /* Menghilangkan garis saat fokus. */
+    background-color: var(--body-bg); /* Warna latar belakang input (sesuai tema) */
     color: var(--text-color);
 }
 .search-bar button {
-    background-color: var(--accent-color);
-    color: var(--accent-text-color);
-    border: none;
+    transition: filter 0.2s ease;
+}
+.search-bar button:hover {
+    filter: brightness(90%); /* Efek hover untuk tombol search */
+}
+.search-bar button {
+    background-color: var(--accent-color); 
+    color: var(--accent-text-color); 
+    border: none; 
     padding: 0 20px;
     cursor: pointer;
     font-weight: 500;
@@ -275,25 +277,25 @@ header {
 
 /* --- Hamburger Button --- */
 .hamburger-btn {
-    display: none; /* Sembunyikan di desktop */
-    flex-direction: column;
-    justify-content: space-around;
-    width: 2rem;
-    height: 2rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 110;
+    display: none; /* Kunci: Menyembunyikan tombol ini secara default (di tampilan desktop). */
+    flex-direction: column; /* Membuat 3 garis <span> di dalamnya tersusun vertikal (atas ke bawah). */
+    justify-content: space-around; /* Memberi jarak yang sama di antara 3 garis tersebut. */
+    width: 2rem; /* Mengatur lebar tombol. */
+    height: 2rem; /* Mengatur tinggi tombol, membuatnya menjadi kotak. */
+    background: transparent; /* Membuat latar belakang tombol transparan. */
+    border: none; /* Menghilangkan border default dari tombol. */
+    cursor: pointer; /* Mengubah kursor menjadi ikon tangan saat disentuh. */
+    padding: 0; /* Menghilangkan padding default dari tombol. */
+    z-index: 110; /* Memastikan tombol ini berada di lapisan atas, tidak tertutup elemen lain. */
 }
 .hamburger-btn span {
-    width: 2rem;
-    height: 0.25rem;
-    background: var(--heading-color);
-    border-radius: 10px;
-    transition: all 0.3s linear;
-    position: relative;
-    transform-origin: 1px;
+    width: 2rem; /* Mengatur lebar setiap garis agar sama dengan lebar tombol. */
+    height: 0.25rem; /* Mengatur ketebalan setiap garis. */
+    background: var(--heading-color); /* Memberi warna pada garis (bisa berubah sesuai tema). */
+    border-radius: 10px; /* Membuat ujung setiap garis menjadi tumpul/bulat. */
+    transition: all 0.3s linear; /* Memberi animasi halus selama 0.3 detik jika ada perubahan (misalnya saat diubah menjadi ikon 'X'). */
+    position: relative; /* Diperlukan agar properti 'transform-origin' bisa berfungsi. */
+    transform-origin: 1px; /* Mengatur titik poros rotasi untuk animasi menjadi 'X', yaitu di dekat ujung kiri garis. */
 }
 
 /* Responsive Header */
@@ -315,11 +317,11 @@ header {
         animation: slideDown 0.4s ease-out, fadeUp 0.5s ease-in 2.5s forwards;
     }
     .header-main-nav ul {
-        gap: 12px !important;
+        gap: 12px !important; /* Kurangi jarak antar item menu */
         margin-bottom: 10px;
     }
     #account-menu-desktop {
-        display: none !important;
+        display: none !important; /* Sembunyikan menu akun di desktop */
     }
     .logo {
         width: 100%;
@@ -333,7 +335,7 @@ header {
         font-size: 1.2rem;
     }
     .header-top {
-        display: none;
+        display: none; /* Sembunyikan header atas di mobile */
     }
     /* Tampilkan link khusus mobile di dalam menu hamburger */
     .mobile-only {
@@ -353,7 +355,7 @@ header {
     .header-main-left {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-between; /* Mendorong logo ke kiri & search bar ke kanan */ 
         width: 100%;
         margin-bottom: 15px;
     }
@@ -385,19 +387,19 @@ header {
         transform: translateY(0);
     }
     .header-main-nav ul {
-        flex-direction: column;
+        flex-direction: column; /* PAKSA item untuk menumpuk ke bawah */
         width: 100%;
         text-align: center;
         padding: 0.01rem 0;
 
-        max-height: calc(100vh - 120px);
-        overflow-y: auto;
+        max-height: calc(100vh - 120px); /* Batasi tinggi menu agar tidak terlalu tinggi */
+        overflow-y: auto; /* Tampilkan scrollbar jika menu lebih panjang dari max-height */
         /* Tampilkan scrollbar jika menu lebih panjang dari max-height */
     }
     .header-main-nav.is-active li {
         padding: 0.11rem 0;
         width: 100%;
-        transition: background-color 0.s ease-in-out;
+        transition: background-color 0.s ease-in-out; 
     }
     /* link <a> sebagai target utama agar background tidak memanjang */
     .header-main-nav.is-active li a {
@@ -657,8 +659,8 @@ body.dark-mode .dropdown-content button#logout-btn:hover {
     color: var(--accent-text-color);
 }
 .btn-primary:hover {
-    opacity: 0.85;
-    transform: translateY(-1px);
+    opacity: 0.85; /* Mengurangi opacity untuk efek hover */
+    transform: translateY(-1px); /* Efek hover untuk feedback visual */
 }
 .btn-secondary { /* Style untuk tombol Secondary/Outline */
     background-color: transparent;
@@ -792,42 +794,42 @@ body.dark-mode .dropdown-content button#logout-btn:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s; /* Transisi halus saat hover */
 }
 .carousel-btn:hover {
     background-color: rgba(255, 255, 255, 0.25);
 }
 .carousel-btn.prev {
-    left: 20px;
+    left: 20px; /* Posisikan tombol kiri di kiri */
 }
 .carousel-btn.next {
-    right: 20px;
+    right: 20px; /* Posisikan tombol kanan di kanan */
 }
 .hero-content h1 {
     font-family: var(--font-heading);
     color: var(--hero-text-color);
     font-size: 3rem;
     margin-bottom: 1rem;
-    text-align: center;
+    text-align: center; /* Rata tengah untuk teks judul */
 }
 
 .cta-button {
     text-decoration: none;
     background: var(--accent-color);
     color: var(--accent-text-color);
-    border: none;
+    border: none; /* Hapus border default */
     border-radius: 8px;
     padding: 12px 32px;
     font-size: 1rem;
     font-weight: 580;
     cursor: pointer;
-    transition: background 0.1s, transform 0.1s;
+    transition: background 0.1s, transform 0.1s; /* Transisi untuk efek hover */
     margin-top: 1.5rem;
     text-align: center;
 }
 .cta-button,
 .product-card-footer .buy-btn {
-    transition: transform 0.4s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    transition: transform 0.4s ease, box-shadow 0.2s ease, filter 0.2s ease; /* Transisi untuk efek hover */
 }
 .cta-button:hover,
 .buy-btn:hover {
@@ -838,7 +840,7 @@ body.dark-mode .dropdown-content button#logout-btn:hover {
 
 /* --- Featured Products --- */
 #recommended {
-    scroll-margin-top: 120px;
+    scroll-margin-top: 120px; /* Jarak scroll ke atas saat mengklik tautan */
 }
 .featured-products {
     padding: 1rem 0;
@@ -851,11 +853,11 @@ body.dark-mode .dropdown-content button#logout-btn:hover {
     margin: 3rem;
 }
 .product-grid { /* Aturan untuk Wadah Grid Utama */
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    display: grid; /* Menggunakan grid untuk tata letak */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Membuat kolom otomatis dengan lebar minimal 250px */
     gap: 30px;
 }
-/* Animasi jeda (staggered) untuk kartu produk */
+/* Animasi jeda untuk kartu produk */
 .product-card-link:nth-child(1) { animation-delay: 0.1s; }
 .product-card-link:nth-child(2) { animation-delay: 0.2s; }
 .product-card-link:nth-child(3) { animation-delay: 0.3s; }
@@ -865,11 +867,17 @@ body.dark-mode .dropdown-content button#logout-btn:hover {
 .product-card-link:nth-child(7) { animation-delay: 0.7s; }
 .product-card-link:nth-child(8) { animation-delay: 0.8s; }
 a.product-card-link { /* Mengatur link pembungkus agar fleksibel */
-    text-decoration: none;
-    color: inherit;
+    text-decoration: none; 
+    color: inherit; /* Menghilangkan garis bawah dan mewarisi warna teks */
     display: flex; /* Membuat link ini menjadi flex container */
-    opacity: 0;
+    opacity: 0; /* Mulai dengan opacity 0 untuk animasi masuk */
 }
+.related-products-section .product-card-link:nth-child(1) { animation-delay: 0.1s; }
+.related-products-section .product-card-link:nth-child(2) { animation-delay: 0.2s; }
+.related-products-section .product-card-link:nth-child(3) { animation-delay: 0.3s; }
+.related-products-section .product-card-link:nth-child(4) { animation-delay: 0.4s; }
+.related-products-section .product-card-link:nth-child(5) { animation-delay: 0.5s; }
+.related-products-section .product-card-link:nth-child(6) { animation-delay: 0.6s; }
 @keyframes card-fade-in {
     from {
         opacity: 0;
@@ -880,8 +888,12 @@ a.product-card-link { /* Mengatur link pembungkus agar fleksibel */
         transform: translateY(0); /* Kembali ke posisi normal */
     }
 }
+/* Aturan ini aktif saat JavaScript menambahkan class ".animate" pada link kartu produk */
 .product-card-link.animate {
-    animation: card-fade-in 0.5s ease-out forwards;
+    animation-name: card-fade-in;         /* Menentukan nama @keyframes animasi yang akan digunakan, yaitu 'card-fade-in'. */
+    animation-duration: 0.5s;             /* Mengatur durasi total animasi, yaitu selama 0.5 detik. */
+    animation-timing-function: ease-out;  /* Mengatur kurva kecepatan animasi: cepat di awal, lalu melambat di akhir. */
+    animation-fill-mode: forwards;        /* Memastikan elemen tetap berada di state akhir animasi (opacity: 1, transform: translateY(0)) setelah animasi selesai. */
 }
 .product-card { /* Aturan untuk Setiap Kartu Produk */
     background: var(--card-bg);
@@ -905,7 +917,7 @@ a.product-card-link { /* Mengatur link pembungkus agar fleksibel */
 .product-card-body { /* Aturan untuk KONTEN di Dalam Kartu */
     padding: 15px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Mengatur konten dari atas ke bawah */
     text-align: left;
     flex-grow: 1; /* Paksa bagian ini untuk mengisi semua ruang kosong */
 }
@@ -913,21 +925,21 @@ a.product-card-link { /* Mengatur link pembungkus agar fleksibel */
     font-size: 1rem;
     color: var(--heading-color);
     margin: 0 0 10px 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap; /* Mencegah teks pindah ke baris baru */
+    overflow: hidden; /* Sembunyikan teks yang terlalu panjang */
+    text-overflow: ellipsis; /* Tampilkan elipsis (...) untuk teks yang terpotong */
 }
 .product-card-body .description {
     font-size: 0.9rem;
     color: var(--text-color);
     margin: 0 0 15px 0;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
+    overflow: hidden; /* Sembunyikan teks yang terlalu panjang */
+    display: -webkit-box; /* Membuat elemen menjadi kotak fleksibel */
+    -webkit-box-orient: vertical; /* Mengatur orientasi kotak fleksibel ke vertikal */
 }
 .product-card-footer { /* Aturan untuk FOOTER Kartu */
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Mendorong elemen ke kiri dan kanan */
     align-items: center;
     padding: 15px;
     border-top: 1px solid var(--subtle-border-color);
@@ -954,34 +966,37 @@ a.product-card-link { /* Mengatur link pembungkus agar fleksibel */
 
 /* --- Skeleton Loading --- */
 .skeleton-card {
-    background-color: var(--card-bg);
+    background-color: var(--card-bg); /* Warna latar belakang kerangka */
     border: 1px solid var(--subtle-border-color);
 }
 .skeleton {
-    background-color: var(--subtle-border-color);
+    background-color: var(--subtle-border-color); /* Warna abu-abu muda untuk kerangka */
     border-radius: 4px;
-    position: relative;
-    overflow: hidden;
+    position: relative; /* Diperlukan untuk efek animasi kilau */
+    overflow: hidden; /* Agar animasi tidak keluar dari area kerangka */
 }
-.skeleton::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 150%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+skeleton::after {
+    content: '';                                  /* Wajib ada untuk membuat elemen ::after muncul. */
+    position: absolute;                           /* Membuat elemen ini "melayang" di atas balok .skeleton. */
+    top: 0;                                       /* Posisikan di paling atas. */
+    left: -150%;                                  /* Posisikan di luar layar, jauh di sebelah kiri. Ini adalah titik AWAL animasi. */
+    width: 150%;                                  /* Lebar kilau dibuat lebih besar dari baloknya agar terlihat miring. */
+    height: 100%;                                 /* Tinggi kilau sama dengan tinggi balok. */
+    /* Membuat gradasi dari transparan, ke kilau putih tipis, lalu kembali transparan. Inilah yang menciptakan efek kilau. */
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent); 
+    /* Menjalankan animasi bernama 'shimmer' selama 1.5 detik, dan mengulanginya terus-menerus (infinite). */
     animation: shimmer 1.5s infinite;
 }
 body.dark-mode .skeleton::after {
-     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    /* Membuat efek kilau sedikit lebih redup saat mode gelap aktif agar tidak terlalu mencolok. */
+     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent); 
 }
 @keyframes shimmer {
     0% {
-        left: -150%;
+        left: -150%; /* ...posisi kilau ada di paling kiri (di luar layar). */
     }
     100% {
-        left: 150%;
+        left: 150%; /* ...posisi kilau bergeser ke paling kanan (di luar layar). */
     }
 }
 .skeleton-img { /* Ukuran spesifik untuk setiap bagian kerangka */
@@ -989,7 +1004,7 @@ body.dark-mode .skeleton::after {
     height: 160px; /* Samakan dengan tinggi gambar produk sejenis */
 }
 .skeleton-title {
-    width: 70%;
+    width: 70%; /* Lebar kerangka judul dibuat 70% agar tidak terlalu panjang. */
     height: 1rem;
     margin-bottom: 10px;
 }
@@ -999,7 +1014,7 @@ body.dark-mode .skeleton::after {
     margin-bottom: 8px;
 }
 .skeleton-text:last-child {
-    width: 80%;
+    width: 80%; /* Membuat baris terakhir kerangka teks sedikit lebih pendek, meniru paragraf asli. */
 }
 
 /* --- Cart Icon --- */
@@ -1025,29 +1040,29 @@ body.dark-mode .skeleton::after {
 
 /* --- Cart Preview Dropdown --- */
 .cart-preview {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    width: 350px;
+    position: absolute; /* Posisikan dropdown di atas elemen lain */
+    top: 100%; /* Tepat di bawah ikon keranjang */
+    right: 0; /* Posisikan ke kanan */
+    width: 350px; /* Lebar tetap untuk dropdown */
     background-color: var(--card-bg);
     border: 1px solid var(--subtle-border-color);
     border-radius: 8px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     z-index: 100;
     padding: 15px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease-out;
+    opacity: 0; 
+    visibility: hidden; /* Sembunyikan secara default */
+    transform: translateY(-10px); /* Posisikan sedikit ke atas untuk efek masuk */
+    transition: all 0.3s ease-out; /* Transisi halus saat muncul */
 }
 .cart-icon-wrapper:hover .cart-preview {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+    opacity: 1; /* Tampilkan dropdown saat hover pada ikon keranjang */
+    visibility: visible; /* Membuat elemen bisa terlihat dan berinteraksi */
+    transform: translateY(0); /* Kembalikan posisi ke normal dari yg sebelumnya diatas */
 }
 .cart-preview-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Posisikan judul dan link di kiri-kanan */
     align-items: center;
     padding-bottom: 10px;
     margin-bottom: 15px;
@@ -1067,14 +1082,14 @@ body.dark-mode .skeleton::after {
     font-size: 0.9rem;
 }
 #cart-preview-view-link:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* Tambahkan garis bawah saat hover */
 }
 #cart-preview-items {
-    display: flex;
-    flex-direction: column;
+    display: flex; 
+    flex-direction: column; /* Tumpuk item secara vertikal */
     gap: 15px;
-    max-height: 300px;
-    overflow-y: auto;
+    max-height: 300px; /* Batasi tinggi dropdown */
+    overflow-y: auto; /* Tampilkan scrollbar jika item melebihi tinggi */
 }
 .cart-preview-item {
     display: flex;
@@ -1082,7 +1097,7 @@ body.dark-mode .skeleton::after {
     gap: 10px;
     padding: 5px;
     border-radius: 4px;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s; /* Transisi halus saat hover */
 }
 .cart-preview-item:hover {
     background-color: var(--section-bg);
@@ -1090,7 +1105,7 @@ body.dark-mode .skeleton::after {
 .cart-preview-item img {
     width: 50px;
     height: 50px;
-    object-fit: cover;
+    object-fit: cover; /* Pastikan gambar mengisi area tanpa menjadi gepeng */
     border-radius: 4px;
 }
 .cart-preview-item-info {
@@ -1102,9 +1117,9 @@ body.dark-mode .skeleton::after {
     margin: 0 0 5px 0;
     font-size: 0.9rem;
     color: var(--heading-color);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap; /* Mencegah teks pindah ke baris baru */
+    overflow: hidden; /* Sembunyikan teks yang terlalu panjang */
+    text-overflow: ellipsis; /* Tampilkan elipsis (...) untuk teks yang terpotong */
 }
 .cart-preview-item-info .price {
     font-weight: 500;
@@ -1118,11 +1133,11 @@ body.dark-mode .skeleton::after {
     100% { transform: rotate(0deg); }
 }
 .shake {
-    animation: cart-shake 0.5s ease-in-out;
+    animation: cart-shake 0.5s ease-in-out; /* Durasi animasi 0.5 detik */
 }
 @media (max-width: 768px) {
     .product-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr); /* Ubah menjadi 2 kolom di mobile */
         gap: 20px;
     }
     .product-card img {
@@ -1147,39 +1162,39 @@ body.dark-mode .skeleton::after {
 /* --- Filter Kategori & Sortir --- */
 /* ============================================= */
 .category-filters {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 1rem; /* Jarak ke grid produk */
+    display: flex;                  /* Mengaktifkan Flexbox, membuat tombol-tombol di dalamnya berjajar horizontal. */
+    justify-content: center;        /* Memposisikan seluruh baris tombol tepat di tengah halaman. */
+    flex-wrap: wrap;                /* KUNCI: Jika tombol tidak muat dalam satu baris (di layar sempit), izinkan untuk pindah ke baris baru. */
+    gap: 15px;                      /* Memberi jarak 15px antar setiap tombol. */
+    margin-bottom: 1rem;            /* Memberi jarak 1rem ke elemen di bawahnya (grid produk). */
 }
 .category-filters button {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    font-family: var(--font-body);
-    color: var(--text-color);
-    background-color: var(--card-bg);
-    border: 2px solid var(--subtle-border-color);
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    padding: 10px 20px;               /* Memberi ruang di dalam tombol (10px atas/bawah, 20px kiri/kanan). */
+    font-size: 0.9rem;            
+    font-weight: 500;             
+    font-family: var(--font-body);    /* Menggunakan font 'Inter' dari variabel. */
+    color: var(--text-color);         /* Warna teks tombol, bisa berubah sesuai tema. */
+    background-color: var(--card-bg); /* Warna latar tombol, bisa berubah sesuai tema. */
+    border: 2px solid var(--subtle-border-color); /* Garis tepi tombol yang tipis. */
+    border-radius: 20px;              /* Membuat sudut tombol menjadi sangat tumpul (seperti kapsul). */
+    cursor: pointer;                  /* Mengubah kursor menjadi ikon tangan saat disentuh. */
+    transition: all 0.2s ease;        /* Memberi animasi halus selama 0.2 detik untuk SEMUA perubahan (warna, border, dll). */
 }
-.category-filters button:hover {
+.category-filters button:hover { /* Aturan saat kursor MENGARAH ke tombol. */
     background-color: var(--accent-color);
     color: var(--accent-text-color);
     border-color: var(--accent-color);
 }
-.category-filters button.active {
+.category-filters button.active { /* Aturan saat tombol memiliki class ".active" (yang ditambahkan oleh JS). */
     background-color: var(--accent-color);
     color: var(--accent-text-color);
     border-color: var(--accent-color);
 }
 /* Styling untuk Dropdown Sortir */
 .sorting-controls {
-    display: flex;
+    display: flex; /* Membuat label "Urutkan:" dan dropdown berjajar horizontal. */
     justify-content: flex-end; /* Posisikan di kanan */
-    align-items: center;
+    align-items: center; /* Menyejajarkan label dan dropdown secara vertikal di tengah. */
     margin-bottom: 1.5rem; /* Jarak ke filter kategori */
     gap: 10px;
 }
@@ -1190,8 +1205,8 @@ body.dark-mode .skeleton::after {
     padding: 8px 12px;
     border: 1px solid var(--subtle-border-color);
     border-radius: 6px;
-    background-color: var(--card-bg);
-    color: var(--text-color);
+    background-color: var(--card-bg); /* Warna latar dropdown, bisa berubah sesuai tema. */
+    color: var(--text-color); /* Warna teks di dalam dropdown. */
     font-family: var(--font-body);
     font-size: 0.9rem;
     cursor: pointer;
@@ -1214,17 +1229,17 @@ body.dark-mode .skeleton::after {
 /* --- Layout & Box --- */
 .auth-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center;       /* Memposisikan item (form) di tengah secara horizontal. */
+    align-items: center;           /* Memposisikan item (form) di tengah secara vertikal. */
     padding: 4rem 20px;
 }
 .auth-box {
     background-color: var(--light-color);
     padding: 40px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Memberi efek bayangan halus untuk ilusi kedalaman. */
+    width: 100%;  /* Mengatur lebar form agar mengisi wadahnya. */
+    max-width: 400px; /* Membatasi agar form tidak terlalu lebar di layar desktop. */
     text-align: center;
 }
 .auth-box h2 {
@@ -1245,20 +1260,20 @@ body.dark-mode .skeleton::after {
     border: 1px solid var(--subtle-border-color);
 }
 .auth-form h1 {
-    font-family: var(--font-heading);
+    font-family: var(--font-heading); /* Menggunakan font 'Press Start 2P'. */
     font-size: 1.8rem;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2rem; /* Memberi jarak ke elemen di bawahnya. */
     color: var(--heading-color);
 }
 .form-group {
-    position: relative;
+    position: relative; 
     margin-bottom: 20px;
-    text-align: left;
+    text-align: left; /* Memastikan label dan input rata kiri. */
     margin-bottom: 1.5rem;
 }
 .form-group label {
-    display: block;
+    display: block; /* Membuat label menempati satu baris penuh, mendorong input ke bawahnya. */
     margin-bottom: 8px;
     font-weight: 500;
     color: var(--dark-color);
@@ -1268,16 +1283,16 @@ body.dark-mode .skeleton::after {
 .form-group input[type="tel"],
 .form-group input[type="date"],
 .form-group input[type="email"] {
-    width: 100%;
+    width: 100%; /* Membuat kolom input memenuhi seluruh lebar form. */
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Memastikan padding tidak menambah lebar total input. */
 }
 .auth-form input:focus {
-    border-color: var(--primary-color);
-    outline: none;
+    border-color: var(--primary-color); /* Mengubah warna border menjadi warna aksen saat kolom input sedang aktif/diklik. */
+    outline: none; /* Menghilangkan garis outline biru default dari browser. */
 }
 
 /* --- Button & Switch --- */
@@ -1299,7 +1314,7 @@ body.dark-mode .skeleton::after {
 .auth-form .cta-button {
     width: 100%;
     font-size: 1.1rem;
-    text-align: center;
+    text-align: center; /* Memastikan teks di dalam tombol berada di tengah. */
 }
 .auth-switch {
     text-align: center;
@@ -1328,7 +1343,7 @@ body.dark-mode .skeleton::after {
 
 /* Styling untuk Radio Button Jenis Kelamin */
 .radio-container {
-    display: flex;
+    display: flex; /* Membuat pilihan "Pria" dan "Wanita" berjajar ke samping. */
     gap: 20px; /* Jarak antar grup (Pria dan Wanita) */
 }
 .radio-option {
@@ -1341,12 +1356,12 @@ body.dark-mode .skeleton::after {
 }
 .error-message {
     color: #e63946;
-    font-size: 0.8rem;
+    font-size: 0.8rem; /* Ukuran teks pesan error lebih kecil. */
     font-weight: 500;
-    margin-top: 5px;
+    margin-top: 5px; /* Jarak dari input di atasnya. */
     display: none; /* Sembunyikan secara default */
 }
-/* Aturan baru yang lebih fleksibel untuk menampilkan pesan error */
+/* Aturan yang lebih fleksibel untuk menampilkan pesan error */
 .is-invalid ~ .error-message {
     display: block;
 }
@@ -1370,10 +1385,10 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     transform: translateX(-50%); /* Trik untuk menengahkan elemen secara presisi */
     z-index: 1000;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* sejajarkan ke samping */
     align-items: center; /* Sejajarkan di tengah */
     gap: 10px;
-}
+} 
 .toast {
     padding: 15px 20px;
     border-radius: 8px;
@@ -1436,24 +1451,24 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
 /* ============================================= */
 /* --- Layout & Box --- */
 .account-details {
-    background-color: var(--card-bg);
-    border: 1px solid var(--subtle-border-color);
-    border-radius: 8px;
-    padding: 30px;
-    max-width: 600px;
-    margin: 2rem auto;
+    background-color: var(--card-bg);             /* Mengatur warna latar belakang kotak, bisa berubah sesuai tema. */
+    border: 1px solid var(--subtle-border-color); /* Memberi garis tepi tipis di sekeliling kotak. */
+    border-radius: 8px;                           /* Membuat sudut-sudut kotak menjadi tumpul. */
+    padding: 30px;                                /* Memberi jarak 30px di bagian DALAM kotak, antara konten dan garis tepi. */
+    max-width: 600px;                             /* Membatasi lebar maksimum kotak agar tidak terlalu lebar di layar besar. */
+    margin: 2rem auto;                            /* Menengahkan kotak di halaman: '2rem' untuk jarak atas/bawah, 'auto' untuk jarak kiri/kanan yang seimbang. */
 }
 .user-info-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 0;
-    border-bottom: 1px solid var(--subtle-border-color);
+    display: flex;                      /* Mengaktifkan Flexbox, membuat label dan nilainya berjajar ke samping. */
+    justify-content: space-between;     /* Mendorong label ke kiri dan nilainya ke kanan. */
+    padding: 15px 0;                    /* Memberi jarak vertikal 15px di atas dan bawah setiap baris. */
+    border-bottom: 1px solid var(--subtle-border-color); /* Memberi garis pemisah horizontal di bawah setiap baris. */
 }
-.user-info-item:last-child {
-    border-bottom: none;
+.user-info-item:last-child { /* Aturan khusus untuk item TERAKHIR di dalam grup. */
+    border-bottom: none;     /* Menghilangkan garis pemisah di item paling bawah agar terlihat rapi. */
 }
-.user-info-item strong {
-    color: var(--heading-color);
+.user-info-item strong { /* Menargetkan elemen <strong> (label seperti "Nama Pengguna:"). */
+    color: var(--heading-color); 
 }
 #logout-btn {
     border-radius: 5px;
@@ -1465,7 +1480,6 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     background-color: #dc3545;
     margin-top: 10px;
 }
-
 #address-form {
     margin-top: 30px;
     display: none;
@@ -1508,10 +1522,9 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
         font-size: 0.9rem; /* Sesuaikan ukuran font input */
     }
     .cta-button { /* Tombol logout dan edit/save */
-        padding: 10px 20px;
-        /* Sesuaikan padding tombol */
-        font-size: 0.95rem;
-        /* Sesuaikan ukuran font tombol */
+        padding: 10px 20px; /* Sesuaikan padding tombol */
+        font-size: 0.95rem; /* Sesuaikan ukuran font tombol */
+        justify-content: center;
     }
 }
 /* Media Query untuk layar yang lebih kecil lagi */
@@ -1542,9 +1555,9 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     gap: 30px;
 }
 .cart-section .container {
-    display: flex;
-    align-items: flex-start;
-    gap: 30px;
+    display: flex;           /* Mengaktifkan Flexbox, membuat elemen anak (daftar item & ringkasan) berjajar ke samping. */
+    align-items: flex-start; /* Memastikan kedua kolom rata di bagian ATAS, bukan di tengah atau bawah. */
+    gap: 30px;               /* Memberi jarak 30px antara kolom daftar item dan kolom ringkasan. */
 }
 
 /* --- Header & Summary --- */
@@ -1561,21 +1574,21 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
 }
 .cart-summary { /* Pastikan ringkasan memiliki lebar tetap */
     width: 350px; /* Lebar kolom ringkasan */
-    flex-shrink: 0; /* Mencegah kolom ini menyusut */
-    position: sticky;
+    flex-shrink: 0;        /* Mencegah kotak ini "menyusut" jika lebar layar berkurang. */
+    position: sticky;      /* Membuat kotak ini "menempel" saat di-scroll. */
     top: 150px; /* Sesuaikan dengan tinggi header Anda */
 }
-.cart-summary h2 {
+.cart-summary h2 { /* Styling untuk judul "Ringkasan Belanja" */
     margin: 0 0 15px 0;
     font-family: var(--font-heading);
     font-size: 1.2rem;
 }
 .cart-summary p {
-    display: flex;
-    justify-content: space-between;
+    display: flex;                 /* Membuat teks (misal: "Subtotal") dan harganya berjajar ke samping. */
+    justify-content: space-between;/* Mendorong teks ke kiri dan harga ke kanan. */
     margin-bottom: 10px;
 }
-.cart-summary .total {
+.cart-summary .total { /* Styling khusus untuk baris Total */
     font-weight: bold;
     font-size: 1.2rem;
     border-top: 2px solid var(--subtle-border-color);
@@ -1594,9 +1607,9 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     cursor: pointer;
 }
 .cart-item {
-    display: flex;
-    gap: 20px;
-    align-items: center;
+    display: flex;           /* Membuat semua bagian di dalam satu item (checkbox, gambar, info, aksi) berjajar ke samping. */
+    gap: 20px;               /* Jarak antar bagian tersebut. */
+    align-items: center;     /* Menyejajarkan semua bagian secara vertikal di tengah. */
     background-color: var(--card-bg);
     border: 1px solid var(--subtle-border-color);
     border-radius: 8px;
@@ -1606,13 +1619,13 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
 .cart-item img {
     width: 100px;
     height: 100px;
-    object-fit: cover;
+    object-fit: cover; /* Memastikan gambar mengisi kotak tanpa menjadi gepeng. */
     border-radius: 6px;
 }
 .cart-item-info {
-    flex-grow: 1;
+    flex-grow: 1;/* Membuat bagian info (judul & harga) mengambil semua sisa ruang di tengah. */
 }
-.cart-item-info h3 {
+.cart-item-info h3 { /* Styling untuk judul produk */
     margin: 0 0 5px 0;
     font-size: 1rem;
     color: var(--heading-color);
@@ -1625,7 +1638,7 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     align-items: center;
     gap: 10px;
 }
-.quantity-controls button {
+.quantity-controls button { /* Styling untuk tombol +/- */
     width: 30px;
     height: 30px;
     border: none;
@@ -1634,15 +1647,8 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
 }
 .quantity-controls button:hover { /* --- Efek Hover untuk Tombol Kuantitas & Hapus --- */
     transform: translateZ(1.5px) scale(1.35);
-    /* background-color: var(--subtle-border-color); */
-    /* transform: scale(1.1); */
-    /* border-radius: 10px; */
 }
-.remove-btn:hover {
-    background-color: #c82333;
-    transform: scale(1.05);
-}
-.remove-btn {
+.remove-btn { /* Styling untuk tombol "Hapus" */
     background: #e63946;
     color: white;
     border: none;
@@ -1650,12 +1656,16 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     border-radius: 5px;
     cursor: pointer;
 }
+.remove-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
 .cart-item-select { /*  style untuk checkbox di setiap item */
     display: flex;
     align-items: center;
     padding-right: 15px;
 }
-.cart-item-select input[type="checkbox"] {
+.cart-item-select input[type="checkbox"] { /* Membuat ukuran checkbox lebih besar dari default. */
     width: 20px;
     height: 20px;
     cursor: pointer;
@@ -1816,7 +1826,7 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     margin-bottom: 10px;
 }
 .category-tag {
-    display: inline-block;
+    display: inline-block; /* Membuat elemen ini berperilaku seperti teks (inline) tapi bisa diberi padding dan margin vertikal. */
     background-color: var(--subtle-border-color);
     color: var(--text-color);
     padding: 5px 10px;
@@ -1825,7 +1835,7 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     margin-bottom: 1.5rem;
 }
 .price-detail {
-    font-size: 2rem;
+    font-size: 2rem; /* Ukuran font yang besar untuk menonjolkan harga. */
     font-weight: bold;
     color: var(--accent-color);
     margin-bottom: 1.5rem;
@@ -1841,7 +1851,7 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
 /* --- Detail Rekomendasi Produk --- */
 .related-products-section {
     padding: 3rem 0;
-    border-top: 1px solid var(--subtle-border-color);
+    border-top: 1px solid var(--subtle-border-color); /* Memberi garis pemisah tipis di atas section. */
     background: transparent;
 }
 .related-products-section h2 {
@@ -1850,21 +1860,22 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     text-align: center;
 }
 .related-products-section .product-grid {
+    /* Aturan grid fleksibel: buat kolom sebanyak mungkin dengan lebar minimal 200px. */
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px; /* Samakan dengan gap produk utama agar konsisten */
 }
-.related-products-section .product-card img {  /* Aturan untuk GAMBAR di dalam Kartu Produk */
-    height: 160px;
+.related-products-section .product-card img { 
+    height: 160px; /* Membuat gambar di kartu rekomendasi lebih pendek dari kartu biasa. */
 }
 .related-products-section .product-card-body h3 {
     font-size: 0.9rem;
 }
 .related-products-section .product-card-body .description {
     font-size: 0.8rem;
-    -webkit-line-clamp: 2;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    -webkit-line-clamp: 2; /* KUNCI: Batasi teks deskripsi agar HANYA menampilkan 2 baris. */
+    display: -webkit-box;      /* Properti yang diperlukan agar line-clamp berfungsi. */
+    -webkit-box-orient: vertical; /* Properti yang diperlukan agar line-clamp berfungsi. */
+    overflow: hidden;          /* Sembunyikan sisa teks yang melebihi 2 baris. */
 }
 .related-products-section .product-card-footer {
     padding: 12px;
@@ -1877,7 +1888,6 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     padding: 4px 8px;
 }
 
-
 /* --- Tombol & Interaksi --- */
 #add-to-cart-btn {
     background: var(--accent-color);
@@ -1887,13 +1897,13 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     padding: 10px 0;
     font-size: 1rem;
     cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-    margin-top: 8px;
-    width: 100%;
+    transition: background 0.2s, transform 0.2s; /* Animasi halus saat warna latar atau posisi berubah. */
+    margin-top: 8px;                              /* Memberi jarak dari elemen di atasnya. */
+    width: 100%;                                  /* Membuat tombol memenuhi seluruh lebar kolom info produk. */
 }
 #add-to-cart-btn:hover {
-    background: #2bbeb0;
-    transform: translateY(1px) scale(1.04);
+    background: #2bbeb0;                        /* Mengubah warna latar menjadi sedikit lebih gelap saat kursor menyentuh. */
+    transform: translateY(1px) scale(1.04);     /* Memberi efek visual: tombol sedikit turun (1px) dan sedikit membesar (1.04x). */
 }
 
 /* Responsif untuk Halaman Detail Produk */
@@ -1990,10 +2000,10 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     padding-bottom: 4rem;
 }
 .about-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Dua kolom sama besar */
-    gap: 40px;
-    align-items: center;
+    display: grid;                   /* Mengaktifkan layout Grid CSS. */
+    grid-template-columns: 1fr 1fr;  /* Membuat dua kolom dengan lebar yang sama persis. */
+    gap: 40px;                       /* Memberi jarak 40px antara kedua kolom. */
+    align-items: center;             /* Menyejajarkan konten di kedua kolom secara vertikal di tengah. */
 }
 .about-text h2,
 .about-text h3 {
@@ -2003,15 +2013,15 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
 }
 .about-text p {
     margin-bottom: 1.5rem;
-    line-height: 1.8;
+    line-height: 1.8;  /* Spasi baris yang lebih lega agar mudah dibaca. */
 }
 .about-image img {
     width: 100%;
     border-radius: 8px;
 }
-.about-image { /* Gaya untuk gambar kantor */
-    margin: 0; /* Menghapus margin default dari <figure> */
-    text-align: center;
+.about-image { /* Aturan untuk <figure> */
+    margin: 0;                        /* Menghilangkan margin default dari tag <figure>. */
+    text-align: center;               /* Memposisikan gambar dan caption di tengah. */
 }
 .about-image img {
     width: 100%;
@@ -2019,18 +2029,18 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     border-radius: 8px;
     border: 1px solid var(--subtle-border-color);
 }
-.about-image figcaption {
-    margin-top: 10px;
-    font-size: 0.9rem;
+.about-image figcaption { /* Aturan untuk <caption> */
+    margin-top: 10px;                 /* Jarak dari gambar di atasnya. */
+    font-size: 0.9rem;                /* Ukuran teks caption lebih kecil. */
     color: var(--text-color);
-    font-style: italic;
+    font-style: italic;               /* Teks caption dibuat miring. */
 }
 .dev-tribute {
-    display: flex;
-    justify-content: space-around;
+    display: flex;                  /* Membuat teks-teks di dalamnya berjajar ke samping. */
+    justify-content: space-around;  /* Memberi jarak yang seimbang di antara dan di sekitar teks. */
     align-items: center;
-    flex-wrap: wrap;
-    margin-top: 4rem;
+    flex-wrap: wrap;                /* Izinkan teks pindah ke baris baru jika tidak muat. */
+    margin-top: 4rem;               /* Jarak dari konten di atasnya. */
     font-family: var(--font-heading);
     font-size: 1.2rem;
     color: var(--heading-color);
@@ -2039,9 +2049,9 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     margin: 10px;
 }
 .thank-you-note {
-    text-align: center;
+    text-align: center;             /* Teks di tengah. */
     margin-top: 2rem;
-    padding: 1.5rem;
+    padding: 1.5rem;                /* Ruang di dalam kotak. */
     border: 1px solid var(--subtle-border-color);
     border-radius: 8px;
     background-color: var(--card-bg);
@@ -2090,10 +2100,10 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     border-radius: 8px;
     border: 1px solid var(--subtle-border-color);
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: flex; /* Mengaktifkan Flexbox. */
+    flex-direction: column; /* Membuat item di dalamnya (ikon, judul, teks) menumpuk ke bawah. */
+    align-items: center;  /* Memposisikan semua item di tengah secara horizontal. */
+    justify-content: center; /* Memposisikan semua item di tengah secara vertikal, membuat kartu terlihat seimbang. */
 }
 .contact-item img {
     height: 40px;
@@ -2107,11 +2117,11 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
 }
 .contact-item p {
     font-size: 0.9rem;
-    word-break: break-all;
+    word-break: break-all; /* Memaksa teks yang sangat panjang (seperti email) untuk pindah baris agar tidak "tembus" keluar dari kartu. */
 }
 .contact-item a {
     color: var(--accent-color);
-    text-decoration: none;
+    text-decoration: none; /* Menghilangkan garis bawah default dari link. */
     font-weight: 500;
 }
 .contact-item a:hover {
@@ -2169,7 +2179,7 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     border-bottom: 1px solid var(--subtle-border-color);
 }
 .faq-question {
-    width: 100%;
+    width: 100%; /* Membuat judul memenuhi seluruh lebar yang tersedia. */
     background: none;
     border: none;
     padding: 20px 0;
@@ -2178,19 +2188,19 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     font-weight: 500;
     font-family: var(--font-body);
     color: var(--heading-color);
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none; /* Menyembunyikan panah/marker default */
+    cursor: pointer;                      /* Mengubah kursor menjadi ikon tangan saat disentuh. */
+    display: flex;                        /* Mengaktifkan Flexbox. */
+    justify-content: space-between;     /* Mendorong teks pertanyaan ke kiri dan ikon '+' ke kanan. */
+    align-items: center;                  /* Menyejajarkan teks dan ikon '+' secara vertikal di tengah. */
+    list-style: none;                     /* KUNCI: Menyembunyikan ikon panah default dari tag <details>. */
 }
 .faq-question::-webkit-details-marker {
     display: none; /* Menyembunyikan panah/marker di Chrome/Safari */
 }
 .faq-question::after {
-    content: '+';
-    font-size: 1.5rem;
-    transition: transform 0.3s ease-out;
+    content: '+';                         /* Membuat elemen semu yang berisi karakter '+'. Ini adalah ikon kustom Anda. */
+    font-size: 1.5rem;                    /* Ukuran ikon '+'. */
+    transition: transform 0.3s ease-out;  /* Animasi halus selama 0.3 detik saat ikon berputar. */
 }
 .faq-question:hover {
     color: var(--accent-color);
@@ -2201,9 +2211,8 @@ input.is-invalid {/* Beri border merah pada input yang tidak valid */
     overflow: hidden;
     transition: grid-template-rows 0.3s ease-out;
 }
-
 details[open] > .faq-answer {
-    grid-template-rows: 1fr;
+    grid-template-rows: 1fr;         /* KUNCI: Saat <details> terbuka, ubah tinggi baris menjadi 1fr (satu fraksi), yang artinya tingginya akan menyesuaikan dengan konten di dalamnya. */
 }
 .faq-answer p { /* KODE ANIMASI UNTUK TEKS DI DALAMNYA */
     padding: 0 0 20px 0;
@@ -2214,9 +2223,9 @@ details[open] > .faq-answer {
 details[open] > .faq-answer p {
     opacity: 1; /* Saat terbuka, teks menjadi terlihat */
 }
-details[open] > .faq-question::after { /* Mengubah ikon '+' menjadi '-' saat terbuka */
-    content: '-';
-    transform: rotate(180deg);
+details[open] > .faq-question::after { /* Aturan saat <details> dalam keadaan TERBUKA. */
+    content: '-';                         /* Mengubah ikon dari '+' menjadi '-'. */
+    transform: rotate(180deg);            /* Memutar ikon 180 derajat untuk efek animasi. */
 }
 .faq-answer ol { /* Styling untuk daftar berurutan di dalam FAQ */
     padding-left: 25px; /* Memberi ruang di kiri untuk nomor urut */
@@ -2354,7 +2363,7 @@ details[open] > .faq-question::after { /* Mengubah ikon '+' menjadi '-' saat ter
     border-radius: 6px;
     padding: 10px 15px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease; 
 }
 .payment-methods .radio-option:hover {
     background-color: var(--section-bg); /* Warna sedikit berbeda saat hover */
@@ -2376,16 +2385,16 @@ details[open] > .faq-question::after { /* Mengubah ikon '+' menjadi '-' saat ter
     background-color: var(--accent-color); /* Isi warna saat terpilih */
 }
 .payment-methods input[type="radio"]:checked::before {
-    content: '';
-    display: block;
+    content: '';                                  /* Wajib ada untuk membuat elemen semu ::before muncul. */
+    display: block;                               /* Membuatnya menjadi elemen blok. */
     width: 10px;
     height: 10px;
     background-color: var(--accent-text-color); /* Titik tengah */
     border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute;                           /* Membuatnya "melayang" di dalam tombol radio. */
+    top: 50%;                                     /* Posisikan di tengah secara vertikal. */
+    left: 50%;                                    /* Posisikan di tengah secara horizontal. */
+    transform: translate(-50%, -50%);             /* Trik CSS untuk memusatkan elemen secara presisi. */
 }
 .payment-methods label {
     cursor: pointer;
@@ -2410,13 +2419,13 @@ details[open] > .faq-question::after { /* Mengubah ikon '+' menjadi '-' saat ter
     font-size: 1rem;
     background-color: var(--body-bg);
     color: var(--text-color);
-    outline: none;
-    resize: vertical; /* Izinkan user resize vertikal */
-    min-height: 80px; /* Tinggi minimum */
+    outline: none;                                /* Menghilangkan garis outline biru default dari browser saat diklik. */
+    resize: vertical;                             /* KUNCI: Hanya mengizinkan pengguna untuk mengubah ukuran area teks secara vertikal (ke bawah), bukan horizontal. */
+    min-height: 80px;                             /* Menetapkan tinggi minimal untuk area teks. */
 }
-#courier-note::placeholder {  /* Style untuk placeholder */
-    color: var(--text-color);
-    opacity: 0.7;
+#courier-note::placeholder {  /* Aturan khusus untuk teks placeholder. */
+    color: var(--text-color);                     /* Warna teks placeholder. */
+    opacity: 0.7;                                 /* Membuat teks placeholder sedikit lebih transparan. */
 }
 
 /* Responsif untuk Layar Sangat Kecil (Mobile) */
@@ -2538,32 +2547,31 @@ details[open] > .faq-question::after { /* Mengubah ikon '+' menjadi '-' saat ter
 /* --- Pop-up Customer Service --- */
 /* ============================================= */
 .cs-popup {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 300px;
+    position: fixed;                              /* KUNCI: Membuat pop-up "menempel" di layar, tidak ikut ter-scroll bersama halaman. */
+    bottom: 20px;                                 /* Jarak 20px dari bawah layar. */
+    right: 20px;                                  /* Jarak 20px dari kanan layar. */
+    width: 300px;                                 /* Lebar tetap untuk pop-up. */
     background-color: var(--card-bg);
     border: 1px solid var(--subtle-border-color);
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: 100;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    transform-origin: bottom right;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);    /* Efek bayangan agar terlihat "melayang". */
+    z-index: 100;                                 /* Memastikan pop-up berada di lapisan atas. */
+    transform-origin: bottom right;               /* Mengatur titik poros animasi ke pojok kanan bawah. */
 
-    /* Aturan untuk animasi fade-in dan scale */
-    transform: scale(0.8);
-    opacity: 0;
-    visibility: hidden;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s;
+    /* KUNCI ANIMASI (Keadaan Awal): */
+    transform: scale(0.8);                        /* Awalnya, perkecil ukurannya menjadi 80%. */
+    opacity: 0;                                   /* Buat sepenuhnya transparan. */
+    visibility: hidden;                           /* Sembunyikan dan buat tidak bisa diklik. */
+    transition: all 0.3s ease-in-out;             /* Animasikan semua perubahan selama 0.3 detik. */
 }
-.cs-popup.is-active {
-    transform: scale(1);
-    opacity: 1;
-    visibility: visible;
+.cs-popup.is-active { /* Aturan saat JavaScript menambahkan class ".is-active" */
+    transform: scale(1);                          /* Kembalikan ukuran ke 100%. */
+    opacity: 1;                                   /* Buat terlihat sepenuhnya. */
+    visibility: visible;                          /* Buat bisa berinteraksi. */
 }
 .cs-popup-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between;             /* Mendorong judul ke kiri dan tombol 'x' ke kanan. */
     align-items: center;
     padding: 12px 15px;
     background-color: var(--accent-color);
@@ -2670,25 +2678,25 @@ footer {
         font-size: 9px;
     }
     body {
-        overflow-x: hidden;
+        overflow-x: hidden; /* KUNCI: Memaksa untuk menyembunyikan scrollbar horizontal, mencegah konten "tembus" ke samping. */
     }
     .container,
     .header-top .container,
     .header-main .container,
     .featured-products .container {
-        padding: 4px;
-        width: 100%;
-        box-sizing: border-box;
+        padding: 4px;           /* Mengurangi ruang kosong di dalam container menjadi sangat kecil (hanya 4px). */
+        width: 100%;            /* Memastikan container memenuhi seluruh lebar layar yang tersedia. */
+        box-sizing: border-box; /* Memastikan padding tidak akan menambah lebar total container. */
     }
     .logo img {
-        width: 24px;
+        width: 24px;            /* Mengecilkan lebar gambar logo secara drastis. */
     }
     .logo span {
-        font-size: 0.75rem;
+        font-size: 0.75rem;     /* Mengecilkan ukuran teks "MineCart" di samping logo. */
     }
     .search-bar {
-        flex-direction: column;
-        gap: 4px;
+        flex-direction: column; /* Mengubah susunan search bar dari horizontal (input di samping tombol) menjadi vertikal (input di atas tombol). */
+        gap: 4px;               /* Memberi jarak vertikal 4px antara input dan tombol cari. */
     }
     .search-bar input {
         width: 100%;
@@ -2734,7 +2742,7 @@ footer {
         font-size: 0.7rem;
     }
     .hamburger-btn {
-        transform: scale(0.8);
+        transform: scale(0.8);      /* Mengecilkan ukuran tombol hamburger menjadi 80% dari ukuran aslinya. */
     }
     .cart-icon-wrapper img,
     #theme-toggle-btn img {
@@ -2748,18 +2756,18 @@ footer {
     .header-main,
     nav,
     footer {
-        overflow-x: hidden;
+        overflow-x: hidden;         /* KUNCI: Mencegah elemen-elemen besar ini menciptakan scroll horizontal jika ada konten yang "tembus". */
     }
     button,
     .cta-button,
     .search-bar button {
-        min-height: 32px; 
-        min-width: 44px; 
-        font-size: 0.75rem;
-        padding: 6px 8px;
-        border-radius: 6px;
-        line-height: 1;
-        box-sizing: border-box;
+        min-height: 32px;           /* Menetapkan tinggi MINIMAL untuk semua tombol agar tetap mudah diklik (standar aksesibilitas). */
+        min-width: 44px;            /* Menetapkan lebar MINIMAL untuk semua tombol. */
+        font-size: 0.75rem;         /* Ukuran font yang sangat kecil. */
+        padding: 6px 8px;           /* Padding yang diperkecil. */
+        border-radius: 6px;         /* Sudut tumpul. */
+        line-height: 1;             /* Mengatur tinggi baris agar teks pas di tengah secara vertikal. */
+        box-sizing: border-box;     /* Memastikan padding tidak menambah ukuran total tombol. */
     }
     .search-bar button img,
     #theme-toggle-btn img,
@@ -2966,7 +2974,7 @@ footer {
     }
     .auth-form input,
     .auth-form .cta-button {
-        padding: 6px; /* Perkecil padding input dan tombol */
+        padding: 4px; /* Perkecil padding input dan tombol */
         font-size: 0.7rem;
     }
     .auth-switch {
@@ -3000,27 +3008,27 @@ footer {
     footer,
     nav,
     .container {
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        overflow-x: hidden;
+        padding: 0;                  /* Menghapus SEMUA padding dari elemen-elemen layout utama. */
+        margin: 0;                   /* Menghapus SEMUA margin dari elemen-elemen layout utama. */
+        width: 100%;                 /* Memaksa lebar elemen agar pas dengan lebar layar. */
+        overflow-x: hidden;          /* Menyembunyikan scroll horizontal jika ada konten yang "tembus". */
     }
     .logo img {
-        width: 16px;
-        height: auto;
+        width: 16px;                 /* Mengecilkan gambar logo menjadi sangat kecil. */
+        height: auto;                /* Membiarkan tinggi gambar menyesuaikan secara otomatis. */
     }
     .logo span {
         font-size: 0.5rem;
         display: none; /* Sembunyikan teks jika tidak muat */
     }
     .search-bar {
-        flex-direction: column;
-        gap: 2px;
+        flex-direction: column;      /* Mengubah susunan search bar menjadi vertikal (input di atas tombol). */
+        gap: 2px;                    /* Memberi jarak vertikal yang sangat kecil antara input dan tombol. */
     }
     .search-bar input {
-        width: 100%;
-        font-size: 0.5rem;
-        padding: 2px;
+        width: 100%;                 /* Input memenuhi lebar. */
+        font-size: 0.5rem;           /* Ukuran font di dalam input sangat kecil. */
+        padding: 2px;                /* Padding di dalam input sangat kecil. */
     }
     .search-bar button {
         min-height: 24px;
@@ -3038,13 +3046,13 @@ footer {
         width: 100%;
     }
     .carousel-slide img {
-        width: 100%;
+        width: 100%;                 /* Gambar carousel tetap memenuhi lebar layar. */
         height: auto;
         object-fit: cover;
     }
     .product-grid {
-        grid-template-columns: 1fr;
-        gap: 4px;
+        grid-template-columns: 1fr;  /* Memaksa grid produk menjadi satu kolom. */
+        gap: 4px;                    /* Jarak vertikal antar produk sangat kecil. */
     }
     .product-card {
         font-size: 0.5rem;
@@ -3054,8 +3062,8 @@ footer {
         font-size: 0.5rem;
     }
     .hamburger-btn {
-        transform: scale(0.6);
-        margin: 0;
+        transform: scale(0.6);       /* Mengecilkan tombol hamburger menjadi 60% dari ukuran aslinya. */
+        margin: 0;                   /* Menghapus margin agar tidak memakan ruang. */
     }
     #theme-toggle-btn img,
     .cart-icon-wrapper img {
